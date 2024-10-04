@@ -22,6 +22,8 @@ char *ft_itoa(int n)
     i = ft_intlen(n) - 1;
     minval = 0;
     number = malloc((i + 2) * sizeof(char));
+    if (number == NULL)
+        return (0);
     if (n == -2147483648)
     {
         n = -2147483647;
