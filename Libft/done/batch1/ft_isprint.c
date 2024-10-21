@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int ft_isprint(char c);
+int ft_isprint(int c);
 
 /*
 int main(void)
@@ -13,7 +13,7 @@ int main(void)
 }
 */
 
-int ft_isprint(char c)
+int ft_isprint(int c)
 {
     if (c < ' ' || c > '~')
         return (0);
