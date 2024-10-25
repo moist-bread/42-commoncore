@@ -5,8 +5,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 int		ft_trimbegin(char const *s1, char const *set);
 int		ft_trimend(char const *s1, char const *set);
 
-/*
-int	main(void)
+int main(void)
 {
 	char const	original[] = "aaaaaaaaaaaaaaabbbolaboababababababababbabaaaabbbaa";
 	char const	ref[] = "ab";
@@ -17,7 +16,6 @@ int	main(void)
 	printf("%s (return)", ft_strtrim(original, ref));
 	return (0);
 }
-*/
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
