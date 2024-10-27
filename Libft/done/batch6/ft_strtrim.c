@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 10:29:57 by rduro-pe          #+#    #+#             */
+/*   Updated: 2024/10/27 10:29:58 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -5,7 +17,8 @@ char	*ft_strtrim(char const *s1, char const *set);
 int		ft_trimbegin(char const *s1, char const *set);
 int		ft_trimend(char const *s1, char const *set);
 
-int main(void)
+/*
+int	main(void)
 {
 	char const	original[] = "aaaaaaaaaaaaaaabbbolaboababababababababbabaaaabbbaa";
 	char const	ref[] = "ab";
@@ -16,27 +29,26 @@ int main(void)
 	printf("%s (return)", ft_strtrim(original, ref));
 	return (0);
 }
+*/
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
+	int		begin;
+	int		end;
 	int		i;
-	int		n;
-	int		j;
 	char	*trimmed;
 
-	i = ft_trimbegin(s1, set);
-	n = ft_trimend(s1, set);
-	j = 0;
-	trimmed = malloc((n - i + 2) * sizeof(char));
+	if (s1 == 0)
+		return (0);
+	begin = ft_trimbegin(s1, set);
+	end = ft_trimend(s1, set);
+	i = 0;
+	trimmed = malloc((end - begin + 2) * sizeof(char));
 	if (trimmed == NULL)
 		return (0);
-	while (s1[i] != 0 && i <= n)
-	{
-		trimmed[j] = s1[i];
-		j++;
-		i++;
-	}
-	trimmed[j] = 0;
+	while (s1[begin] != 0 && begin <= end)
+		trimmed[i++] = s1[begin++];
+	trimmed[i] = 0;
 	return (trimmed);
 }
 
@@ -61,8 +73,8 @@ int	ft_trimbegin(char const *s1, char const *set)
 
 int	ft_trimend(char const *s1, char const *set)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (s1[i] != 0)

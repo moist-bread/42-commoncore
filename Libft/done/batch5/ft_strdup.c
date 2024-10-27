@@ -1,26 +1,38 @@
-// #include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 10:29:48 by rduro-pe          #+#    #+#             */
+/*   Updated: 2024/10/27 10:29:49 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
 #include <stdlib.h>
 
-char	*ft_strdup(char *src);
-int		ft_strlen(char *str);
+char	*ft_strdup(const char *src);
+size_t	ft_strlen(const char *str);
 
 /*
 int	main(void)
 {
-		char    str[] = "bom dia flor do dia";
+	const char	str[] = "bom dia flor do dia";
 
-		printf("%s\n", ft_strdup(str));
-		return (0);
+	printf("%s\n", ft_strdup(str));
+	return (0);
 }
-*/
+ */
 
-char	*ft_strdup(char *src)
+char	*ft_strdup(const char *src)
 {
 	int		i;
 	char	*dup;
 
 	i = 0;
-	dup = (char *)malloc(ft_strlen(src) * sizeof(char));
+	dup = malloc(ft_strlen(src) * sizeof(char));
 	if (dup == NULL)
 		return (0);
 	while (src[i] != '\0')
@@ -31,9 +43,9 @@ char	*ft_strdup(char *src)
 	return (dup);
 }
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0')

@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 10:29:34 by rduro-pe          #+#    #+#             */
+/*   Updated: 2024/10/27 10:29:35 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <string.h>
 
-char	*ft_strrchr(char *str, int c);
-int		ft_strlen(char *str);
+char	*ft_strrchr(const char *str, int c);
 
 /*
 int	main(void)
@@ -17,28 +28,22 @@ int	main(void)
 	printf("search result: %s (mine)\n", ft_strrchr(string, character));
 	return (0);
 }
-*/
+ */
 
-char	*ft_strrchr(char *str, int c)
+char	*ft_strrchr(const char *str, int c)
 {
-	int	i;
+	int		i;
+	char	*s;
 
-	i = ft_strlen(str);
+	i = 0;
+	s = (char *)str;
+	while (str[i] != '\0')
+		i++;
 	while (i >= 0)
 	{
 		if (str[i] == c)
-			return (&str[i]);
+			return (&s[i]);
 		i--;
 	}
 	return (0);
-}
-
-int	ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
 }

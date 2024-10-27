@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/27 10:27:12 by rduro-pe          #+#    #+#             */
+/*   Updated: 2024/10/27 10:27:20 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,13 +27,13 @@ int	main(void)
 	printf("substring: %s\n", ft_substr(string, character, 5));
 	return (0);
 }
-*/
+ */
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int					i;
-	long unsigned int	j;
-	char				*substring;
+	int		i;
+	size_t	j;
+	char	*substring;
 
 	i = ft_strchrloc(s, start);
 	j = 0;
@@ -50,7 +62,6 @@ int	ft_strchrloc(char const *str, unsigned int c)
 			return (i);
 		i++;
 	}
-
 	if (chara == 0)
 		return (i);
 	else
