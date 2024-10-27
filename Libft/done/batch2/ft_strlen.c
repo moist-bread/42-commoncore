@@ -1,6 +1,9 @@
-int	ft_strlen(char *str)
+#include <stdio.h>
+
+
+size_t	ft_strlen(const char *str)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while (str[i] != '\0')

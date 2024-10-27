@@ -1,13 +1,13 @@
 #include <stdio.h>
 
 
-char	ft_tolower(char c);
+int	ft_tolower(char c);
 
 /*
 int	main(void)
 {
 	char test1 = ';';
-	char test2 = 'W';
+	char test2 = 'E';
 
 	printf("text:%c ", test1);
 	printf("return: %c \n", ft_tolower(test1));
@@ -15,9 +15,9 @@ int	main(void)
 	printf("return: %c \n", ft_tolower(test2));
 	return (0);
 }
-*/
+ */
 
-char	ft_tolower(char c)
+int	ft_tolower(char c)
 {
 	if (c >= 'A' && c <= 'Z')
 		c += 32;

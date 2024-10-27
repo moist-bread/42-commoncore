@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-char	ft_toupper(char c);
+int	ft_toupper(char c);
 
 /*
 int	main(void)
@@ -15,8 +15,8 @@ int	main(void)
 	printf("return: %c \n", ft_toupper(test2));
 	return (0);
 }
-*/
-char	ft_toupper(char c)
+ */
+int	ft_toupper(char c)
 {
 	if (c >= 'a' && c <= 'z')
 		c -= 32;

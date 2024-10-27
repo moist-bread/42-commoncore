@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-char	*ft_strchr(char *str, int c);
+char	*ft_strchr(const char *s, int c);
 
 /*
 int	main(void)
@@ -14,16 +14,18 @@ int	main(void)
 		ft_strchr(string, character));
 	return (0);
 }
-*/
+ */
 
-char	*ft_strchr(char *str, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int i;
+	char *str;
 
 	i = 0;
-	while (str[i] != 0)
+	str = (char *)s;
+	while (s[i] != 0)
 	{
-		if (str[i] == c)
+		if (s[i] == c)
 			return (&str[i]);
 		i++;
 	}

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <strings.h>
 
-void	ft_bzero(void *s, int n);
+void	ft_bzero(void *s, size_t n);
 
 /*
 int	main(void)
@@ -21,11 +21,11 @@ int	main(void)
 	printf("%c (char 5)\n", string2[5]);
 	return (0);
 }
-*/
+ */
 
-void	ft_bzero(void *s, int n)
+void	ft_bzero(void *s, size_t n)
 {
-	int i;
+	size_t i;
 	unsigned char *str;
 
 	i = 0;

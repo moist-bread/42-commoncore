@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
-unsigned int	ft_strlen(char *str);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+size_t	ft_strlen(const char *str);
 
 /*
 int	main(void)
@@ -16,16 +16,16 @@ int	main(void)
 	printf("return: %u \n", strlcpy(test1, test2, 13));
 	printf("text1: %s text2: %s\n", test1, test2);
 	printf("text1: %s text2: %s\n", test3, test4);
-	printf("return: %u \n", ft_strlcpy(test3, test4, 13));
+	printf("return: %lu \n", ft_strlcpy(test3, test4, 13));
 	printf("text1: %s text2: %s\n", test3, test4);
 	return (0);
 }
-*/
+ */
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	unsigned int	i;
-	unsigned int	src_len;
+	size_t	i;
+	size_t	src_len;
 
 	i = 0;
 	src_len = ft_strlen(src);
@@ -42,9 +42,9 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 	return (src_len);
 }
 
-unsigned int	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while (str[i] != '\0')
