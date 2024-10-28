@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:28:44 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 12:06:25 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:50:29 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	main(void)
 
 char	*ft_strchr(const char *s, int c)
 {
-	int i;
-	char *str;
+	int		i;
+	char	*str;
 
 	i = 0;
 	str = (char *)s;

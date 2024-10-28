@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:57 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:29:58 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/28 12:00:51 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_trimend(char const *s1, char const *set);
 /*
 int	main(void)
 {
-	char const	original[] = "aaaaaaaaaaaaaaabbbolaboababababababababbabaaaabbbaa";
+	char const	original[] = "aaaaaabbbolaboababababababababbabaabbbaa";
 	char const	ref[] = "ab";
 
 	printf("%s (original)\n%s (ref)\n", original, ref);

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:54 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:29:55 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/28 12:00:25 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 int	ft_strlen(char const *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:29:28 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:56:24 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	main(void)
 
 char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
-	size_t i;
-	size_t pin;
-	char *s;
+	size_t	i;
+	size_t	pin;
+	char		*s;
 
 	pin = 0;
 	s = (char *)str;

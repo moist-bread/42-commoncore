@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:27:12 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:27:20 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/28 12:01:13 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 int	ft_strchrloc(char const *str, unsigned int c)
 {
-	int i;
-	int chara;
+	int	i;
+	int	chara;
 
 	i = 0;
 	chara = c;

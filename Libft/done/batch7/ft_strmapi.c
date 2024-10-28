@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:31 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:30:32 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/28 12:03:10 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(void)
 	str = "Hallo Ebery Nyan";
 	printf("%s\n%s", str, ft_strmapi(str, ft_toupper));
 }
+
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	unsigned int	i;
