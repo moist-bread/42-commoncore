@@ -6,23 +6,28 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:58 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:30:59 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/27 12:02:13 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 
-int	ft_memcmp(char *s1, char *s2, long n);
+int	ft_memcmp(const void *s1, const void *s2, size_t n);
 
-int	main(void)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-}
-
-int	ft_memcmp(char *s1, char *s2, long n)
-{
-	int i;
+	size_t i;
+	unsigned char *str1;
+	unsigned char *str2;
 
 	i = 0;
-	return (s1[i] - s2[i]);
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	if (n == 0 || (str1[i] == '\0' && str2[i] == '\0'))
+		return (0);
+	while (i + 1 < n && (str1[i] != '\0' || str2[i] != '\0')
+		&& (str1[i] == str2[i]))
+		i++;
+	return (str1[i] - str2[i]);
 }

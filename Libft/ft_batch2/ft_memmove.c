@@ -6,8 +6,14 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:41 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:30:42 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:41:05 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*memmove(void *dest, const void *src, long n);
+#include <stdio.h>
+
+void	*memmove(void *dest, const void *src, size_t n);
+
+void	*memmove(void *dest, const void *src, size_t n)
+{
+}

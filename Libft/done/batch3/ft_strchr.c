@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:28:44 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:28:46 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/27 12:06:25 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*ft_strchr(const char *s, int c)
 			return (&str[i]);
 		i++;
 	}
-
 	if (c == 0)
 		return (&str[i]);
 	else
