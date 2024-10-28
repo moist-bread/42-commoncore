@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:31 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/28 12:03:10 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:40:51 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strlen(const char *str);
 char	ft_toupper(unsigned int index, char c);
 
+/*
 int	main(void)
 {
 	char	*str;
@@ -24,6 +25,7 @@ int	main(void)
 	str = "Hallo Ebery Nyan";
 	printf("%s\n%s", str, ft_strmapi(str, ft_toupper));
 }
+*/
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

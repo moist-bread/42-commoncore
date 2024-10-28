@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:39 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:31:40 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:39:41 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include <stdlib.h>
 
 char	*ft_itoa(int n);
-int		ft_intlen(int n);
+int		ft_intlen(long n);
 
+/*
 int	main(void)
 {
 	int	number;
@@ -25,47 +26,39 @@ int	main(void)
 	printf("%s (my itoa)\n", ft_itoa(number));
 	return (0);
 }
+*/
 
 char	*ft_itoa(int n)
 {
 	int		i;
-	int		minval;
+	long	num;
 	char	*number;
 
-	i = ft_intlen(n) - 1;
-	minval = 0;
+	num = n;
+	i = ft_intlen(num) - 1;
 	number = malloc((i + 2) * sizeof(char));
 	if (number == NULL)
-		return (0);
-	if (n == -2147483648)
-	{
-		n = -2147483647;
-		minval++;
-	}
-	if (n < 0)
+		return (NULL);
+	if (num < 0)
 	{
 		number[0] = '-';
-		n = -n;
+		num = -num;
 	}
 	number[i + 1] = '\0';
-	while (n > 9)
+	while (num > 9)
 	{
-		number[i] = (n % 10) + 48;
-		n = n / 10;
-		i--;
+		number[i--] = (num % 10) + 48;
+		num /= 10;
 	}
-	number[i] = n + 48;
-	if (minval == 1)
-		number[10] = '8';
+	number[i] = num + 48;
 	return (number);
 }
 
-int	ft_intlen(int n)
+int	ft_intlen(long n)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
 	if (n == -2147483648)
 		return (11);
 	if (n < 0)
@@ -75,7 +68,7 @@ int	ft_intlen(int n)
 	}
 	while (n >= 1)
 	{
-		n = n / 10;
+		n /= 10;
 		i++;
 	}
 	return (i);
