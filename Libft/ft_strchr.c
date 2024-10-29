@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:28:44 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 12:16:26 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:02:02 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ char	*ft_strchr(const char *s, int c)
 	str = (char *)s;
 	while (s[i] != 0)
 	{
-		if (s[i] == c)
+		if (s[i] == (char)c)
 			return (&str[i]);
 		i++;
 	}
-	if (c == 0)
+	if ((char)c == 0)
 		return (&str[i]);
 	else
 		return (0);

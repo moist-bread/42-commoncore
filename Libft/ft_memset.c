@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:44 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 12:20:46 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:10:17 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ void	*ft_memset(void *dest, int filler, size_t n)
 	i = 0;
 	d = (unsigned char *)dest;
 	while (i < n)
-	{
-		d[i] = filler;
-		i++;
-	}
+		d[i++] = filler;
 	return (dest);
 }

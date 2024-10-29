@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:41 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 12:20:48 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:32:04 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,31 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n);
 
+/*
+int main(void)
+{
+	char	array1[] = "mau dia";
+	char	*array2 = "bom dia";
+
+	printf("%s(before)", array1);
+	ft_memmove((void *)&array1[4], (const void *)array1, 3);
+	printf("%s(after)", array1);
+	
+}
+*/
+
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t			i;
+	int			i;
 	unsigned char	*d;
 	unsigned char	*s;
 
-	i = 0;
 	d = (unsigned char *)dest;
 	s = (unsigned char *)src;
 	if (d < s)
 	{
-		while (i < n)
+		i = 0;
+		while (i < (int)n)
 		{
 			d[i] = s[i];
 			i++;
@@ -33,7 +46,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	else
 	{
-		i = n - 1;
+		i = (int)n - 1;
 		while (i >= 0)
 		{
 			d[i] = s[i];
