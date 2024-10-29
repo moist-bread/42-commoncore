@@ -6,12 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:28:55 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/28 14:08:41 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:19:40 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *str);

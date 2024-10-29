@@ -6,12 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:48 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:29:49 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:20:20 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *str);

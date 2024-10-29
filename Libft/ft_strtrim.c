@@ -6,12 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:57 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/28 12:00:51 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:17:16 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char	*ft_strtrim(char const *s1, char const *set);
 int		ft_trimbegin(char const *s1, char const *set);

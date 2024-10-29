@@ -6,12 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:23 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:29:24 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:18:14 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 

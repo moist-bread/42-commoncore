@@ -6,12 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:43 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/28 14:06:44 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:21:24 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 int	ft_atoi(const char *str);
 

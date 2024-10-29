@@ -6,12 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:04 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/28 18:55:15 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:42:26 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_memset(void *dest, int filler, size_t n);
@@ -31,8 +30,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 void	*ft_memset(void *dest, int filler, size_t n)
 {
-	size_t i;
-	unsigned char *d;
+	size_t			i;
+	unsigned char	*d;
 
 	i = 0;
 	d = (unsigned char *)dest;

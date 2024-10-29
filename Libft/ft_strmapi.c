@@ -6,16 +6,15 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:31 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/28 18:40:51 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:48:47 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int		ft_strlen(const char *str);
-char	ft_toupper(unsigned int index, char c);
+size_t	ft_strlen(const char *str);
+//char	ft_toupper(unsigned int index, char c);
 
 /*
 int	main(void)
@@ -45,19 +44,12 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	return (str);
 }
 
-int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
+/*
 char	ft_toupper(unsigned int index, char c)
 {
 	if (c >= 'a' && c <= 'z')
 		c -= 32;
 	return (c);
 }
+
+*/

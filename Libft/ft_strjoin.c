@@ -6,15 +6,14 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:54 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/28 12:00:25 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:41:45 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strlen(char const *str);
+size_t	ft_strlen(char const *str);
 
 /*
 int	main(int argc, char *argv[])
@@ -51,9 +50,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (string);
 }
 
-int	ft_strlen(char const *str)
+size_t	ft_strlen(char const *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0')

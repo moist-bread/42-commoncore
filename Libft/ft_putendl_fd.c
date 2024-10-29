@@ -6,11 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:08 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:30:09 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:20:40 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {

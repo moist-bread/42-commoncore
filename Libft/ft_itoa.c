@@ -6,12 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:39 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/28 18:39:41 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:21:01 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char	*ft_itoa(int n);
 int		ft_intlen(long n);

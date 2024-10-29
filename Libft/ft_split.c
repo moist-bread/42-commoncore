@@ -6,12 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:31:43 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:41:25 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char	**ft_split(char const *s, char c);
 char	*ft_segalloc(char const *s, char c, int len);
@@ -19,13 +18,14 @@ int		ft_seglen(char const *str, char c);
 int		ft_segcount(char const *str, char c);
 void	*ft_freestr(char **split, int i);
 
+/*
 int	main(void)
 {
 	int		i;
 	char	chara;
 	char	**result;
 	int		count;
-	char	sentence[] = "Loruem iupsuuum doloru";
+	char	sentence[] = "Loruem iupsuuum doloruu";
 
 	i = 0;
 	chara = 'u';
@@ -37,8 +37,10 @@ int	main(void)
 		printf("%s\n", result[i]);
 		i++;
 	}
+	ft_freestr(result, count + 1);
 	return (0);
 }
+*/
 
 char	**ft_split(char const *s, char c)
 {
@@ -60,8 +62,9 @@ char	**ft_split(char const *s, char c)
 			j++;
 		len = ft_seglen(&s[j], c);
 		split[i] = ft_segalloc(&s[j], c, len);
-		if (split[i++] == NULL)
-			return (ft_freestr(split, i));
+		if (split[i] == NULL)
+			return (ft_freestr(split, segcount + 1));
+		i++;
 		j += len;
 	}
 	split[i] = 0;
@@ -115,9 +118,13 @@ char	*ft_segalloc(char const *s, char c, int len)
 	return (seg);
 }
 
-void	*ft_freestr(char **split, int i)
+void	*ft_freestr(char **split, int max)
 {
-	while (i >= 0)
-		free(split[i--]);
+	int	i;
+
+	i = 0;
+	while (i < max)
+		free(split[i++]);
+	free(split);
 	return (NULL);
 }

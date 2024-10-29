@@ -6,12 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:11 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/27 10:30:13 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:20:37 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd);
 
