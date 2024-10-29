@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:39 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 12:21:01 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:13:56 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	main(void)
 {
 	int	number;
 
-	number = -2147483647;
+	number = 0;
 	printf("%d (original)\n", number);
 	printf("%s (my itoa)\n", ft_itoa(number));
 	return (0);
 }
-*/
+ */
 
 char	*ft_itoa(int n)
 {
@@ -60,6 +60,8 @@ int	ft_intlen(long n)
 	i = 0;
 	if (n == -2147483648)
 		return (11);
+	if (n == 0)
+		return (1);
 	if (n < 0)
 	{
 		n = -n;

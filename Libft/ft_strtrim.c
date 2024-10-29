@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:57 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 18:00:49 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:54:31 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	main(void)
 {
 	char const	original[] = "   xxx   xxx";
 	char const	ref[] = " x";
-	char *s = ft_strtrim(original, ref);
+	char		*s;
 
+	s = ft_strtrim(original, ref);
 	printf("%s (original)\n%s (ref)\n", original, ref);
 	printf("%i (trim begin)\n", ft_trimbegin(original, ref));
 	printf("%i (trim end)\n", ft_trimend(original, ref));
@@ -30,7 +31,7 @@ int	main(void)
 	printf("%d(strcmp)\n", strcmp(s, ""));
 	return (0);
 }
-*/
+ */
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -44,10 +45,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	begin = ft_trimbegin(s1, set);
 	end = ft_trimend(s1, set);
 	i = 0;
-	trimmed = malloc((end - begin + 2) * sizeof(char));
+	trimmed = malloc((end - begin + 1) * sizeof(char));
 	if (trimmed == NULL)
 		return (0);
-	while (s1[begin] != 0 && begin <= end)
+	while (s1[begin] != 0 && begin < end)
 		trimmed[i++] = s1[begin++];
 	trimmed[i] = 0;
 	return (trimmed);
@@ -89,7 +90,7 @@ int	ft_trimend(char const *s1, char const *set)
 		if (s1[i] == set[j])
 			i--;
 		else
-			return (i);
+			return (++i);
 	}
 	return (0);
 }
