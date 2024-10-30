@@ -6,13 +6,13 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:19 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 21:40:03 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:35:48 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	iter(unsigned int i, char *s);
+//void	iter(unsigned int i, char *s);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 /*
@@ -36,5 +36,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 
 	i = 0;
 	while (s[i])
-		f(i++, s);
+	{
+		f(i, &s[i]);
+		i++;	
+	}
 }

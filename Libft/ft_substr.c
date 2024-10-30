@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:27:12 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 12:17:06 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/30 16:16:24 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,21 @@ size_t	ft_strlen(const char *str);
 /*
 int	main(void)
 {
-	char	string[] = "bom dia";
+	char	*string = NULL;
 
 	printf("original string: %s\nstart: %i\n", string, 5);
 	printf("substring: %s\n", ft_substr(string, 5, 5));
 	return (0);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
  */
 
@@ -33,6 +43,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	size;
 	char	*substring;
 
+	if (s == NULL)
+		return (0);
 	j = 0;
 	strlen = ft_strlen(s);
 	if (start >= strlen)
@@ -53,12 +65,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substring);
 }
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}

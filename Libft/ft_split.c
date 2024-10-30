@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 13:41:25 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/30 16:09:30 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	main(void)
 	char	chara;
 	char	**result;
 	int		count;
-	char	sentence[] = "Loruem iupsuuum doloruu";
+	char	*sentence = "Lorem ipsum ajshdah";
 
 	i = 0;
-	chara = 'u';
+	chara = ' ';
 	result = ft_split(sentence, chara);
 	count = ft_segcount(sentence, chara);
 	printf("%i\n", count);
@@ -45,27 +45,27 @@ int	main(void)
 char	**ft_split(char const *s, char c)
 {
 	int		i;
-	int		j;
 	int		len;
 	int		segcount;
 	char	**split;
 
-	i = 0;
-	j = 0;
+	if (s == NULL)
+		return (0);
 	segcount = ft_segcount(s, c);
 	split = malloc((segcount + 1) * sizeof(char *));
 	if (split == NULL)
 		return (0);
+	i = 0;
 	while (i < segcount)
 	{
-		while (s[j] == c)
-			j++;
-		len = ft_seglen(&s[j], c);
-		split[i] = ft_segalloc(&s[j], c, len);
+		while (*s == c)
+			s++;
+		len = ft_seglen(s, c);
+		split[i] = ft_segalloc(s, c, len);
 		if (split[i] == NULL)
 			return (ft_freestr(split, segcount + 1));
 		i++;
-		j += len;
+		s += len;
 	}
 	split[i] = 0;
 	return (split);
