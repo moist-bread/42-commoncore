@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:28:51 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/30 14:33:07 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/30 19:04:00 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,11 @@ size_t	ft_strlcat(char *dest, const char *src, size_t destsize)
 	src_len = ft_strlen(src);
 	if (destsize <= dest_len)
 		return (destsize + src_len);
+	while (src && )
+	{
+
+		
+	}
+	
 	return (dest_len + src_len);
 }
