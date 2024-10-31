@@ -6,7 +6,7 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:48 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 12:59:13 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:36:06 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strdup(const char *src)
 	char	*dup;
 
 	i = 0;
-	dup = malloc(ft_strlen(src) * sizeof(char));
+	dup = malloc((ft_strlen(src) + 1) * sizeof(char));
 	if (dup == NULL)
 		return (0);
 	while (src[i] != '\0')
@@ -49,5 +49,6 @@ char	*ft_strdup(const char *src)
 		dup[i] = src[i];
 		i++;
 	}
+	dup[i] = src[i];
 	return (dup);
 }

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:27:12 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 12:59:56 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:28:26 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *str);
-
 /*
+int		ft_strcmp(char *s1, char *s2);
+
 int	main(void)
 {
 	char	*string;
+	char	*s;
 
-	string = NULL;
-	printf("original string: %s\nstart: %i\n", string, 5);
-	printf("substring: %s\n", ft_substr(string, 5, 5));
+	string = "tripouille";
+	s = ft_substr(string, 100, 1);
+	printf("original string: %s\nstart: %i\n", string, 100);
+	printf("substring: %s\n", s);
+	printf("%d (diff)", ft_strcmp(s, ""));
 	return (0);
 }
 
@@ -35,6 +39,22 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' || s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+		{
+			return ((s1[i] - s2[i]));
+			break ;
+		}
+		i++;
+	}
+	return ((s1[i] - s2[i]));
+}
  */
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -46,17 +66,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (s == NULL)
 		return (0);
-	j = 0;
 	strlen = ft_strlen(s);
 	if (start >= strlen)
-		return (NULL);
-	if (strlen - start < len)
+		size = 0;
+	else if (strlen - start < len)
 		size = strlen - start;
 	else
 		size = len;
 	substring = malloc((size + 1) * sizeof(char));
 	if (substring == 0)
 		return (NULL);
+	j = 0;
 	while (s[start + j] != 0 && j < size)
 	{
 		substring[j] = s[start + j];
