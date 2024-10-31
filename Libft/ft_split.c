@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/30 16:09:30 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:53:30 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	main(void)
 	char	chara;
 	char	**result;
 	int		count;
-	char	*sentence = "Lorem ipsum ajshdah";
+	char	*sentence;
 
+	sentence = "Lorem ipsum ajshdah";
 	i = 0;
 	chara = ' ';
 	result = ft_split(sentence, chara);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:41 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 14:32:04 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:53:37 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 void	*ft_memmove(void *dest, const void *src, size_t n);
 
 /*
-int main(void)
+int	main(void)
 {
 	char	array1[] = "mau dia";
-	char	*array2 = "bom dia";
+	char	*array2;
 
+	array2 = "bom dia";
 	printf("%s(before)", array1);
 	ft_memmove((void *)&array1[4], (const void *)array1, 3);
 	printf("%s(after)", array1);
-	
 }
 */
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	int			i;
+	int				i;
 	unsigned char	*d;
 	unsigned char	*s;
 

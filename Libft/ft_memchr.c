@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:54 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 16:45:33 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:53:42 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	*ft_memchr(const void *s, int c, size_t n);
 /*
 int	main(void)
 {
-	//char	*string;
-	char s[] = {0, 1, 2 ,3 ,4 ,5};
+	char	s[] = {0, 1, 2 ,3 ,4 ,5};
 	int		character;
 
+	//char	*string;
 	//string = "tripouille";
 	character = 'a';
 	//printf("original: %s\npin: %c\nsearch result: %s\n", string, 't' + 256,
@@ -33,7 +33,7 @@ int	main(void)
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	i;
+	size_t			i;
 	unsigned char	*str;
 
 	i = 0;
