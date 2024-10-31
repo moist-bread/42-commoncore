@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:27:12 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/30 16:16:24 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:59:56 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ size_t	ft_strlen(const char *str);
 /*
 int	main(void)
 {
-	char	*string = NULL;
+	char	*string;
 
+	string = NULL;
 	printf("original string: %s\nstart: %i\n", string, 5);
 	printf("substring: %s\n", ft_substr(string, 5, 5));
 	return (0);
@@ -64,4 +65,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	substring[j] = 0;
 	return (substring);
 }
-

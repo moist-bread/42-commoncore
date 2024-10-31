@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:31 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/29 13:48:47 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:59:41 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 size_t	ft_strlen(const char *str);
-//char	ft_toupper(unsigned int index, char c);
+// char	ft_toupper(unsigned int index, char c);
 
 /*
 int	main(void)
