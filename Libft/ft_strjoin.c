@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:54 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 12:59:19 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:30:31 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ int	main(int argc, char *argv[])
 	printf("%s (prefix)\n%s (suffix)\n", argv[1], argv[2]);
 	printf("%s (return)\n", ft_strjoin(argv[1], argv[2]));
 	return (0);
+}
+
+size_t	ft_strlen(char const *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
 */
 
@@ -50,12 +60,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (string);
 }
 
-size_t	ft_strlen(char const *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
