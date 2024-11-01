@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/10/31 21:37:25 by rduro-pe         ###   ########.fr        #
+#    Updated: 2024/11/01 17:07:40 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,11 @@ SRCS =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
 		ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c \
 
+LST	=	ft_lstnew.c \
+
 OBJS = $(SRCS:.c=.o)
+
+BONUS_OBJS = $(LST:.c=.o)
 
 CC = cc
 
@@ -36,7 +40,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@echo "Removing OBJS"
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	@echo "Removing $(NAME)"
@@ -45,4 +49,8 @@ fclean: clean
 re:	fclean all
 	@echo "Re-Done!!"
 
-.PHONY: all clean fclean re
+bonus: $(BONUS_OBJS) $(NAME)
+	@echo "Archiving BONUS into $(NAME)"
+	@ar rcs $(NAME) $(BONUS_OBJS)
+
+.PHONY: all clean fclean re bonus
