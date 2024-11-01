@@ -1,46 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 15:48:25 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/01 18:05:48 by rduro-pe         ###   ########.fr       */
+/*   Created: 2024/11/01 18:02:07 by rduro-pe          #+#    #+#             */
+/*   Updated: 2024/11/01 18:09:01 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
 
-typedef struct s_list
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-void			*content;
-struct s_list	*next;
-}				t_list;
-
-t_list			*ft_lstnew(void *content);
-
-int main (void)
-{
-	char	*con;
-
-	con = "conteudo interessante";
-	ft_lstnew((void *)con);
-	return(0);
 }
 
-*/
-
-t_list	*ft_lstnew(void *content)
+void	*ft_freestr(char **split, int max)
 {
-	t_list *new;
+	int i;
 
-	new = malloc(sizeof(t_list));
-	if (new == 0)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	i = 0;
+	while (i < max)
+		free(split[i++]);
+	free(split);
+	return (NULL);
 }

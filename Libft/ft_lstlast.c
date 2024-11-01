@@ -1,46 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 15:48:25 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/01 18:05:48 by rduro-pe         ###   ########.fr       */
+/*   Created: 2024/11/01 17:47:50 by rduro-pe          #+#    #+#             */
+/*   Updated: 2024/11/01 17:52:17 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
+t_list	*ft_lstlast(t_list *lst);
 
-typedef struct s_list
+t_list	*ft_lstlast(t_list *lst)
 {
-void			*content;
-struct s_list	*next;
-}				t_list;
-
-t_list			*ft_lstnew(void *content);
-
-int main (void)
-{
-	char	*con;
-
-	con = "conteudo interessante";
-	ft_lstnew((void *)con);
-	return(0);
-}
-
-*/
-
-t_list	*ft_lstnew(void *content)
-{
-	t_list *new;
-
-	new = malloc(sizeof(t_list));
-	if (new == 0)
+	if (lst == NULL)
 		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }
