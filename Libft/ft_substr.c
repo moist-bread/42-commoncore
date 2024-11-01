@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:27:12 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/01 13:37:18 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/01 13:46:04 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (0);
 	strlen = ft_strlen(s);
 	if (start >= strlen)
-		return(ft_strdup(""));
+		return (ft_strdup(""));
 	if (strlen - start < len)
 		size = strlen - start;
 	else
