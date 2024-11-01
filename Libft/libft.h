@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 13:00:04 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/01 13:18:42 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <limits.h>
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+# include <stdint.h>
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
