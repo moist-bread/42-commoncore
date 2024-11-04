@@ -6,7 +6,7 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:52:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/03 17:33:52 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:50:38 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *last;
+	t_list	*last;
 
 	last = ft_lstlast(*lst);
 	if (last == NULL)

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:54 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/01 15:30:31 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:45:05 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	string[i + j] = 0;
 	return (string);
 }
-
