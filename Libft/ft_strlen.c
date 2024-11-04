@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2024/10/28 11:26:36 by rduro-pe          #+#    #+#             */
 /*   Updated: 2024/10/28 11:53:01 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
@@ -12,12 +15,13 @@
 
 #include "libft.h"
 
+
 size_t	ft_strlen(const char *str)
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 		i++;
 	return (i);
 }

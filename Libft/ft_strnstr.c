@@ -6,7 +6,7 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 12:59:47 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/04 08:51:56 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 		if (str[pin] == to_find[0])
 		{
 			i = 0;
-			while (str[pin + i] == to_find[i] && to_find[i] != '\0' && pin
-				+ i < len)
+			while (str[pin + i] == to_find[i] && to_find[i] && pin + i < len)
 				i++;
 			if (to_find[i] == '\0')
 				return (&s[pin]);

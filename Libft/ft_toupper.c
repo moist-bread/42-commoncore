@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2024/10/28 11:49:55 by rduro-pe          #+#    #+#             */
 /*   Updated: 2024/10/28 11:50:05 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
@@ -12,7 +15,8 @@
 
 #include "libft.h"
 
-int	ft_toupper(char c);
+
+int	ft_toupper(int c);
 
 /*
 int	main(void)
@@ -27,7 +31,7 @@ int	main(void)
 	return (0);
 }
  */
-int	ft_toupper(char c)
+int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
 		c -= 32;

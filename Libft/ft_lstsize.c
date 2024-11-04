@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:36:35 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/01 17:48:16 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/03 15:35:29 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	ft_lstsize(t_list *lst)
 {
 	int size;
 
+	if (lst == NULL)
+		return (0);
 	size = 0;
 	while (lst->next != NULL)
 	{

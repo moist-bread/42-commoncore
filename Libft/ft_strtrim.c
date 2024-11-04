@@ -6,7 +6,7 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:57 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 12:59:54 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/04 08:53:28 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	trimmed = malloc((end - begin + 1) * sizeof(char));
 	if (trimmed == NULL)
 		return (0);
-	while (s1[begin] != 0 && begin < end)
+	while (s1[begin] && begin < end)
 		trimmed[i++] = s1[begin++];
 	trimmed[i] = 0;
 	return (trimmed);
@@ -60,10 +60,10 @@ int	ft_trimbegin(char const *s1, char const *set)
 	int	j;
 
 	i = 0;
-	while (s1[i] != 0)
+	while (s1[i])
 	{
 		j = 0;
-		while (s1[i] != set[j] && set[j] != 0)
+		while (s1[i] != set[j] && set[j])
 			j++;
 		if (s1[i] == set[j])
 			i++;
@@ -79,13 +79,13 @@ int	ft_trimend(char const *s1, char const *set)
 	int	j;
 
 	i = 0;
-	while (s1[i] != 0)
+	while (s1[i])
 		i++;
 	i--;
 	while (i >= 0)
 	{
 		j = 0;
-		while (s1[i] != set[j] && set[j] != 0)
+		while (s1[i] != set[j] && set[j])
 			j++;
 		if (s1[i] == set[j])
 			i--;

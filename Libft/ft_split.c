@@ -6,7 +6,7 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 11:53:30 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/04 08:49:32 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_seglen(char const *str, char c)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0' && str[i] != c)
+	while (str[i] && str[i] != c)
 		i++;
 	return (i);
 }
@@ -89,13 +89,13 @@ int	ft_segcount(char const *str, char c)
 
 	i = 0;
 	count = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
-		while (str[i] == c && str[i] != '\0')
+		while (str[i] == c && str[i])
 			i++;
-		if (str[i] != '\0')
+		if (str[i])
 			count++;
-		while (str[i] != c && str[i] != '\0')
+		while (str[i] != c && str[i])
 			i++;
 	}
 	return (count);
@@ -110,7 +110,7 @@ char	*ft_segalloc(char const *s, char c, int len)
 	seg = malloc((len + 1) * sizeof(char));
 	if (seg == NULL)
 		return (0);
-	while (s[j] != 0 && s[j] != c)
+	while (s[j] && s[j] != c)
 	{
 		seg[j] = s[j];
 		j++;
