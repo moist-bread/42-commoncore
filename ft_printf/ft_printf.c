@@ -6,102 +6,116 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:55:55 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/06 18:07:16 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:07:36 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
 #include <unistd.h>
 
-int ft_printf(const char *input, ...);
-int ft_itsapercent(const char *input, ...);
-void	ft_putstr(char *str);
+int		ft_printf(const char *input, ...);
+int		ft_itsapercent(const char *input, va_list args);
+int		ft_printchar(int c);
+int		ft_printstr(char *str);
+int     ft_prtnb_base(int nbr, char *base, int len);
 
-int main(void)
+int	main(void)
 {
-    ft_printf("text%%\th");
-    /* printf("(%%c test) %c\n", 'C');
-    printf("(%%s test) %s\n", "boas");
-    printf("(%%p test) %p\n", (void *)"void pointer");
-    printf("(%%d test) %d\n", (int)-420.42);
-    printf("(%%i test) %i\n", 420420);
-    printf("(%%u test) %u\n", (unsigned int)420.42);
-    printf("(%%x test) %x\n", 42);
-    printf("(%%X test) %X\n", 42); */
-}
-/* int ft_printf(const char *input, ...)
-{
-    va_list args;
-    int counter;
-    char *x;
-    
-    va_start(args, input);
-    x = va_arg(args, char *);
-    counter = 0;
-    while (x)
-    {
-        counter++;
-        x = va_arg(args, char *);
-    }
-    va_end(args);
-    return(counter);
-} */
+	int	cnt;
 
-int ft_printf(const char *input, ...)
-{
-    int counter;
-    int i;
-
-    counter = 0;
-    i = 0;
-    while (input[i])
-    {
-        if (input[i] == '%')
-        {
-            counter += ft_itsapercent(&input[++i]);
-            i++;
-        }
-        else
-        {
-            write (1, &input[i++], 1);
-            counter++;
-        }
-    }
-    return(counter);
+	// cnt = ft_printf("text");
+	cnt = ft_printf("text%%\th%c%s%d%x%X%s", 'C', "waaa", 32758, 42, 42, "");
+	printf("\n");
+	printf("%d (cnt)\n", cnt);
+	printf("text%%\th%c%s%d%x%X%s (normal printf)", 'C', "waaa", 32758, 42, 42, "");
 }
 
-int ft_itsapercent(const char *input, ...)
+int	ft_printf(const char *input, ...)
 {
-    int counter;
+	va_list	args;
+	int		cnt;
 
-    if (input[0] == '%')
-    {
-        write (1, &input[0], 1);
-        counter = 1;
-    }
-    if (input[0] == 's')
-    {
-        write (1, &input[0], 1);
-        counter = ft_putstr(args);
-    }
-    return (counter);
-}
-
-void	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
+	va_start(args, input);
+	cnt = 0;
+	while (*input)
 	{
-		write(1, &str[i], 1);
-		i++;
+		if (*input == '%')
+			cnt += ft_itsapercent(++input, args);
+		else
+		{
+			write(1, &*input, 1);
+			cnt++;
+		}
+		input++;
 	}
+	va_end(args);
+	return (cnt);
 }
 
-// in the input, count the amount of % not followed by a %
-// detect what vartype itll be and redirect it to the corresponding
-// printer function
-// dont forget to just print them normally
+int	ft_itsapercent(const char *input, va_list args)
+{
+	int		cnt;
+
+	if (*input == 'c')
+		cnt = ft_printchar(va_arg(args, int));
+	if (*input == 's')
+		cnt = ft_printstr(va_arg(args, char *));
+	if (*input == 'p')
+        cnt = ft_prtnb_base(va_arg(args, unsigned long int), "0123456789", 10);
+	if (*input == 'd' || *input == 'i')
+		cnt = ft_prtnb_base(va_arg(args, int), "0123456789", 10);
+	if (*input == 'u')
+		cnt = ft_prtnb_base(va_arg(args, unsigned int), "0123456789", 16);
+    if (*input == 'x')
+		cnt = ft_prtnb_base(va_arg(args, unsigned int), "0123456789abcdef", 16);
+	if (*input == 'X')
+		cnt = ft_prtnb_base(va_arg(args, unsigned int), "0123456789ABCDEF", 16);
+	if (*input == '%')
+		cnt = ft_printchar('%');
+	return (cnt);
+}
+
+int	ft_printchar(int c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_printstr(char *str)
+{
+	int	cnt;
+
+    if (!str)
+        str = "(null)";
+    cnt = 0;
+	while (*str)
+	{
+        write(1, &*str++, 1);
+		cnt++;
+	}
+	return (cnt);
+}
+
+int	ft_prtnb_base(int nbr, char *base, int len)
+{
+	long	num;
+	int		cnt;
+	int		mod;
+
+	num = nbr;
+	cnt = 0;
+	if (num < 0)
+	{
+		write(1, "-", 1);
+		num = -num;
+	}
+	if (num > 9)
+		cnt += ft_prtnb_base(num / len, base, len);
+	mod = num % len;
+	write(1, &base[mod], 1);
+	cnt++;
+	return (cnt);
+}
