@@ -5,33 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 17:55:55 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/07 18:07:36 by rduro-pe         ###   ########.fr       */
+/*   Created: 2024/11/08 11:58:25 by rduro-pe          #+#    #+#             */
+/*   Updated: 2024/11/08 12:37:09 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 int		ft_printf(const char *input, ...);
-int		ft_itsapercent(const char *input, va_list args);
+int		ft_ispercent(const char *input, va_list args);
 int		ft_printchar(int c);
 int		ft_printstr(char *str);
-int     ft_prtnb_base(int nbr, char *base, int len);
+int     ft_prtnb_base(long nbr, char *base, int len);
+int	    ft_printptr(unsigned long p);
+int		ft_prtptr_base(unsigned long nbr, char *base);
 
-int	main(void)
+/* int main(void)
+{
+    ft_printf("(%%p est) %p\n", (void *)-1);
+	ft_printf("(%%p est) %p\n", (void *)1);
+    ft_printf("(%%p tst) %p\n", (void *)15);
+	ft_printf("(%%p est) %p\n", (void *)16);
+    ft_printf("(%%p est) %p\n", (void *)17);
+	ft_printf("(%%p tst) %p\n", (void *)0);
+} */
+
+/* int	main(void)
 {
 	int	cnt;
+    char *str = 0;
+    void *p = "thing";
 
-	// cnt = ft_printf("text");
-	cnt = ft_printf("text%%\th%c%s%d%x%X%s", 'C', "waaa", 32758, 42, 42, "");
-	printf("\n");
-	printf("%d (cnt)\n", cnt);
-	printf("text%%\th%c%s%d%x%X%s (normal printf)", 'C', "waaa", 32758, 42, 42, "");
-}
+	cnt = ft_printf("text%%\th%c%s%d%x%X%s%p", 'C', "waaa", 32758, 42, 42, str, p);
+	printf(" (my printf)\n");
+	printf("%d (count)\n", cnt);
+	printf("text%%\th%c%s%d%x%X%s%p (real printf)\n", 'C', "waaa", 32758, 42, 42, str, p);
+    cnt = ft_printf("%p %u", (void *)-1, (unsigned int)-1);
+	printf(" (my printf)\n");
+	printf("%d (count)\n", cnt);
+	printf("%p %u (real printf)", (void *)-1, (unsigned int)-1);
+} */
 
 int	ft_printf(const char *input, ...)
 {
@@ -43,7 +56,7 @@ int	ft_printf(const char *input, ...)
 	while (*input)
 	{
 		if (*input == '%')
-			cnt += ft_itsapercent(++input, args);
+			cnt += ft_ispercent(++input, args);
 		else
 		{
 			write(1, &*input, 1);
@@ -55,7 +68,7 @@ int	ft_printf(const char *input, ...)
 	return (cnt);
 }
 
-int	ft_itsapercent(const char *input, va_list args)
+int	ft_ispercent(const char *input, va_list args)
 {
 	int		cnt;
 
@@ -64,11 +77,11 @@ int	ft_itsapercent(const char *input, va_list args)
 	if (*input == 's')
 		cnt = ft_printstr(va_arg(args, char *));
 	if (*input == 'p')
-        cnt = ft_prtnb_base(va_arg(args, unsigned long int), "0123456789", 10);
+        cnt = ft_printptr(va_arg(args, unsigned long));
 	if (*input == 'd' || *input == 'i')
 		cnt = ft_prtnb_base(va_arg(args, int), "0123456789", 10);
 	if (*input == 'u')
-		cnt = ft_prtnb_base(va_arg(args, unsigned int), "0123456789", 16);
+		cnt = ft_prtnb_base(va_arg(args, unsigned int), "0123456789", 10);
     if (*input == 'x')
 		cnt = ft_prtnb_base(va_arg(args, unsigned int), "0123456789abcdef", 16);
 	if (*input == 'X')
@@ -77,7 +90,7 @@ int	ft_itsapercent(const char *input, va_list args)
 		cnt = ft_printchar('%');
 	return (cnt);
 }
-
+/* 
 int	ft_printchar(int c)
 {
 	write(1, &c, 1);
@@ -99,23 +112,44 @@ int	ft_printstr(char *str)
 	return (cnt);
 }
 
-int	ft_prtnb_base(int nbr, char *base, int len)
+int	ft_prtnb_base(long nbr, char *base, int len)
 {
-	long	num;
 	int		cnt;
 	int		mod;
 
-	num = nbr;
 	cnt = 0;
-	if (num < 0)
+	if (nbr < 0)
 	{
 		write(1, "-", 1);
-		num = -num;
+		nbr = -nbr;
+        cnt++;
 	}
-	if (num > 9)
-		cnt += ft_prtnb_base(num / len, base, len);
-	mod = num % len;
+	if (nbr >= len)
+		cnt += ft_prtnb_base(nbr / len, base, len);
+	mod = nbr % len;
 	write(1, &base[mod], 1);
 	cnt++;
 	return (cnt);
 }
+
+int	ft_printptr(unsigned long p)
+{
+	if(!p)
+		return(ft_printstr("(nil)"));
+	write(1, "0x", 2);
+    return (ft_prtptr_base(p, "0123456789abcdef") + 2);    
+}
+
+int	ft_prtptr_base(unsigned long nbr, char *base)
+{
+	int		cnt;
+	int		mod;
+
+	cnt = 0;
+	if (nbr >= 16)
+		cnt += ft_prtnb_base(nbr / 16, base, 16);
+	mod = nbr % 16;
+	write(1, &base[mod], 1);
+	cnt++;
+	return (cnt);
+} */

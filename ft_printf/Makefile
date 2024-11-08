@@ -6,13 +6,13 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/11/07 15:30:20 by rduro-pe         ###   ########.fr        #
+#    Updated: 2024/11/08 12:38:01 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS =	 ft_printf.c \
+SRCS =	 ft_printf.c ft_conversions.c \
 
 OBJS = $(SRCS:.c=.o)
 
