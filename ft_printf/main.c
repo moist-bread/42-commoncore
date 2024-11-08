@@ -5,13 +5,20 @@
 
 int main(void)
 {
+    char *str = 0;
+    printf("%d(counter s)\n", printf("(%%s test) %s\n", str));
+	printf("%d(counter p)\n", printf("(%%p test) %p\n", (void *)0));
+}
+
+/* int main(void)
+{
     printf("(%%p test) %p\n", (void *)-1);
 	printf("(%%p test) %p\n", (void *)1);
     printf("(%%p test) %p\n", (void *)15);
 	printf("(%%p test) %p\n", (void *)16);
     printf("(%%p test) %p\n", (void *)17);
 	printf("(%%p test) %p\n", (void *)0);
-}
+} */
 
 /* int main(void)
 {

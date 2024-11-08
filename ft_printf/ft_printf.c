@@ -6,42 +6,28 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:58:25 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/08 12:37:09 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:49:41 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *input, ...);
-int		ft_ispercent(const char *input, va_list args);
-int		ft_printchar(int c);
-int		ft_printstr(char *str);
-int     ft_prtnb_base(long nbr, char *base, int len);
-int	    ft_printptr(unsigned long p);
-int		ft_prtptr_base(unsigned long nbr, char *base);
-
-/* int main(void)
+/* int	main(void)
 {
+	int	cnt;
+
+	cnt = ft_printf("text%%\th%c%s%d", 'C', "waaa", 32758);
+	printf(" (my printf)\n");
+	printf("%d (count)\n", cnt);
+	printf("text%%\th%c%s%d (real printf)\n", 'C', "waaa", 32758);
     ft_printf("(%%p est) %p\n", (void *)-1);
 	ft_printf("(%%p est) %p\n", (void *)1);
     ft_printf("(%%p tst) %p\n", (void *)15);
 	ft_printf("(%%p est) %p\n", (void *)16);
     ft_printf("(%%p est) %p\n", (void *)17);
 	ft_printf("(%%p tst) %p\n", (void *)0);
-} */
-
-/* int	main(void)
-{
-	int	cnt;
-    char *str = 0;
-    void *p = "thing";
-
-	cnt = ft_printf("text%%\th%c%s%d%x%X%s%p", 'C', "waaa", 32758, 42, 42, str, p);
-	printf(" (my printf)\n");
-	printf("%d (count)\n", cnt);
-	printf("text%%\th%c%s%d%x%X%s%p (real printf)\n", 'C', "waaa", 32758, 42, 42, str, p);
     cnt = ft_printf("%p %u", (void *)-1, (unsigned int)-1);
-	printf(" (my printf)\n");
+	ft_printf(" (my printf)\n");
 	printf("%d (count)\n", cnt);
 	printf("%p %u (real printf)", (void *)-1, (unsigned int)-1);
 } */
