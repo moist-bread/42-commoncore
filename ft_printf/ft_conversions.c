@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:37:13 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/08 12:43:46 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:54:10 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	ft_printptr(unsigned long p)
 
 int	ft_prtptr_base(unsigned long nbr, char *base)
 {
-	int cnt;
-	int mod;
+	int	cnt;
+	int	mod;
 
 	cnt = 0;
 	if (nbr >= 16)
