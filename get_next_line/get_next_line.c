@@ -6,7 +6,7 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:46:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/14 12:17:48 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:38:35 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char 	*get_next_line(int fd);
 void	*ft_buffzero(char *buff, size_t n);
-int		ft_linelen(char *str);
 char 	*ft_add_line_chunck(char *start, char *chunck);
 void 	ft_buffrealign(char *buff);
+int		ft_linelen(char *str);
 
 /* int main(void)
 {
@@ -44,9 +44,9 @@ char *get_next_line(int fd)
 	len_read = 1;
 	//printf("entry buff: %s\n", buff);
 	line = ft_add_line_chunck(NULL, buff);
+	if (!line)
+		return(NULL);
 	ft_buffrealign(buff);
-	//printf("IS THERE A NEW LINE? %d\n", ft_no_newline(buff));
-	//ft_buffzero(buff, BUFFER_SIZE + 1);
 	while (len_read != 0 && line[ft_linelen(line) - 1] != '\n')
 	{
 		len_read = read(fd, buff, BUFFER_SIZE);
@@ -55,25 +55,8 @@ char *get_next_line(int fd)
 		if (!line)
 			return(NULL);
 		ft_buffrealign(buff);
-		//printf("%cA\n", line[i]);
-		//printf("%d(index) %d(chara)\n", i, line[i]);
 	}
 	return(line);
-}
-
-void ft_buffrealign(char *buff)
-{
-	int i;
-	int j;
-
-	i= 0;
-	while(buff[i] && buff[i] != '\n')
-		i++;
-	j = 0;
-	if (buff[i] == '\n')
-		while(buff[++i] && i < BUFFER_SIZE)
-			buff[j++] = buff[i];
-	ft_buffzero(&buff[j], BUFFER_SIZE - j);
 }
 
 void	*ft_buffzero(char *buff, size_t n)
@@ -113,6 +96,20 @@ char *ft_add_line_chunck(char *start, char *chunck)
 	return (line);
 }
 
+void ft_buffrealign(char *buff)
+{
+	int i;
+	int j;
+
+	i= 0;
+	while(buff[i] && buff[i] != '\n')
+		i++;
+	j = 0;
+	if (buff[i] == '\n')
+		while(buff[++i] && i < BUFFER_SIZE)
+			buff[j++] = buff[i];
+	ft_buffzero(&buff[j], BUFFER_SIZE - j);
+}
 
 int	ft_linelen(char *str)
 {
