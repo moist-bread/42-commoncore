@@ -6,7 +6,7 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:44:29 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/14 12:33:48 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:09:48 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	*ft_buffzero(char *buff, size_t n);
 char 	*ft_add_line_chunck(char *start, char *chunck);
 void 	ft_buffrealign(char *buff);
 int		ft_linelen(char *str);
+void	*ft_freeline(char *line);
 
 #endif

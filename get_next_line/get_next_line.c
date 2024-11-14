@@ -6,20 +6,26 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:46:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/14 17:05:34 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:22:58 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char 	*get_next_line(int fd);
-void	*ft_buffzero(char *buff, size_t n);
-char 	*ft_add_line_chunck(char *start, char *chunck);
-void 	ft_buffrealign(char *buff);
-int		ft_linelen(char *str);
-void	*ft_freeline(char *line);
-
 /* int main(void)
+{
+	//terminal input get line
+	char *line;
+	
+	write(1, "your input: ", 13);
+	line = get_next_line(1);
+	printf("line: %s", line);
+
+	ft_freeline(line);
+	return(0);
+} */
+
+int main(void)
 {
 	int fd;
 	char *line;
@@ -36,7 +42,7 @@ void	*ft_freeline(char *line);
 	return(0);
 	//printf("entry buff: %s\n", buff);
 	//printf("read buff: %s\n", buff);
-} */
+}
 
 char *get_next_line(int fd)
 {
@@ -46,11 +52,11 @@ char *get_next_line(int fd)
 	
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (ft_buffzero(buff, BUFFER_SIZE));
-	len_read = 1;
 	line = ft_add_line_chunck(NULL, buff);
 	if (!line)
 		return(NULL);
 	ft_buffrealign(buff);
+	len_read = 1;
 	while (len_read > 0 && line[ft_linelen(line) - 1] != '\n')
 	{
 		len_read = read(fd, buff, BUFFER_SIZE);
