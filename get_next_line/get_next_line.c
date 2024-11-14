@@ -6,7 +6,7 @@
 /*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:46:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/14 12:38:35 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:05:34 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	*ft_buffzero(char *buff, size_t n);
 char 	*ft_add_line_chunck(char *start, char *chunck);
 void 	ft_buffrealign(char *buff);
 int		ft_linelen(char *str);
+void	*ft_freeline(char *line);
 
 /* int main(void)
 {
@@ -31,6 +32,10 @@ int		ft_linelen(char *str);
 		printf("line %d: %s", i, line);
 		i++;
 	}
+	ft_freeline(line);
+	return(0);
+	//printf("entry buff: %s\n", buff);
+	//printf("read buff: %s\n", buff);
 } */
 
 char *get_next_line(int fd)
@@ -42,20 +47,20 @@ char *get_next_line(int fd)
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (ft_buffzero(buff, BUFFER_SIZE));
 	len_read = 1;
-	//printf("entry buff: %s\n", buff);
 	line = ft_add_line_chunck(NULL, buff);
 	if (!line)
 		return(NULL);
 	ft_buffrealign(buff);
-	while (len_read != 0 && line[ft_linelen(line) - 1] != '\n')
+	while (len_read > 0 && line[ft_linelen(line) - 1] != '\n')
 	{
 		len_read = read(fd, buff, BUFFER_SIZE);
-		//printf("read buff: %s\n", buff);
 		line = ft_add_line_chunck(line, buff);
 		if (!line)
 			return(NULL);
 		ft_buffrealign(buff);
 	}
+	if (!line[0] || len_read < 0)
+		return (ft_freeline(line));
 	return(line);
 }
 
@@ -81,18 +86,18 @@ char *ft_add_line_chunck(char *start, char *chunck)
 		start[0] = '\0';
 	}
 	line = malloc((ft_linelen(start) + ft_linelen(chunck) + 1) * sizeof(char));
-	if (line == NULL)
+	if (!line)
 		return (NULL);
 	i = -1;
-	j = 0;
 	while (start[++i])
 		line[i] = start[i];
+	j = 0;
+	if (chunck[j])
+		line[i++] = chunck[j++];
 	while (chunck[j] && chunck[j - 1] != '\n')
-	{
-		line[i + j] = chunck[j];
-		j++;
-	}
-	line[i + j] = 0;
+		line[i++] = chunck[j++];
+	line[i] = '\0';
+	ft_freeline(start);
 	return (line);
 }
 
@@ -116,7 +121,15 @@ int	ft_linelen(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i])
+		i++;
 	while (str[i] && str[i - 1] != '\n')
 		i++;
 	return (i);
+}
+
+void *ft_freeline(char *line)
+{
+	free(line);
+	return(NULL);
 }
