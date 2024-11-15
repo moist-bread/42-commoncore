@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fts.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/15 11:56:36 by rduro-pe          #+#    #+#             */
+/*   Updated: 2024/11/15 11:56:37 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 /* char *get_next_line(int fd)
 {
@@ -6,7 +17,7 @@
 	int len_read;
 	static char buff[BUFFER_SIZE + 1];
 	char *buff2;
-	
+
 	len_read = 0;
 	i = 0;
 	if (BUFFER_SIZE <= 0 || fd < 0)
@@ -18,7 +29,7 @@
 	{
 		len_read += read(fd, &buff[i], 1);
 		if (buff[i] == '\n' || buff[i] == '\0' || len_read != i + 1)
-			break;
+			break ;
 		i++;
 	}
 	if (len_read != i + 1)
@@ -36,21 +47,20 @@
 	return (buff2);
 } */
 
-
 /* char *get_next_line(int fd)
 {
 	int i;
 	int len_read;
 	static char buff[BUFFER_SIZE + 1];
 	static char *buff2;
-	
+
 	len_read = 0;
 	i = 0;
 	while (1)
 	{
 		len_read += read(fd, &buff[i], 1);
 		if (buff[i] == '\n' || buff[i] == '\0' || len_read != i + 1)
-			break;
+			break ;
 		i++;
 	}
 	if (len_read != i + 1)
@@ -82,6 +92,5 @@
 	//close(fd);
 	//fd = open("text.txt", O_RDONLY);
 	//printf("%s\n\n", buff2);
-	
-} */
 
+} */
