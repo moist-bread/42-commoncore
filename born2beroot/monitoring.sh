@@ -38,7 +38,7 @@ diskt=$(df -h  --total / | tail -1 | awk '$1 == "total" {printf("%sb (%s)", $2, 
 $cpuidle$(mpstat 1 3 | tail -1 | awk '{printf("%.1f%%", 100-$12)}')
 
 #last reboot date
-reboot=$(who -b | awk '$1 == "system" {print $3 " " $4}')
+reboot=$(who -b | awk '{print $3 " " $4}')
 
 #logical volume manager status
 lvm=$( if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ];
@@ -49,7 +49,8 @@ else
 fi )
 
 #tcp connections
-tcp=$(ss -at | grep ESTAB | wc -l)
+#tcp=$(ss -at | grep ESTAB | wc -l)
+tcpestab=$(ss --summary | sed |awk '$1 == "TCP:" {print $4}')
 
 #users
 users=$(users | wc -w)
