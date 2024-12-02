@@ -4,43 +4,29 @@
 architecture=$(uname -a)
 
 #physical processors
-#ppro=$(grep "physical id" /proc/cpuinfo | wc -l)
-lscpu | awk '$1 == "CPU(s):" {print $2}'
-#try with --physical and experiment for the virtual
+ppro=$(lscpu | awk '$1 == "CPU(s):" {print $2}')
 
 #virtual processors
-vpro=$(grep processor /proc/cpuinfo | wc -l)
+vpro=$(nproc)
 
 #ram usage
 ramu=$(free --mega | awk '$1 == "Mem:" {printf("%i/%iMB (%.2f%%)", $3, $2, ($3*100)/$2)}')
 
 #disk space used
-disku=$(df -m  --total / /home /dev/shm | tail -1 | awk '$1 == "total" {print $3}')
-#disku=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} END {print disk_u}')
-
-#disk space total
-#diskt=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{diskst_total += $2} END {printf ("%.0fGb\n"), diskst_total/1024}')
-
-#disk space percentage
-#diskp=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} {disk_t += $2} END {printf("%d"), (disk_u*100)/disk_t}')
+disku=$(df -m  --total | tail -1 | awk '$1 == "total" {print $3}')
 
 #disk space total and usage
-diskt=$(df -h  --total / /home /dev/shm | tail -1 | awk '$1 == "total" {printf("%sb (%s)", $2, $5)}')
-
-#cpu wait time
-#cpuid=$(vmstat 1 3 | tail -1 | awk '{print $15}')
-#cpu_ex=$(expr 100 - $cpuid)
-#cpuwt=$(printf "%.1f" $cpu_ex)
-
-#sudo apt install sysstat
+diskt=$(df -h  --total / | tail -1 | awk '$1 == "total" {printf("%sb (%s)", $2, $5)}')
 
 #idle cpu
+#sudo apt install sysstat
 $cpuidle$(mpstat 1 3 | tail -1 | awk '{printf("%.1f%%", 100-$12)}')
 
 #last reboot date
 reboot=$(who -b | awk '{print $3 " " $4}')
 
 #logical volume manager status
+#could have fix for collumn with awk '{print $6}' b4 grep
 lvm=$( if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ];
 then
 	echo yes
@@ -49,8 +35,7 @@ else
 fi )
 
 #tcp connections
-#tcp=$(ss -at | grep ESTAB | wc -l)
-tcpestab=$(ss --summary | sed |awk '$1 == "TCP:" {print $4}')
+tcpestab=$(ss --summary | sed 's/,/ /'| awk '$1 == "TCP:" {print $4}')
 
 #users
 users=$(users | wc -w)
@@ -76,4 +61,3 @@ wall "
 	#User log: $users
 	#Network: IP $ip ($mac)
 	#Sudo: $sudo cmd"
-
