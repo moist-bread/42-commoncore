@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:46:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/15 11:57:35 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:19:26 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	*ft_buffzero(char *buff, size_t n)
 	ft_freeline(line);
 	return(0);
 }
-int	main(void)
+*/
+/* int	main(void)
 {
 	int fd;
 	char *line;
@@ -76,4 +77,4 @@ int	main(void)
 		ft_freeline(line);
 	}
 	return(0);
-} */
+}  */
