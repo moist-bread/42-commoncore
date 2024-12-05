@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/05 18:00:47 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/05 18:19:00 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <stdarg.h>
 # include <stdio.h>
-# include <unistd.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct stacks
 {
@@ -26,13 +26,14 @@ typedef struct stacks
 	int	btop_id;
 }		stacks;
 
-//PRINTING FTS
-int		print_stack(int *stack, int len);
+// PRINTING FTS
+void	print_stack(int *stack, int top_idx);
+void	print_both_stacks(stacks *stk);
 
-//HELPER FTS
+// HELPER FTS
 stacks	*make_stacks(int argc, char *argv[]);
 
-//OPERATION FTS
+// OPERATION FTS
 void	sa_do(stacks *stk);
 void	sb_do(stacks *stk);
 void	ss_do(stacks *stk);
@@ -45,15 +46,15 @@ void	rra_do(stacks *stk);
 void	rrb_do(stacks *stk);
 void	rrr_do(stacks *stk);
 
-//PRINTF FTS
-int	ft_printf(const char *input, ...);
-int	ft_ispercent(const char *input, va_list args);
-int	ft_printchar(int c);
-int	ft_printstr(char *str);
-int	ft_prtnb_base(long nbr, char *base, int len);
-int	ft_printptr(unsigned long p, int flag);
+// PRINTF FTS
+int		ft_printf(const char *input, ...);
+int		ft_ispercent(const char *input, va_list args);
+int		ft_printchar(int c);
+int		ft_printstr(char *str);
+int		ft_prtnb_base(long nbr, char *base, int len);
+int		ft_printptr(unsigned long p, int flag);
 
-//LIBFT FTS
-int	ft_atoi(const char *str);
+// LIBFT FTS
+int		ft_atoi(const char *str);
 
 #endif

@@ -6,73 +6,103 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/05 17:40:08 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:42:52 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 stacks	*make_stacks(int argc, char *argv[]);
-int		print_stack(int *stack, int len);
+void	print_stack(int *stack, int top_idx);
 void	rb_do(stacks *stk);
 
 int	main(int argc, char *argv[])
 {
 	stacks	*stk;
 
+	if (argc < 3)
+		return (0); // INSTEAD OF RETURN "GIVE PROMPT BACK"
+	// ft_printf("%i\n", argc);
+	// check if theyre all ints else write "Error"
+	// check if there are duplicates
+	if (input_checker(argc, argv))
+		return (1);
 	stk = make_stacks(argc, argv);
 	if (!stk)
 		return (0);
-	print_stack(stk->a, stk->atop_id);
-	print_stack(stk->b, stk->btop_id);
-	ra_do(stk);
-	print_stack(stk->a, stk->atop_id);
-	print_stack(stk->b, stk->btop_id);
+	print_both_stacks(stk);
+	// ra_do(stk);
+	// print_both_stacks(stk);
 	// pb_do(stk);
 	// pb_do(stk);
-	// print_stack(stk->a, stk->atop_id);
-	// print_stack(stk->b, stk->btop_id);
+	// print_both_stacks(stk);
 	// ss_do(stk);
-	// print_stack(stk->a, stk->atop_id);
-	// print_stack(stk->b, stk->btop_id);
+	// print_both_stacks(stk);
 	// pa_do(stk);
-	// print_stack(stk->a, stk->atop_id);
-	// print_stack(stk->b, stk->btop_id);
+	// print_both_stacks(stk);
+}
+
+int input_checker(int argc, char *argv[])
+{
+	int	error;
+	int i;
+
+	error = 0;
+	i = 1;
+	while (i < argc)
+	{
+		is_num(argv[i]);
+		
+		i++;
+	}
+		
+	
+	if (error)
+		write(2, "Error\n", 6);
+	return (error);
+}
+
+is_num(char *argv[])
+{
+	int j;
+	
+	j = -1;
+	while(*argv[++j])
+	{
+		if(*argv[0] == '-' || *argv[0] == '+')
+			j++;
+		if (*argv[j] < '0' && *argv[j] > '9')
+		{
+			error++;
+			break;
+		}
+		
+	}
+	
 }
 
 stacks	*make_stacks(int argc, char *argv[])
 {
 	stacks	*stk;
-	int		i;
 
-	// ft_printf("%i\n", argc);
-	if (argc < 3)
-		return (NULL);
-	// INSTEAD OF RETURN "GIVE PROMPT BACK"
-	// check if theyre all ints else write "Error"
-	// check if there are duplicates
 	stk = malloc(sizeof(stacks));
 	if (!stk)
 		return (NULL);
-	stk->a = malloc((argc - 1) * sizeof(int));
+	stk->a = malloc(--argc * sizeof(int));
 	if (!stk->a)
 		return (NULL);
-	stk->b = malloc((argc - 1) * sizeof(int));
+	stk->b = malloc(argc * sizeof(int));
 	if (!stk->b)
 		return (NULL);
-	// ft_printf("BAD%i\n", argc);
-	stk->atop_id = argc - 2;
+	stk->atop_id = -1;
 	stk->btop_id = -1;
-	i = 0;
-	while (i <= stk->atop_id)
-	{
-		stk->a[i] = ft_atoi(argv[i + 1]);
-		i++;
-	}
+	while (++stk->atop_id < argc)
+		stk->a[stk->atop_id] = ft_atoi(argv[argc - stk->atop_id]);
+	stk->atop_id--;
 	return (stk);
 }
 
-int	print_stack(int *stack, int top_idx)
+void	print_stack(int *stack, int top_idx)
 {
 	if (top_idx < 0)
 		ft_printf("|empty| (%i)\n", top_idx);
@@ -82,5 +112,10 @@ int	print_stack(int *stack, int top_idx)
 		top_idx--;
 	}
 	ft_printf("\n");
-	return (0);
+}
+
+void	print_both_stacks(stacks *stk)
+{
+	print_stack(stk->a, stk->atop_id);
+	print_stack(stk->b, stk->btop_id);
 }

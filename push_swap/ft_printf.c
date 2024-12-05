@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:58:25 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/05 18:00:16 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/05 18:03:46 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_printf(const char *input, ...)
 
 int	ft_ispercent(const char *input, va_list args)
 {
-	int		cnt;
+	int	cnt;
 
 	if (*input == 'c')
 		cnt = ft_printchar(va_arg(args, int));

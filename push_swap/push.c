@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:48:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/05 17:42:55 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/05 18:03:38 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ void	pb_do(stacks *stk)
 
 void	ra_do(stacks *stk)
 {
-	int temp;
-	int i;
-	
+	int	temp;
+	int	i;
+
 	if (stk->atop_id > 0)
 	{
 		i = stk->atop_id;
 		temp = stk->a[stk->atop_id];
-		while(i > 0)
+		while (i > 0)
 		{
 			stk->a[i] = stk->a[i - 1];
-			i--;	
+			i--;
 		}
 		stk->a[0] = temp;
 	}
@@ -54,17 +54,17 @@ void	ra_do(stacks *stk)
 
 void	rb_do(stacks *stk)
 {
-	int temp;
-	int i;
-	
+	int	temp;
+	int	i;
+
 	if (stk->btop_id > 0)
 	{
 		i = stk->btop_id;
 		temp = stk->b[stk->btop_id];
-		while(i > 0)
+		while (i > 0)
 		{
 			stk->b[i] = stk->b[i - 1];
-			i--;	
+			i--;
 		}
 		stk->b[0] = temp;
 	}
