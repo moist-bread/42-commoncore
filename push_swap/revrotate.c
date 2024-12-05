@@ -1,42 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   revrotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 22:48:58 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/05 17:38:03 by rduro-pe         ###   ########.fr       */
+/*   Created: 2024/12/05 17:39:30 by rduro-pe          #+#    #+#             */
+/*   Updated: 2024/12/05 17:40:41 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa_do(stacks *stk)
+void	rra_do(stacks *stk)
 {
 	int temp;
+	int i;
 	
 	if (stk->atop_id > 0)
 	{
-		temp = stk->a[stk->atop_id];
-		stk->a[stk->atop_id] = stk->a[stk->atop_id - 1];
-		stk->a[stk->atop_id - 1] = temp;
-	}
-}
-void	sb_do(stacks *stk)
-{
-	int temp;
-	
-	if (stk->btop_id > 0)
-	{
-		temp = stk->b[stk->btop_id];
-		stk->b[stk->btop_id] = stk->b[stk->btop_id - 1];
-		stk->b[stk->btop_id - 1] = temp;
+		i = 0;
+		temp = stk->a[0];
+		while(i < stk->atop_id)
+		{
+			stk->a[i] = stk->a[i + 1];
+			i++;	
+		}
+		stk->a[stk->atop_id] = temp;
 	}
 }
 
-void	ss_do(stacks *stk)
+void	rrb_do(stacks *stk)
 {
-	sa_do(stk);
-	sb_do(stk);
+	int temp;
+	int i;
+	
+	if (stk->btop_id > 0)
+	{
+		i = 0;
+		temp = stk->b[0];
+		while(i < stk->btop_id)
+		{
+			stk->b[i] = stk->b[i + 1];
+			i++;	
+		}
+		stk->b[stk->btop_id] = temp;
+	}
+}
+
+void	rrr_do(stacks *stk)
+{
+	rra_do(stk);
+	rrb_do(stk);
 }

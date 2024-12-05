@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:37:13 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/02 22:25:35 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:59:57 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,19 @@ int	ft_prtnb_base(long nbr, char *base, int len)
 	return (cnt);
 }
 
-int	ft_printptr(unsigned long p)
-{
-	if (!p)
-		return (ft_printstr("(nil)"));
-	write(1, "0x", 2);
-	return (ft_prtptr_base(p, "0123456789abcdef") + 2);
-}
-
-int	ft_prtptr_base(unsigned long nbr, char *base)
+int	ft_printptr(unsigned long p, int flag)
 {
 	int	cnt;
 	int	mod;
 
 	cnt = 0;
-	if (nbr >= 16)
-		cnt += ft_prtnb_base(nbr / 16, base, 16);
-	mod = nbr % 16;
-	write(1, &base[mod], 1);
-	cnt++;
+	if (!p)
+		return (ft_printstr("(nil)"));
+	if (flag)
+		cnt += write(1, "0x", 2);
+	if (p >= 16)
+		cnt += ft_printptr(p / 16, 0);
+	mod = p % 16;
+	cnt += write(1, &"0123456789abcdef"[mod], 1);
 	return (cnt);
 }

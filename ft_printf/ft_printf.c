@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:58:25 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/08 12:52:47 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:56:08 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_ispercent(const char *input, va_list args)
 	if (*input == 's')
 		cnt = ft_printstr(va_arg(args, char *));
 	if (*input == 'p')
-		cnt = ft_printptr(va_arg(args, unsigned long));
+		cnt = ft_printptr(va_arg(args, unsigned long), 1);
 	if (*input == 'd' || *input == 'i')
 		cnt = ft_prtnb_base(va_arg(args, int), "0123456789", 10);
 	if (*input == 'u')
