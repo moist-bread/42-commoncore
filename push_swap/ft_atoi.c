@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:43 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/04 15:32:35 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/07 18:56:48 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,11 @@ int	ft_atoi(const char *str)
 	if (sign)
 		result = -result;
 	return (result);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

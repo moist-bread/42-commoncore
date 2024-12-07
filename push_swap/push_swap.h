@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/05 18:19:00 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:36:27 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int		ft_printptr(unsigned long p, int flag);
 
 // LIBFT FTS
 int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/05 20:42:52 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/07 21:07:10 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 stacks	*make_stacks(int argc, char *argv[]);
 void	print_stack(int *stack, int top_idx);
+int input_checker(int argc, char *argv[]);
 void	rb_do(stacks *stk);
+int	is_num(char argv[]);
+int	int_check(const char *str);
 
 int	main(int argc, char *argv[])
 {
@@ -50,35 +53,52 @@ int input_checker(int argc, char *argv[])
 	error = 0;
 	i = 1;
 	while (i < argc)
-	{
-		is_num(argv[i]);
-		
-		i++;
-	}
-		
-	
+		error += is_num(argv[i++]);
 	if (error)
 		write(2, "Error\n", 6);
 	return (error);
 }
 
-is_num(char *argv[])
+int	is_num(char argv[])
 {
 	int j;
 	
 	j = -1;
-	while(*argv[++j])
-	{
-		if(*argv[0] == '-' || *argv[0] == '+')
-			j++;
-		if (*argv[j] < '0' && *argv[j] > '9')
-		{
-			error++;
-			break;
-		}
-		
-	}
-	
+	if(argv[0] == '-' || argv[0] == '+')
+		j++;
+	while(argv[++j])
+		if (!ft_isdigit(argv[j]))
+			return(1);
+	if (!int_check(argv))
+		return(1);
+	return(0);
+}
+
+int	int_check(const char *str)
+{
+	long	result;
+	long	verif;
+	int	sign;
+	int	i;
+
+	result = 0;
+	i = 0;
+	sign = 0;
+	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+		if (str[i++] == '-')
+			sign++;
+	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+		result = result * 10 + (str[i++] - 48);
+	if (sign)
+		result = -result;
+	verif = result * 50;
+	if (verif / 50 != result) // long overflow
+		return (0);
+	if(result < -2147483648 || result > 2147483647)
+		return (0);
+	return (1);
 }
 
 stacks	*make_stacks(int argc, char *argv[])
