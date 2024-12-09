@@ -6,14 +6,16 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/12/05 17:41:05 by rduro-pe         ###   ########.fr        #
+#    Updated: 2024/12/09 11:14:42 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME = a.out
+
+#REMEMBER TO CHANGE NAME BACK AAAAAAAAA
 
 SRCS =	ft_printf.c ft_conversions.c push_swap_main.c push.c swap.c ft_atoi.c \
-		revrotate.c
+		revrotate.c error_check.c 
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/07 19:36:27 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:43:00 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ void	print_both_stacks(stacks *stk);
 
 // HELPER FTS
 stacks	*make_stacks(int argc, char *argv[]);
+void	free_stacks(stacks *stk);
+
+// ERROR CHECK FTS
+int		input_check(int argc, char *argv[]);
+int		int_check(char argv[]);
+int		overflow_check(char *str);
+int		repeat_check(stacks *stk);
 
 // OPERATION FTS
 void	sa_do(stacks *stk);

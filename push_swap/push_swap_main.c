@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/07 21:07:10 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:47:24 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 stacks	*make_stacks(int argc, char *argv[]);
 void	print_stack(int *stack, int top_idx);
-int input_checker(int argc, char *argv[]);
 void	rb_do(stacks *stk);
-int	is_num(char argv[]);
-int	int_check(const char *str);
+int		int_check(char argv[]);
 
 int	main(int argc, char *argv[])
 {
@@ -26,13 +24,13 @@ int	main(int argc, char *argv[])
 	if (argc < 3)
 		return (0); // INSTEAD OF RETURN "GIVE PROMPT BACK"
 	// ft_printf("%i\n", argc);
-	// check if theyre all ints else write "Error"
-	// check if there are duplicates
-	if (input_checker(argc, argv))
+	if (input_check(argc, argv))
 		return (1);
 	stk = make_stacks(argc, argv);
 	if (!stk)
 		return (0);
+	if (repeat_check(stk))
+		return (1);
 	print_both_stacks(stk);
 	// ra_do(stk);
 	// print_both_stacks(stk);
@@ -43,62 +41,6 @@ int	main(int argc, char *argv[])
 	// print_both_stacks(stk);
 	// pa_do(stk);
 	// print_both_stacks(stk);
-}
-
-int input_checker(int argc, char *argv[])
-{
-	int	error;
-	int i;
-
-	error = 0;
-	i = 1;
-	while (i < argc)
-		error += is_num(argv[i++]);
-	if (error)
-		write(2, "Error\n", 6);
-	return (error);
-}
-
-int	is_num(char argv[])
-{
-	int j;
-	
-	j = -1;
-	if(argv[0] == '-' || argv[0] == '+')
-		j++;
-	while(argv[++j])
-		if (!ft_isdigit(argv[j]))
-			return(1);
-	if (!int_check(argv))
-		return(1);
-	return(0);
-}
-
-int	int_check(const char *str)
-{
-	long	result;
-	long	verif;
-	int	sign;
-	int	i;
-
-	result = 0;
-	i = 0;
-	sign = 0;
-	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-		if (str[i++] == '-')
-			sign++;
-	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
-		result = result * 10 + (str[i++] - 48);
-	if (sign)
-		result = -result;
-	verif = result * 50;
-	if (verif / 50 != result) // long overflow
-		return (0);
-	if(result < -2147483648 || result > 2147483647)
-		return (0);
-	return (1);
 }
 
 stacks	*make_stacks(int argc, char *argv[])
@@ -120,6 +62,13 @@ stacks	*make_stacks(int argc, char *argv[])
 		stk->a[stk->atop_id] = ft_atoi(argv[argc - stk->atop_id]);
 	stk->atop_id--;
 	return (stk);
+}
+
+void	free_stacks(stacks *stk)
+{
+	free(stk->a);
+	free(stk->b);
+	free(stk);
 }
 
 void	print_stack(int *stack, int top_idx)
