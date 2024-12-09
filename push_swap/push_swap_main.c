@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/09 11:47:24 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:18:34 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@ int		int_check(char argv[]);
 int	main(int argc, char *argv[])
 {
 	stacks	*stk;
+	char	**args;
 
-	if (argc < 3)
+	if (argc == 1)
 		return (0); // INSTEAD OF RETURN "GIVE PROMPT BACK"
+	if (argc == 2)
+		args = ft_split(argv[1], ' ');
+	else
+		args = argv;
 	// ft_printf("%i\n", argc);
-	if (input_check(argc, argv))
+	if (input_check(argc, args))
 		return (1);
-	stk = make_stacks(argc, argv);
+	stk = make_stacks(argc, args);
 	if (!stk)
 		return (0);
 	if (repeat_check(stk))

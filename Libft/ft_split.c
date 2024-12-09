@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/04 08:49:32 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:02:33 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_split(char const *s, char c);
-char	*ft_segalloc(char const *s, char c, int len);
-int		ft_seglen(char const *str, char c);
-int		ft_segcount(char const *str, char c);
-void	*ft_freestr(char **split, int i);
+char		**ft_split(char const *s, char c);
+static char	*ft_segalloc(char const *s, char c, int len);
+static int	ft_seglen(char const *str, char c);
+static int	ft_segcount(char const *str, char c);
+static void	*ft_freestr(char **split, int i);
 
-/*
-int	main(void)
+/* int	main(void)
 {
 	int		i;
 	char	chara;
@@ -27,9 +26,11 @@ int	main(void)
 	int		count;
 	char	*sentence;
 
-	sentence = "Lorem ipsum ajshdah";
-	i = 0;
+	sentence = "hello!";
 	chara = ' ';
+	//sentence = "Lorem ipsum ajshdah";
+	//chara = ' ';
+	i = 0;
 	result = ft_split(sentence, chara);
 	count = ft_segcount(sentence, chara);
 	printf("%i\n", count);
@@ -40,8 +41,8 @@ int	main(void)
 	}
 	ft_freestr(result, count + 1);
 	return (0);
-}
-*/
+} */
+
 
 char	**ft_split(char const *s, char c)
 {
@@ -50,29 +51,28 @@ char	**ft_split(char const *s, char c)
 	int		segcount;
 	char	**split;
 
-	if (s == NULL)
-		return (0);
+	if (!s)
+		return (NULL);
 	segcount = ft_segcount(s, c);
 	split = malloc((segcount + 1) * sizeof(char *));
-	if (split == NULL)
-		return (0);
+	if (!split)
+		return (NULL);
 	i = 0;
 	while (i < segcount)
 	{
-		while (*s == c)
+		while (*s == c && *s)
 			s++;
 		len = ft_seglen(s, c);
 		split[i] = ft_segalloc(s, c, len);
-		if (split[i] == NULL)
-			return (ft_freestr(split, segcount + 1));
-		i++;
+		if (!split[i++])
+			return (ft_freestr(split, segcount));
 		s += len;
 	}
 	split[i] = 0;
 	return (split);
 }
 
-int	ft_seglen(char const *str, char c)
+static int	ft_seglen(char const *str, char c)
 {
 	int	i;
 
@@ -82,49 +82,44 @@ int	ft_seglen(char const *str, char c)
 	return (i);
 }
 
-int	ft_segcount(char const *str, char c)
+static int	ft_segcount(char const *str, char c)
 {
-	int	i;
 	int	count;
 
-	i = 0;
 	count = 0;
-	while (str[i])
+	while (*str)
 	{
-		while (str[i] == c && str[i])
-			i++;
-		if (str[i])
+		while (*str == c && *str)
+			str++;
+		if (*str)
 			count++;
-		while (str[i] != c && str[i])
-			i++;
+		while (*str != c && *str)
+			str++;
 	}
 	return (count);
 }
 
-char	*ft_segalloc(char const *s, char c, int len)
+static char	*ft_segalloc(char const *s, char c, int len)
 {
 	int		j;
 	char	*seg;
 
 	j = 0;
 	seg = malloc((len + 1) * sizeof(char));
-	if (seg == NULL)
+	if (!seg)
 		return (0);
-	while (s[j] && s[j] != c)
-	{
-		seg[j] = s[j];
-		j++;
-	}
-	seg[j] = 0;
+	while (*s && *s != c)
+		seg[j++] = *s++;
+	seg[j] = '\0';
 	return (seg);
 }
 
-void	*ft_freestr(char **split, int max)
+static void	*ft_freestr(char **split, int max)
 {
 	int	i;
 
 	i = 0;
-	while (i < max)
+	while (i <= max)
 		free(split[i++]);
 	free(split);
 	return (NULL);
