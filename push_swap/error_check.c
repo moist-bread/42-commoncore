@@ -6,20 +6,20 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:13:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/09 11:46:20 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:04:46 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	input_check(int argc, char *argv[])
+int	input_check(char *argv[])
 {
 	int	error;
 	int	i;
 
 	error = 0;
-	i = 1;
-	while (i < argc && !error)
+	i = 0;
+	while (argv[i] && !error)
 		error = int_check(argv[i++]);
 	if (error)
 		write(2, "Error\n", 6);
@@ -70,7 +70,7 @@ int	overflow_check(char *str)
 	return (1);
 }
 
-int	repeat_check(stacks *stk)
+int	repeat_check(t_stacks *stk)
 {
 	int	rep;
 	int	i;

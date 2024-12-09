@@ -6,13 +6,13 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:48:58 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/05 18:04:50 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:06:55 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa_do(stacks *stk)
+void	sa_do(t_stacks *stk)
 {
 	int	temp;
 
@@ -24,7 +24,7 @@ void	sa_do(stacks *stk)
 	}
 }
 
-void	sb_do(stacks *stk)
+void	sb_do(t_stacks *stk)
 {
 	int	temp;
 
@@ -36,7 +36,7 @@ void	sb_do(stacks *stk)
 	}
 }
 
-void	ss_do(stacks *stk)
+void	ss_do(t_stacks *stk)
 {
 	sa_do(stk);
 	sb_do(stk);

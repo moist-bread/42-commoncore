@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/09 11:43:00 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:04:18 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,40 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct stacks
+typedef struct s_stacks
 {
 	int	*a;
 	int	atop_id;
 	int	*b;
 	int	btop_id;
-}		stacks;
+}		t_stacks;
 
 // PRINTING FTS
 void	print_stack(int *stack, int top_idx);
-void	print_both_stacks(stacks *stk);
+void	print_both_stacks(t_stacks *stk);
 
 // HELPER FTS
-stacks	*make_stacks(int argc, char *argv[]);
-void	free_stacks(stacks *stk);
+t_stacks	*make_stacks(int argc, char *argv[]);
+void	free_stacks(t_stacks *stk);
 
 // ERROR CHECK FTS
-int		input_check(int argc, char *argv[]);
+int		input_check(char *argv[]);
 int		int_check(char argv[]);
 int		overflow_check(char *str);
-int		repeat_check(stacks *stk);
+int		repeat_check(t_stacks *stk);
 
 // OPERATION FTS
-void	sa_do(stacks *stk);
-void	sb_do(stacks *stk);
-void	ss_do(stacks *stk);
-void	pa_do(stacks *stk);
-void	pb_do(stacks *stk);
-void	ra_do(stacks *stk);
-void	rb_do(stacks *stk);
-void	rr_do(stacks *stk);
-void	rra_do(stacks *stk);
-void	rrb_do(stacks *stk);
-void	rrr_do(stacks *stk);
+void	sa_do(t_stacks *stk);
+void	sb_do(t_stacks *stk);
+void	ss_do(t_stacks *stk);
+void	pa_do(t_stacks *stk);
+void	pb_do(t_stacks *stk);
+void	ra_do(t_stacks *stk);
+void	rb_do(t_stacks *stk);
+void	rr_do(t_stacks *stk);
+void	rra_do(t_stacks *stk);
+void	rrb_do(t_stacks *stk);
+void	rrr_do(t_stacks *stk);
 
 // PRINTF FTS
 int		ft_printf(const char *input, ...);
@@ -64,5 +64,9 @@ int		ft_printptr(unsigned long p, int flag);
 // LIBFT FTS
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char		**ft_split(char const *s, char c);
+size_t	ft_strlen(const char *str);
+char	*ft_strdup(const char *src);
 
 #endif

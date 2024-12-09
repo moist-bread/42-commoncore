@@ -6,16 +6,16 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/09 17:22:42 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:27:25 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 char		**ft_split(char const *s, char c);
 static int	ft_seglen(char const *str, char c);
 static int	ft_segcount(char const *str, char c);
-static void	*ft_freestr(char **split, int i);
+void	*ft_freestr(char **split, int i);
 
 /* int	main(void)
 {
@@ -97,7 +97,7 @@ static int	ft_segcount(char const *str, char c)
 	return (count);
 }
 
-static void	*ft_freestr(char **split, int max)
+void	*ft_freestr(char **split, int max)
 {
 	int	i;
 
