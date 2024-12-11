@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/11 18:20:29 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:39:04 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,33 @@ int			arg_counter(int argc, char **args);
 void		sort_stack(t_stacks *stk);
 void		self_sort(t_stacks *stk);
 int			sort_check(t_stacks *stk);
+int			free_args(char **args, int argc, int splitted);
 
 int	main(int argc, char *argv[])
 {
 	t_stacks	*stk;
 	char		**args;
+	int			splitted;
 
+	splitted = 0;
 	if (argc == 1)
 		return (1); // "GIVE PROMPT BACK"
 	if (argc == 2)
+	{
 		args = ft_split(argv[1], ' ');
+		splitted = 1;
+	}
 	else
 		args = &argv[1];
 	argc = arg_counter(argc, args);
 	if (argc <= 1)
-		return (1); // "GIVE PROMPT BACK"
+		return (free_args(args, argc, splitted)); // "GIVE PROMPT BACK"
 	if (input_check(args))
-		return (1);
+		return (free_args(args, argc, splitted));
 	stk = make_stacks(argc, args);
 	if (!stk)
 		return (0);
+	free_args(args, argc, splitted); // ADD FLAG IN CASE OF SPLIT
 	if (repeat_check(stk))
 		return (1);
 	print_both_stacks(stk);
@@ -55,6 +62,21 @@ int	main(int argc, char *argv[])
 	// print_both_stacks(stk);
 	// pa_do(stk);
 	// print_both_stacks(stk);
+	free_stacks(stk);
+	return (0);
+}
+
+int	free_args(char **args, int argc, int splitted)
+{
+	int	i;
+
+	if (!splitted)
+		return (1);
+	i = 0;
+	while (i <= argc)
+		free(args[i++]);
+	free(args);
+	return (1);
 }
 
 void	sort_stack(t_stacks *stk)
