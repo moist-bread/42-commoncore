@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:13:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/09 18:04:46 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:40:01 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	int_check(char argv[])
 int	overflow_check(char *str)
 {
 	long	result;
-	long	verif;
 	int		sign;
 
 	sign = 0;
@@ -55,16 +54,13 @@ int	overflow_check(char *str)
 			sign++;
 		str++;
 	}
-	while (*str && (*str >= '0' && *str <= '9'))
+	while (*str && (*str >= '0' && *str <= '9') && result < 2147483648) // BREAK BY INT OVERFLOW
 	{
 		result = result * 10 + (*str - '0');
 		str++;
 	}
 	if (sign)
 		result = -result;
-	verif = result * 50;
-	if (verif / 50 != result) // long overflow
-		return (0);
 	if (result < -2147483648 || result > 2147483647)
 		return (0);
 	return (1);

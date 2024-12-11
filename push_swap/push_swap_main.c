@@ -6,33 +6,35 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/09 18:41:53 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:20:29 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 t_stacks	*make_stacks(int argc, char *argv[]);
-void	print_stack(int *stack, int top_idx);
-void	rb_do(t_stacks *stk);
-int		int_check(char argv[]);
-int		arg_counter(int argc, char **args);
-void	sort_stack(t_stacks *stk);
+void		print_stack(int *stack, int top_idx);
+void		rb_do(t_stacks *stk);
+int			int_check(char argv[]);
+int			arg_counter(int argc, char **args);
+void		sort_stack(t_stacks *stk);
+void		self_sort(t_stacks *stk);
+int			sort_check(t_stacks *stk);
 
 int	main(int argc, char *argv[])
 {
 	t_stacks	*stk;
-	char	**args;
+	char		**args;
 
-	if (argc <= 1)
-		return (0); // INSTEAD OF RETURN "GIVE PROMPT BACK"
+	if (argc == 1)
+		return (1); // "GIVE PROMPT BACK"
 	if (argc == 2)
 		args = ft_split(argv[1], ' ');
 	else
 		args = &argv[1];
 	argc = arg_counter(argc, args);
 	if (argc <= 1)
-		return (0); // INSTEAD OF RETURN "GIVE PROMPT BACK"
+		return (1); // "GIVE PROMPT BACK"
 	if (input_check(args))
 		return (1);
 	stk = make_stacks(argc, args);
@@ -40,9 +42,10 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (repeat_check(stk))
 		return (1);
+	print_both_stacks(stk);
 	sort_stack(stk);
-	//ft_printf("(args)%i\n", argc);
-	// print_both_stacks(stk);
+	print_both_stacks(stk);
+	// ft_printf("(args)%i\n", argc);
 	// ra_do(stk);
 	// print_both_stacks(stk);
 	// pb_do(stk);
@@ -54,47 +57,61 @@ int	main(int argc, char *argv[])
 	// print_both_stacks(stk);
 }
 
-/* int	main(void)
-{
-	int		i;
-	char	chara;
-	char	**result;
-	int		count;
-	char	*sentence;
-
-	sentence = "hello!";
-	chara = ' ';
-	//sentence = "Lorem ipsum ajshdah";
-	//chara = ' ';
-	i = 0;
-	result = ft_split(sentence, chara);
-	count = ft_segcount(sentence, chara);
-	printf("%i\n", count);
-	while (result[i] != 0)
-	{
-		printf("%s\n", result[i]);
-		i++;
-	}
-	ft_freestr(result, count + 1);
-	return (0);
-} */
 void	sort_stack(t_stacks *stk)
 {
-	
+	(void)stk;
+	if (stk->atop_id < 3)
+		self_sort(stk);
 }
 
-int		arg_counter(int argc, char **args)
+void	self_sort(t_stacks *stk)
+{
+	if (!sort_check(stk))
+	{
+		if (stk->a[2] < stk->a[1]) // 2 3 1
+			rra_do(stk);
+		if (stk->a[2] > stk->a[1] && stk->a[2] > stk->a[0]) // 3 1 2
+			ra_do(stk);
+		if (stk->a[2] > stk->a[1] && stk->a[2] < stk->a[0]) // 2 1 3
+			sa_do(stk);
+		// ft_printf("entrou\n");
+	}
+	// 1 2 3	0
+	// 1 3 2	2 rra (2 1 3) + sa
+	// 2 3 1	1 rra
+	// 2 1 3	1 sa
+	// 3 2 1	2 ra (2 1 3) + sa
+	// 3 1 2	1 ra
+}
+
+int	sort_check(t_stacks *stk)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < stk->atop_id)
+	{
+		j = 0;
+		while (++j + i <= stk->atop_id)
+			if (stk->a[i] < stk->a[i + j])
+				return (0);
+	}
+	return (1);
+}
+
+int	arg_counter(int argc, char **args)
 {
 	int	count;
 
 	count = 0;
 	if (argc == 1)
-		return(1);
+		return (1);
 	if (argc > 2)
-		return(--argc);
-	while(args[count])
+		return (--argc);
+	while (args[count])
 		count++;
-	return(count);
+	return (count);
 }
 
 t_stacks	*make_stacks(int argc, char *argv[])
@@ -113,7 +130,7 @@ t_stacks	*make_stacks(int argc, char *argv[])
 	stk->atop_id = -1;
 	stk->btop_id = -1;
 	while (++stk->atop_id < argc)
-		stk->a[stk->atop_id] = ft_atoi(argv[argc - stk->atop_id -1]);
+		stk->a[stk->atop_id] = ft_atoi(argv[argc - stk->atop_id - 1]);
 	stk->atop_id--;
 	return (stk);
 }
