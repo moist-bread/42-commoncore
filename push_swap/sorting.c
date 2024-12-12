@@ -6,22 +6,39 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/12 00:08:12 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:40:13 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	sort_calc(t_stacks *stk);
+
 void	sort_stack(t_stacks *stk)
 {
 	if (sort_check(stk->a, stk->atop_id))
-		return (0);
-	if (stk->atop_id == 2)
+		return;
+	if (stk->atop_id <= 2)
 		self_sort(stk, stk->a, stk->atop_id);
+	pb_do(stk);
+	pb_do(stk);
+	sort_calc(stk);
+	
+}
+
+void	sort_calc(t_stacks *stk)
+{
+	(void)stk;
 }
 
 void	self_sort(t_stacks *stks, int *stk, int top)
 {
+	if (top == 1)
+		if (!sort_check(stk, top))
+		{
+			sa_do(stks);
+			return;
+		}
 	if (!sort_check(stk, top))
 	{
 		if (stk[top] < stk[top - 1]) // 2 3 1

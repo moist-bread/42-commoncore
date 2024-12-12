@@ -6,13 +6,14 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/12/11 23:39:18 by rduro-pe         ###   ########.fr        #
+#    Updated: 2024/12/12 10:36:15 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 
-#REMEMBER TO CHANGE NAME BACK AAAAAAAAA
+#	CHANGE NAME BACK TO "push_swap"
+#	REMOVE PRINTING FTRS FROM HELPERS
 
 SRCS =	ft_printf.c ft_conversions.c push_swap_main.c push.c swap.c ft_atoi.c \
 		revrotate.c error_check.c ft_split.c ft_substr.c ft_strlen.c ft_strdup.c \
@@ -32,7 +33,6 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo "Compiling $(NAME)..."
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@rm -f prog.a
 
 clean:
 	@echo "Removing OBJS"
