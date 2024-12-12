@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/12 00:06:17 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:29:14 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_stacks
 	int		*b;
 	int		btop_id;
 }			t_stacks;
+
+typedef struct s_moves
+{
+	int	bst_id;
+	int bst_moves;
+	int	cur_moves;
+}			t_moves;
 
 // PRINTING FTS
 void		print_stack(int *stack, int top_idx);
@@ -47,6 +54,7 @@ int			free_args(char **args, int argc, int splitted);
 void		sort_stack(t_stacks *stk);
 void		self_sort(t_stacks *stks, int *stk, int top);
 int			sort_check(int *stk, int top);
+int			rev_sort_check(int *stk, int top);
 
 // OPERATION FTS
 void		sa_do(t_stacks *stk);
