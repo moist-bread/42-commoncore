@@ -6,13 +6,42 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:13:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/11 17:40:01 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/12 00:06:15 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	input_check(char *argv[])
+int	input_processer(int argc, char **argv, t_stacks **stk, int spt)
+{
+	char	**args;
+
+	if (argc == 1)
+		return (1); // "GIVE PROMPT BACK"
+	if (argc == 2)
+	{
+		args = ft_split(argv[1], ' ');
+		if (!args || !(++spt)) // idk if this IF is necessary
+			return (1);
+	}
+	else
+		args = &argv[1];
+	argc = arg_counter(argc, args);
+	if (argc <= 1)
+		return (free_args(args, argc, spt)); // "GIVE PROMPT BACK"
+	if (input_check(args))
+		return (free_args(args, argc, spt));
+	*stk = make_stacks(argc, args);
+	if (!*stk)
+		return (free_args(args, argc, spt));
+	free_args(args, argc, spt);
+	if (repeat_check(*stk))
+		return (1);
+	else
+		return (0);
+}
+
+int	input_check(char **argv)
 {
 	int	error;
 	int	i;
@@ -36,7 +65,7 @@ int	int_check(char argv[])
 	while (argv[++j])
 		if (!ft_isdigit(argv[j]))
 			return (1);
-	if (!overflow_check(argv))
+	if (overflow_check(argv))
 		return (1);
 	return (0);
 }
@@ -54,7 +83,7 @@ int	overflow_check(char *str)
 			sign++;
 		str++;
 	}
-	while (*str && (*str >= '0' && *str <= '9') && result < 2147483648) // BREAK BY INT OVERFLOW
+	while (*str && (*str >= '0' && *str <= '9') && result < 2147483648)
 	{
 		result = result * 10 + (*str - '0');
 		str++;
@@ -62,8 +91,8 @@ int	overflow_check(char *str)
 	if (sign)
 		result = -result;
 	if (result < -2147483648 || result > 2147483647)
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }
 
 int	repeat_check(t_stacks *stk)

@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/12/09 17:35:01 by rduro-pe         ###   ########.fr        #
+#    Updated: 2024/12/11 23:39:18 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = a.out
 
 SRCS =	ft_printf.c ft_conversions.c push_swap_main.c push.c swap.c ft_atoi.c \
 		revrotate.c error_check.c ft_split.c ft_substr.c ft_strlen.c ft_strdup.c \
-		
+		sorting.c helpers.c
 
 OBJS = $(SRCS:.c=.o)
 
