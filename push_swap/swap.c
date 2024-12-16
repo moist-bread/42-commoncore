@@ -6,16 +6,18 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:48:58 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/09 18:06:55 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:32:45 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa_do(t_stacks *stk)
+void	sa_do(t_stacks *stk, int flag)
 {
 	int	temp;
 
+	if (flag)
+		ft_printf("sa\n");
 	if (stk->atop_id > 0)
 	{
 		temp = stk->a[stk->atop_id];
@@ -24,10 +26,12 @@ void	sa_do(t_stacks *stk)
 	}
 }
 
-void	sb_do(t_stacks *stk)
+void	sb_do(t_stacks *stk, int flag)
 {
 	int	temp;
 
+	if (flag)
+		ft_printf("sb\n");
 	if (stk->btop_id > 0)
 	{
 		temp = stk->b[stk->btop_id];
@@ -38,6 +42,7 @@ void	sb_do(t_stacks *stk)
 
 void	ss_do(t_stacks *stk)
 {
-	sa_do(stk);
-	sb_do(stk);
+	ft_printf("ss\n");
+	sa_do(stk, 0);
+	sb_do(stk, 0);
 }

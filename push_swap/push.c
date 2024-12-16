@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:48:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/09 18:06:38 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:40:37 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	pa_do(t_stacks *stk)
 {
+	ft_printf("pa\n");
 	if (stk->btop_id >= 0)
 	{
 		stk->atop_id++;
@@ -25,6 +26,7 @@ void	pa_do(t_stacks *stk)
 
 void	pb_do(t_stacks *stk)
 {
+	ft_printf("pb\n");
 	if (stk->atop_id >= 0)
 	{
 		stk->btop_id++;
@@ -34,11 +36,13 @@ void	pb_do(t_stacks *stk)
 	}
 }
 
-void	ra_do(t_stacks *stk)
+void	ra_do(t_stacks *stk, int flag)
 {
 	int	temp;
 	int	i;
 
+	if (flag)
+		ft_printf("ra\n");
 	if (stk->atop_id > 0)
 	{
 		i = stk->atop_id;
@@ -52,11 +56,13 @@ void	ra_do(t_stacks *stk)
 	}
 }
 
-void	rb_do(t_stacks *stk)
+void	rb_do(t_stacks *stk, int flag)
 {
 	int	temp;
 	int	i;
 
+	if (flag)
+		ft_printf("rb\n");
 	if (stk->btop_id > 0)
 	{
 		i = stk->btop_id;
@@ -72,6 +78,7 @@ void	rb_do(t_stacks *stk)
 
 void	rr_do(t_stacks *stk)
 {
-	ra_do(stk);
-	rb_do(stk);
+	ft_printf("rr\n");
+	ra_do(stk, 0);
+	rb_do(stk, 0);
 }
