@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/16 16:58:23 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/16 18:13:09 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			int_check(char *argv);
 int			overflow_check(char *str);
 int			repeat_check(t_stacks *stk);
 
-// HELPER FTS
+// MAKE HELPER FTS
 t_stacks	*make_stacks(int argc, char **argv);
 int			arg_counter(int argc, char **args);
 void		free_stacks(t_stacks *stk);
@@ -64,9 +64,13 @@ void		sort_stack(t_stacks *stk);
 int			sort_check(int *stk, int top);
 void		self_sort(t_stacks *stks, int *stk, int top);
 int			rev_sort_check(int *stk, int top);
-void		sort_calc(t_stacks *stk, t_moves *mover);
+void	sort_calc(int *sta, int at, int *stb, int bt, t_moves *mover);
 t_range		*stack_range(int *stk, int top_id);
 void		exe_move(t_stacks *stk, int ba, int bb);
+int	place_finder(int *sta, int id_a, int *stb, int id_b, t_range *range);
+int dist_calc(int id, int top, int *rot);
+
+// SORT HELPERS FTS
 
 // OPERATION FTS
 void		sa_do(t_stacks *stk, int flag);
