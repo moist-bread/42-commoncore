@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/12 00:06:38 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:49:07 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(int argc, char *argv[])
 	// print_both_stacks(stk);
 	// pa_do(stk);
 	// print_both_stacks(stk);
+	// t_range *range = stack_range(stk->a, stk->atop_id);
+	// ft_printf("high: %d(%d) | low: %d(%d)\n", range->high, range->high_id, range->low, range->low_id);
 	free_stacks(stk);
 	return (0);
 }

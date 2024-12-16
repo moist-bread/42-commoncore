@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:13:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/12 00:06:15 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:42:10 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	input_check(char **argv)
 	return (error);
 }
 
-int	int_check(char argv[])
+int	int_check(char *argv)
 {
 	int	j;
 
@@ -65,7 +65,7 @@ int	int_check(char argv[])
 	while (argv[++j])
 		if (!ft_isdigit(argv[j]))
 			return (1);
-	if (overflow_check(argv))
+	if (overflow_check(argv) || !*argv)
 		return (1);
 	return (0);
 }
