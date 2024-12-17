@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/09 18:27:25 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:40:46 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,7 @@
 char		**ft_split(char const *s, char c);
 static int	ft_seglen(char const *str, char c);
 static int	ft_segcount(char const *str, char c);
-void	*ft_freestr(char **split, int i);
-
-/* int	main(void)
-{
-	int		i;
-	char	chara;
-	char	**result;
-	int		count;
-	char	*sentence;
-
-	sentence = "hello!";
-	chara = ' ';
-	//sentence = "Lorem ipsum ajshdah";
-	//chara = ' ';
-	i = 0;
-	result = ft_split(sentence, chara);
-	count = ft_segcount(sentence, chara);
-	printf("%i\n", count);
-	while (result[i] != 0)
-	{
-		printf("%s\n", result[i]);
-		i++;
-	}
-	ft_freestr(result, count + 1);
-	return (0);
-} */
+void		*ft_freestr(char **split, int i);
 
 char	**ft_split(char const *s, char c)
 {

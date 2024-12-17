@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/16 18:13:09 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:54:51 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ typedef struct s_stacks
 typedef struct s_moves
 {
 	int		bst_move;
+	int		bst_rot;
 	int		bst_id_a;
 	int		bst_id_b;
 	int		cur_move;
+	int		cur_rot;
 }			t_moves;
 
 typedef struct s_range
@@ -42,10 +44,6 @@ typedef struct s_range
 	int		low_id;
 }			t_range;
 
-// PRINTING FTS
-void		print_stack(int *stack, int top_idx);
-void		print_both_stacks(t_stacks *stk);
-
 // ERROR CHECK FTS
 int			input_processer(int argc, char **argv, t_stacks **stk, int spt);
 int			input_check(char **argv);
@@ -53,24 +51,37 @@ int			int_check(char *argv);
 int			overflow_check(char *str);
 int			repeat_check(t_stacks *stk);
 
-// MAKE HELPER FTS
-t_stacks	*make_stacks(int argc, char **argv);
+// MAKE HELPERS FTS
 int			arg_counter(int argc, char **args);
-void		free_stacks(t_stacks *stk);
+t_stacks	*make_stacks(int argc, char **argv);
 int			free_args(char **args, int argc, int splitted);
+void		free_stacks(t_stacks *stk);
+
+// PRINTING FTS
+void		print_stack(int *stack, int top_idx);
+void		print_both_stacks(t_stacks *stk);
+void		print_dists(int id_a, int id_b, int dist_a, int dist_b);
+void		print_moves(t_moves *mover);
 
 // SORTING FTS
 void		sort_stack(t_stacks *stk);
-int			sort_check(int *stk, int top);
-void		self_sort(t_stacks *stks, int *stk, int top);
-int			rev_sort_check(int *stk, int top);
-void	sort_calc(int *sta, int at, int *stb, int bt, t_moves *mover);
-t_range		*stack_range(int *stk, int top_id);
-void		exe_move(t_stacks *stk, int ba, int bb);
-int	place_finder(int *sta, int id_a, int *stb, int id_b, t_range *range);
-int dist_calc(int id, int top, int *rot);
 
 // SORT HELPERS FTS
+int			sort_check(int *stk, int top);
+int			rev_sort_check(int *stk, int top);
+void		self_sort(t_stacks *stks, int *stk, int top);
+int			dist_calc(int id, int top, t_moves *mover, int flag);
+
+// SORT CALC FTS
+void		sort_calc(t_stacks *stk, t_moves *mover);
+t_range		*stack_range(int *stk, int top_id);
+int			place_finder(int id_a, t_stacks *stk, t_range *range);
+int			curmov_calc(int dist_a, int dist_b, int bt, t_moves *mover);
+void		is_the_best(int id_a, int id_b, t_moves *mover);
+
+// EXECUTE FTS
+void		exe_move(t_stacks *stk, t_moves *mover);
+void		exe_rot(int *dist, int bst_id, int top_id, t_stacks *stk);
 
 // OPERATION FTS
 void		sa_do(t_stacks *stk, int flag);

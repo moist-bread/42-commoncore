@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:37:33 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/16 17:13:38 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:45:11 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,4 @@ void	free_stacks(t_stacks *stk)
 	free(stk->a);
 	free(stk->b);
 	free(stk);
-}
-
-void	print_stack(int *stack, int top_idx)
-{
-	if (top_idx < 0)
-		ft_printf("|empty| (%i)\n", top_idx);
-	while (top_idx >= 0)
-	{
-		ft_printf("|%i| (%i)\n", stack[top_idx], top_idx);
-		top_idx--;
-	}
-	ft_printf("\n");
-}
-
-void	print_both_stacks(t_stacks *stk)
-{
-	print_stack(stk->a, stk->atop_id);
-	print_stack(stk->b, stk->btop_id);
 }

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:14:45 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/16 17:17:51 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:53:30 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,28 @@ void	self_sort(t_stacks *stks, int *stk, int top)
 			sa_do(stks, 1);
 	}
 }
-	// 1 2 3	0
-	// 1 3 2	2 rra (2 1 3) + sa
-	// 2 3 1	1 rra
-	// 2 1 3	1 sa
-	// 3 2 1	2 ra (2 1 3) + sa
-	// 3 1 2	1 ra
+// 1 2 3	0
+// 1 3 2	2 rra (2 1 3) + sa
+// 2 3 1	1 rra
+// 2 1 3	1 sa
+// 3 2 1	2 ra (2 1 3) + sa
+// 3 1 2	1 ra
 
-t_range *stack_range(int *stk, int top_id)
+int	dist_calc(int id, int top, t_moves *mover, int flag)
 {
-	int i;
-	t_range *range;
-	
-	range = malloc(sizeof(t_range));
-	if (!range)
-		return (NULL);
-	i = 0;
-	range->high = stk[0];
-	range->low = stk[0];
-	while(++i <= top_id)
+	int	dist;
+
+	if (id >= (top + 1) / 2)
 	{
-		if(stk[i] > range->high)
-		{
-			range->high = stk[i];
-			range->high_id = i;	
-		}
-		else if(stk[i] < range->low)
-		{
-			range->low = stk[i];
-			range->low_id = i;	
-		}
+		dist = top - id;
+		if (flag)
+			mover->cur_rot++;
 	}
-	return(range);
+	else
+	{
+		dist = id + 1;
+		if (flag)
+			mover->cur_rot--;
+	}
+	return (dist);
 }
