@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/17 17:50:56 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:11:50 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	sort_stack(t_stacks *stk)
 		return ;
 	pb_do(stk);
 	pb_do(stk);
-	while (stk->atop_id > 2) // WHILE ATOPID BIGGER THAN 2
+	while (stk->atop_id >= 2) // WHILE ATOPID BIGGER THAN 2
 	{
 		sort_calc(stk, mover);
 		exe_move(stk, mover);
 		//print_both_stacks(stk);
 	}
 	self_sort(stk, stk->a, stk->atop_id);
-	//final_sort(stk); // MAKE IT SORT TO THE OTHER SIDE PLS
+	final_sort(stk); // MAKE IT SORT TO THE OTHER SIDE PLS
 	free(mover);
 }
 
