@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/17 12:54:51 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:34:28 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		is_the_best(int id_a, int id_b, t_moves *mover);
 
 // EXECUTE FTS
 void		exe_move(t_stacks *stk, t_moves *mover);
-void		exe_rot(int *dist, int bst_id, int top_id, t_stacks *stk);
+void		exe_rot(int *dist, int bst_id, t_stacks *stk, int flag);
 
 // OPERATION FTS
 void		sa_do(t_stacks *stk, int flag);

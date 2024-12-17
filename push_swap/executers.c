@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:40:16 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/17 12:35:24 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:30:04 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,35 @@ void	exe_move(t_stacks *stk, t_moves *mover)
 		dist_a--;
 		dist_b--;
 	}
-	exe_rot(&dist_a, mover->bst_id_a, stk->atop_id, stk);
-	exe_rot(&dist_b, mover->bst_id_b, stk->btop_id, stk);
+	exe_rot(&dist_a, mover->bst_id_a, stk, 'a');
+	exe_rot(&dist_b, mover->bst_id_b, stk, 'b');
 	pb_do(stk);
 }
 
-void	exe_rot(int *dist, int bst_id, int top_id, t_stacks *stk)
+void	exe_rot(int *dist, int bst_id, t_stacks *stk, int flag)
 {
+	int top_id;
+
+	if (flag == 'a')
+		top_id = stk->atop_id;
+	else
+		top_id = stk->btop_id;
 	while (*dist)
 	{
 		if (bst_id >= (top_id + 1) / 2)
-			rb_do(stk, 1);
+		{
+			if(flag == 'a')
+				ra_do(stk, 1);
+			else
+				rb_do(stk, 1);
+		}
 		else
+		{
+			if(flag == 'a')
+				rra_do(stk, 1);
+			else
 			rrb_do(stk, 1);
+		}
 		(*dist)--;
 	}
 }
