@@ -6,13 +6,13 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/17 18:11:40 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:09:22 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char *argv[])
+int	main(int argc, char **argv)
 {
 	t_stacks	*stk;
 
@@ -20,7 +20,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	print_both_stacks(stk); // PRINTING FT !!
 	sort_stack(stk);
-	print_both_stacks(stk); // PRINTING FT !!
+	//print_both_stacks(stk); // PRINTING FT !!
 	// ft_printf("(args)%i\n", argc);
 	// ra_do(stk);
 	// print_both_stacks(stk);
