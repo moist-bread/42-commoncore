@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/17 14:34:28 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:43:00 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ typedef struct s_range
 	int		low;
 	int		low_id;
 }			t_range;
+
+typedef struct s_highest
+{
+	int		top_high;
+	int		low_high;
+}			t_highest;
+
+// TBD
+void final_sort(t_stacks *stk);
+t_highest *highest_elems(t_stacks	*stk);
+int pivot_picker(int *qs, int last);
+void	ft_swap(int *a, int *b);
+void quick_sort(int *qs, int start, int pivot);
 
 // ERROR CHECK FTS
 int			input_processer(int argc, char **argv, t_stacks **stk, int spt);

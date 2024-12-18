@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:49:09 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/17 15:30:01 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:59:48 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_range	*stack_range(int *stk, int top_id)
 	i = 0;
 	range->high = stk[0];
 	range->low = stk[0];
+	range->high_id = 0;
+	range->low_id = 0;
 	while (++i <= top_id)
 	{
 		if (stk[i] > range->high)

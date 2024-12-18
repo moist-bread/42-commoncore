@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/18 13:09:22 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:06:44 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (input_processer(argc, argv, &stk, 0))
 		return (1);
-	print_both_stacks(stk); // PRINTING FT !!
+	//print_both_stacks(stk); // PRINTING FT !!
 	sort_stack(stk);
 	//print_both_stacks(stk); // PRINTING FT !!
 	// ft_printf("(args)%i\n", argc);
