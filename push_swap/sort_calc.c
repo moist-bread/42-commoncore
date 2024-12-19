@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:49:09 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/18 17:59:48 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:33:00 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ void	sort_calc(t_stacks *stk, t_moves *mover)
 		dist_b = dist_calc(id_b, stk->btop_id, mover, 1);
 		//print_dists(id_a, id_b, dist_a, dist_b); // PRINTING FT !!
 		mover->cur_move = curmov_calc(dist_a, dist_b, stk->btop_id, mover);
-			is_the_best(id_a, id_b, mover);
+		is_the_best(id_a, id_b, mover);
 		if (id_a == stk->atop_id || mover->bst_move > mover->cur_move)
-		//print_moves(mover); // PRINTING FT !!
-		if (mover->bst_move <= 2)
-			break ;
+		{
+			//print_moves(mover); // PRINTING FT !!
+			if (mover->bst_move <= 2)
+				break ;
+		}
 	}
 	free(range);
 }

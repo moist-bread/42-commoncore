@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/18 17:43:00 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:14:48 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,7 @@ typedef struct s_highest
 }			t_highest;
 
 // TBD
-void final_sort(t_stacks *stk);
-t_highest *highest_elems(t_stacks	*stk);
-int pivot_picker(int *qs, int last);
-void	ft_swap(int *a, int *b);
-void quick_sort(int *qs, int start, int pivot);
+//
 
 // ERROR CHECK FTS
 int			input_processer(int argc, char **argv, t_stacks **stk, int spt);
@@ -78,12 +74,20 @@ void		print_moves(t_moves *mover);
 
 // SORTING FTS
 void		sort_stack(t_stacks *stk);
+void		initial_sort(t_stacks *stk);
+void		final_sort(t_stacks *stk);
 
 // SORT HELPERS FTS
 int			sort_check(int *stk, int top);
 int			rev_sort_check(int *stk, int top);
 void		self_sort(t_stacks *stks, int *stk, int top);
 int			dist_calc(int id, int top, t_moves *mover, int flag);
+
+// QUICK SORT FTS
+t_highest	*highest_elems(t_stacks *stk);
+int			pivot_picker(int *qs, int last);
+void		ft_swap(int *a, int *b);
+void		quick_sort(int *qs, int start, int pivot);
 
 // SORT CALC FTS
 void		sort_calc(t_stacks *stk, t_moves *mover);
