@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:09:57 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/19 12:12:10 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:10:34 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_highest	*highest_elems(t_stacks *stk)
 	quick_sort(quicksrt, 0, pivot);
 	// print_stack(quicksrt, stk->atop_id); // PRINTING FT !!
 	highest->top_high = quicksrt[stk->atop_id];
-	highest->low_high = quicksrt[(stk->atop_id / 4) * 2];
+	highest->low_high = quicksrt[(stk->atop_id / 4) * 3];
 	free(quicksrt);
 	return (highest);
 }

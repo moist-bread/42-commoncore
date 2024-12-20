@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/20 10:40:21 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/20 19:08:18 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_highest
 
 // TBD
 //
+int	semi_sort_check(int *stk, int top);
 
 // ERROR CHECK FTS
 int			input_processer(int argc, char **argv, t_stacks **stk, int spt);

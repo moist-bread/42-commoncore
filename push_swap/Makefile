@@ -6,11 +6,11 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/12/19 12:13:13 by rduro-pe         ###   ########.fr        #
+#    Updated: 2024/12/20 16:44:21 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = push_swap
 
 #	CHANGE NAME BACK TO "push_swap"
 #	REMOVE PRINTING FTS FROM HELPERS
