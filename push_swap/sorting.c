@@ -6,26 +6,47 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/19 16:52:25 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:46:20 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_moves	*set_mover();
 
 void	sort_stack(t_stacks *stk)
 {
 	if (sort_check(stk->a, stk->atop_id))
 		return ;
 	if (stk->atop_id <= 2)
-		return (self_sort(stk, stk->a, stk->atop_id));
+		return (self_sort_3(stk, stk->a, stk->atop_id));
 	initial_sort(stk);
 	if (!sort_check(stk->a, stk->atop_id))
-		self_sort(stk, stk->a, stk->atop_id);
-	//print_both_stacks(stk); // PRINTING FT !!
-	final_sort(stk);        // MAKE IT SORT TO THE OTHER SIDE PLS
+		self_sort_3(stk, stk->a, stk->atop_id);
+	// MAKE SELF SORT FOR 5
+	// print_both_stacks(stk); // PRINTING FT !!
+	final_sort(stk);
 }
+
+void	self_sort_3(t_stacks *stks, int *stk, int top)
+{
+	if (top == 1)
+		if (!sort_check(stk, top))
+			return (sa_do(stks, 1));
+	if (!sort_check(stk, top))
+	{
+		if (stk[top] < stk[top - 1]) // 2 3 1
+			rra_do(stks, 1);
+		if (stk[top] > stk[top - 1] && stk[top] > stk[top - 2]) // 3 1 2
+			ra_do(stks, 1);
+		if (stk[top] > stk[top - 1] && stk[top] < stk[top - 2]) // 2 1 3
+			sa_do(stks, 1);
+	}
+}
+// 1 2 3	0
+// 1 3 2	2 rra (2 1 3) + sa
+// 2 3 1	1 rra
+// 2 1 3	1 sa
+// 3 2 1	2 ra (2 1 3) + sa
+// 3 1 2	1 ra
 
 void	initial_sort(t_stacks *stk)
 {
@@ -61,78 +82,25 @@ void	initial_sort(t_stacks *stk)
 void	final_sort(t_stacks *stk)
 {
 	t_range	*range;
-	t_moves	*mover;
-	int		dist;
 
 	range = stack_range(stk->a, stk->atop_id);
 	if (!range)
 		return ;
-	if(stk->b[stk->btop_id] < range->high && stk->b[stk->btop_id] > range->low)
+	if (stk->b[stk->btop_id] < range->high && stk->b[stk->btop_id] > range->low)
 		while (stk->b[stk->btop_id] < stk->a[0])
 			rra_do(stk, 1);
 	while (stk->btop_id >= 0)
 	{
-		if (!(stk->b[stk->btop_id] < range->low))
+		if (stk->b[stk->btop_id] > range->low)
 		{
-			while (stk->b[stk->btop_id] > stk->a[0])
-			{
+			while (stk->btop_id >= 0 && stk->b[stk->btop_id] > stk->a[0])
 				pa_do(stk);
-				if (stk->btop_id < 0)
-					break;
-			}
 			rra_do(stk, 1);
 		}
-		if (stk->btop_id >= 0)
-			while (stk->b[stk->btop_id] < range->low && stk->btop_id >= 0)
+		else
+			while (stk->btop_id >= 0 && stk->b[stk->btop_id] < range->low)
 				pa_do(stk);
 	}
 	free(range);
-	range = stack_range(stk->a, stk->atop_id);
-	if (!range)
-		return ;
-	mover = set_mover();
-	if (!mover)
-		return (free(range));
-	dist = dist_calc(range->low_id, stk->atop_id, mover, 1);
-	while (dist--)
-	{
-		if (mover->cur_rot == 1)
-			ra_do(stk, 1);
-		else
-			rra_do(stk, 1);
-	}
-	free(mover);
-	free(range);
+	stack_shift(stk);
 }
-
-t_moves	*set_mover()
-{
-	t_moves	*mover;
-
-	mover = malloc(sizeof(t_moves));
-	if (!mover)
-		return (NULL);
-	mover->bst_id_a = 0;
-	mover->bst_id_b = 0;
-	mover->bst_move = 1;
-	mover->bst_rot = 0;
-	mover->cur_move = 1;
-	mover->cur_rot = 0;
-	return(mover);
-}
-
-/* while (stk->b[stk->btop_id] > stk->b[stk->btop_id - 1])
-	rb_do(stk, 1);
-rb_do(stk, 1);
-while (stk->btop_id >= 0)
-	pa_do(stk); */
-/* while (stk->btop_id >= 0)
-{
-	if(stk->a[stk->atop_id] < stk->b[stk->btop_id])
-		ra_do(stk, 1);
-	while(stk->a[stk->atop_id] > stk->b[stk->btop_id]
-		&& stk->a[0] < stk->b[stk->btop_id])
-		pa_do(stk);
-	if(stk->btop_id > 0)
-		rra_do(stk, 1); // FIX RRA IFF
-} */

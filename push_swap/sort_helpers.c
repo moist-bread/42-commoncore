@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:14:45 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/17 12:53:30 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:39:19 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,21 @@ int	rev_sort_check(int *stk, int top)
 	return (1);
 }
 
-void	self_sort(t_stacks *stks, int *stk, int top)
+t_moves	*set_mover(void)
 {
-	if (top == 1)
-		if (!sort_check(stk, top))
-			return (sa_do(stks, 1));
-	if (!sort_check(stk, top))
-	{
-		if (stk[top] < stk[top - 1]) // 2 3 1
-			rra_do(stks, 1);
-		if (stk[top] > stk[top - 1] && stk[top] > stk[top - 2]) // 3 1 2
-			ra_do(stks, 1);
-		if (stk[top] > stk[top - 1] && stk[top] < stk[top - 2]) // 2 1 3
-			sa_do(stks, 1);
-	}
+	t_moves	*mover;
+
+	mover = malloc(sizeof(t_moves));
+	if (!mover)
+		return (NULL);
+	mover->bst_id_a = 0;
+	mover->bst_id_b = 0;
+	mover->bst_move = 1;
+	mover->bst_rot = 0;
+	mover->cur_move = 1;
+	mover->cur_rot = 0;
+	return (mover);
 }
-// 1 2 3	0
-// 1 3 2	2 rra (2 1 3) + sa
-// 2 3 1	1 rra
-// 2 1 3	1 sa
-// 3 2 1	2 ra (2 1 3) + sa
-// 3 1 2	1 ra
 
 int	dist_calc(int id, int top, t_moves *mover, int flag)
 {
@@ -83,4 +77,28 @@ int	dist_calc(int id, int top, t_moves *mover, int flag)
 			mover->cur_rot--;
 	}
 	return (dist);
+}
+
+void	stack_shift(t_stacks *stk)
+{
+	t_range	*range;
+	t_moves	*mover;
+	int		dist;
+
+	range = stack_range(stk->a, stk->atop_id);
+	if (!range)
+		return ;
+	mover = set_mover();
+	if (!mover)
+		return (free(range));
+	dist = dist_calc(range->low_id, stk->atop_id, mover, 1);
+	while (dist--)
+	{
+		if (mover->cur_rot == 1)
+			ra_do(stk, 1);
+		else
+			rra_do(stk, 1);
+	}
+	free(mover);
+	free(range);
 }

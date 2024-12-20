@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:13:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/16 14:42:10 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:50:10 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	input_processer(int argc, char **argv, t_stacks **stk, int spt)
 	free_args(args, argc, spt);
 	if (repeat_check(*stk))
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 int	input_check(char **argv)

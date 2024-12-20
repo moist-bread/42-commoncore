@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:37:33 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/17 12:45:11 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:48:40 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	arg_counter(int argc, char **args)
 	int	count;
 
 	count = 0;
-	if (argc == 1)
-		return (1);
 	if (argc > 2)
 		return (--argc);
 	while (args[count])
