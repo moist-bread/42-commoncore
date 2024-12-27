@@ -6,13 +6,14 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 16:28:50 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:35:21 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdarg.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -72,5 +73,13 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 t_list				*ft_lstnew(void *content);
 int					ft_lstsize(t_list *lst);
+
+// PRINTF
+int					ft_printf(const char *input, ...);
+int					ft_ispercent(const char *input, va_list args);
+int					ft_printchar(int c);
+int					ft_printstr(char *str);
+int					ft_prtnb_base(long nbr, char *base, int len);
+int					ft_printptr(unsigned long p, int flag);
 
 #endif
