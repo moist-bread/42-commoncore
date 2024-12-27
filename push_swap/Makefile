@@ -6,57 +6,59 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/12/27 15:10:54 by rduro-pe         ###   ########.fr        #
+#    Updated: 2024/12/27 17:16:03 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-#	REMOVE PRINTING FTS FROM HELPERS
-#	ADD ALL OF LIBFT CAUSE WHY NOT
+#	REMOVE PRINTING FTS
 
-SRCS =	push_swap_main.c error_check.c sorting.c \
-		sort_helpers.c quick_sort.c sort_calc.c executers.c \
-		swap.c push.c revrotate.c \
-		ft_printf.c ft_conversions.c \
-		ft_atoi.c ft_substr.c ft_split.c ft_strlen.c ft_strdup.c \
-		printing.c
+SOURCES =	push_swap_main.c error_check.c sorting.c \
+			sort_helpers.c quick_sort.c sort_calc.c executers.c \
+			swap.c push.c revrotate.c \
+#			printing.c
 
-#LIBFT = ./libft/libft.a
+SRCS_DIR = srcs
 
-OBJ_DIR = obj
+SRCS = $(addprefix $(SRCS_DIR)/, $(SOURCES))
 
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+OBJS_DIR = objs
+
+OBJS = $(addprefix $(OBJS_DIR)/, $(SOURCES:.c=.o))
+
+LIBFT = ./inc/libft/libft.a
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-#$(LIBFT):
-#	@echo "Compiling libft..."
-#	@make -C ./libft -s
+$(NAME): $(OBJS) $(LIBFT)
+	@echo "Compiling $(NAME)..."
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS)
-	@echo "Compiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(OBJS_DIR):
+	@mkdir -p $(OBJS_DIR)
+
+$(LIBFT):
+	@echo "Compiling libft..."
+	@make -C ./inc/libft -s
 
 clean:
-	@echo "Removing OBJS"
-	@rm -rf $(OBJ_DIR)
-#@make clean -C ./libft -s
+	@echo "Removing push_swap OBJS"
+	@rm -rf $(OBJS_DIR)
+	@make clean -C ./inc/libft -s
 
 fclean: clean
 	@echo "Removing $(NAME)"
 	@rm -rf $(NAME)
-#@make fclean -C ./libft -s
+	@echo "Removing libft.a"
+	@rm -rf $(LIBFT)
 
 re:	fclean all
 	@echo "Re-Done!!"
