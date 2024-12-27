@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/04 10:47:30 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:28:50 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+// STRUCTS
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
 
+// LIBFT
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t nmemb, size_t size);
@@ -59,6 +61,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 
+// BONUS
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
