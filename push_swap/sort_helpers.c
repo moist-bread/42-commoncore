@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:14:45 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 12:27:47 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:47:41 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,6 @@ int	semi_sort_check(int *stk, int top)
 	}
 	return (1);
 }
-
-// 1 5 2 4 3    0
-// 5 2 4 3 1
-// 2 4 3 1 5
-// 4 3 1 5 2
-// 3 4 1 5 2
-// 4 1 5 2 3
-// 1 4 5 2 3
-// 4 5 2 3 1
-// 5 2 3 1 4
-// 2 3 1 4 5
-// 3 1 4 5 2
-// 1 3 4 5 2
-
-/*
-int	rev_sort_check(int *stk, int top)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < top)
-	{
-		j = 0;
-		while (++j + i <= top)
-			if (stk[i] > stk[i + j])
-				return (0);
-	}
-	return (1);
-}
-*/
 
 t_moves	*set_mover(void)
 {

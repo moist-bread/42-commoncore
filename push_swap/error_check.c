@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:13:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/20 10:50:10 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 15:00:18 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ int	input_processer(int argc, char **argv, t_stacks **stk, int spt)
 	char	**args;
 
 	if (argc == 1)
-		return (1); // "GIVE PROMPT BACK"
+		return (1);
 	if (argc == 2)
 	{
 		args = ft_split(argv[1], ' ');
-		if (!args || !(++spt)) // idk if this IF is necessary
+		if (!args || !(++spt))
 			return (1);
 	}
 	else
 		args = &argv[1];
 	argc = arg_counter(argc, args);
 	if (argc <= 1)
-		return (free_args(args, argc, spt)); // "GIVE PROMPT BACK"
+		return (free_args(args, argc, spt));
 	if (input_check(args))
 		return (free_args(args, argc, spt));
 	*stk = make_stacks(argc, args);

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 13:00:18 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:59:13 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	self_sort_3(t_stacks *stks, int *stk, int top)
 			return (sa_do(stks, 1));
 	if (!sort_check(stk, top))
 	{
-		if (stk[top] < stk[top - 1]) // 2 3 1
+		if (stk[top] < stk[top - 1])
 			rra_do(stks, 1);
-		if (stk[top] > stk[top - 1] && stk[top] > stk[top - 2]) // 3 1 2
+		if (stk[top] > stk[top - 1] && stk[top] > stk[top - 2])
 			ra_do(stks, 1);
-		if (stk[top] > stk[top - 1] && stk[top] < stk[top - 2]) // 2 1 3
+		if (stk[top] > stk[top - 1] && stk[top] < stk[top - 2])
 			sa_do(stks, 1);
 	}
 }
@@ -72,33 +72,28 @@ void	self_sort_5(t_stacks *stks, int *stk, int top)
 
 void	initial_sort(t_stacks *stk)
 {
-	t_highest	*highest;
+	t_highest	*high;
 	t_moves		*mover;
 
 	mover = set_mover();
 	if (!mover)
 		return ;
-	highest = highest_elems(stk); // QUICK SORT
-	if (!highest)
+	high = highest_elems(stk);
+	if (!high)
 		return (free(mover));
 	pb_do(stk);
 	pb_do(stk);
-	while (stk->atop_id >= 5) // WHILE ATOPID BIGGER THAN 2
+	while (stk->atop_id >= 5)
 	{
-		// ft_printf("num: %d\n", stk->a[stk->atop_id]); // PRINTING FT !!
-		while (stk->a[stk->atop_id] >= highest->low_high
-			&& stk->a[stk->atop_id] <= highest->top_high)
-		{
-			//ft_printf("HIGH NUM (%d)!!\n", stk->a[stk->atop_id]);
-				// PRINTING FT !!
+		while (stk->a[stk->atop_id] >= high->low_high
+			&& stk->a[stk->atop_id] <= high->top_high
+			&& stk->atop_id > stk->btop_id)
 			ra_do(stk, 1);
-		}
-		sort_calc(stk, mover, highest);
+		sort_calc(stk->atop_id + 1, stk, mover, high);
 		exe_move(stk, mover);
-		// print_both_stacks(stk); // PRINTING FT !!
 	}
 	free(mover);
-	free(highest);
+	free(high);
 }
 
 void	final_sort(t_stacks *stk)

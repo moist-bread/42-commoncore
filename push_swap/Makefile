@@ -6,20 +6,21 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/12/20 16:44:21 by rduro-pe         ###   ########.fr        #
+#    Updated: 2024/12/27 15:10:54 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-#	CHANGE NAME BACK TO "push_swap"
 #	REMOVE PRINTING FTS FROM HELPERS
 #	ADD ALL OF LIBFT CAUSE WHY NOT
 
-SRCS =	ft_printf.c ft_conversions.c push_swap_main.c push.c swap.c ft_atoi.c \
-		revrotate.c error_check.c ft_split.c ft_substr.c ft_strlen.c ft_strdup.c \
-		sorting.c make_helpers.c sort_helpers.c executers.c printing.c sort_calc.c \
-		quick_sort.c
+SRCS =	push_swap_main.c error_check.c sorting.c \
+		sort_helpers.c quick_sort.c sort_calc.c executers.c \
+		swap.c push.c revrotate.c \
+		ft_printf.c ft_conversions.c \
+		ft_atoi.c ft_substr.c ft_split.c ft_strlen.c ft_strdup.c \
+		printing.c
 
 #LIBFT = ./libft/libft.a
 

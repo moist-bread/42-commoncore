@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 12:54:39 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 15:07:59 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ typedef struct s_highest
 	int		low_high;
 }			t_highest;
 
-// TBD
-//
-
 // ERROR CHECK FTS
 int			input_processer(int argc, char **argv, t_stacks **stk, int spt);
 int			input_check(char **argv);
@@ -66,12 +63,6 @@ t_stacks	*make_stacks(int argc, char **argv);
 int			free_args(char **args, int argc, int splitted);
 void		free_stacks(t_stacks *stk);
 
-// PRINTING FTS
-void		print_stack(int *stack, int top_idx);
-void		print_both_stacks(t_stacks *stk);
-void		print_dists(int id_a, int id_b, int dist_a, int dist_b);
-void		print_moves(t_moves *mover, t_stacks *stk);
-
 // SORTING FTS
 void		sort_stack(t_stacks *stk);
 void		self_sort_3(t_stacks *stks, int *stk, int top);
@@ -82,7 +73,6 @@ void		final_sort(t_stacks *stk);
 // SORT HELPERS FTS
 int			sort_check(int *stk, int top);
 int			semi_sort_check(int *stk, int top);
-// int			rev_sort_check(int *stk, int top);
 t_moves		*set_mover(void);
 int			dist_calc(int id, int top, t_moves *mover, int flag);
 void		stack_shift(t_stacks *stk);
@@ -94,7 +84,7 @@ void		ft_swap(int *a, int *b);
 void		quick_sort(int *qs, int start, int pivot);
 
 // SORT CALC FTS
-void		sort_calc(t_stacks *stk, t_moves *mover, t_highest *highest);
+void		sort_calc(int id_a, t_stacks *stk, t_moves *mover, t_highest *high);
 t_range		*stack_range(int *stk, int top_id);
 int			place_finder(int id_a, t_stacks *stk, t_range *range);
 int			curmov_calc(int dist_a, int dist_b, int bt, t_moves *mover);
@@ -132,5 +122,11 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		**ft_split(char const *s, char c);
 size_t		ft_strlen(const char *str);
 char		*ft_strdup(const char *src);
+
+// PRINTING FTS
+void		print_stack(int *stack, int top_idx);
+void		print_both_stacks(t_stacks *stk);
+void		print_dists(int id_a, int id_b, int dist_a, int dist_b);
+void		print_moves(t_moves *mover, t_stacks *stk);
 
 #endif

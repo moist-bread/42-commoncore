@@ -6,22 +6,19 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:49:09 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 13:13:46 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 15:17:27 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_calc(t_stacks *stk, t_moves *mover, t_highest *highest)
+void	sort_calc(int id_a, t_stacks *stk, t_moves *mover, t_highest *high)
 {
-	int		id_a;
 	int		id_b;
 	int		dist_a;
 	int		dist_b;
 	t_range	*range;
 
-	(void)highest;
-	id_a = stk->atop_id + 1;
 	mover->bst_move = 1;
 	range = stack_range(stk->b, stk->btop_id);
 	while (id_a--)
@@ -30,20 +27,24 @@ void	sort_calc(t_stacks *stk, t_moves *mover, t_highest *highest)
 		id_b = place_finder(id_a, stk, range);
 		dist_a = dist_calc(id_a, stk->atop_id, mover, 1);
 		dist_b = dist_calc(id_b, stk->btop_id, mover, 1);
-		// print_dists(id_a, id_b, dist_a, dist_b); // PRINTING FT !!
 		mover->cur_move = curmov_calc(dist_a, dist_b, stk->btop_id, mover);
-		// if (id_a == stk->atop_id || (mover->bst_move > mover->cur_move
-		// 		&& stk->a[id_a] < highest->low_high))
 		if (id_a == stk->atop_id || mover->bst_move > mover->cur_move)
 		{
-			is_the_best(id_a, id_b, mover);
-			// print_moves(mover, stk); // PRINTING FT !!
+			if (id_a == stk->atop_id || !(stk->atop_id > stk->btop_id
+					&& stk->a[id_a] >= high->low_high))
+				is_the_best(id_a, id_b, mover);
 			if (mover->bst_move <= 2)
 				break ;
 		}
 	}
 	free(range);
 }
+
+/* 	print_dists(id_a, id_b, dist_a, dist_b); // PRINTING FT !!
+	ft_printf("%d(cur nb) %d(not allowed over)\n", stk->a[id_a],
+		highest->low_high);
+	print_moves(mover, stk); // PRINTING FT !!
+	ft_printf("%d(chosen)\n", stk->a[mover->bst_id_a]); // PRINTING FT !! */
 
 t_range	*stack_range(int *stk, int top_id)
 {
