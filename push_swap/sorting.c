@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/20 20:22:12 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 11:58:05 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	sort_stack(t_stacks *stk)
 		return ;
 	if (stk->atop_id <= 2)
 		return (self_sort_3(stk, stk->a, stk->atop_id));
-	// if (stk->atop_id == 4)
-	// 	return(self_sort_5(stk, stk->a, stk->atop_id));
+	if (stk->atop_id == 4)
+		return (self_sort_5(stk, stk->a, stk->atop_id));
 	initial_sort(stk);
 	if (!sort_check(stk->a, stk->atop_id))
 		self_sort_3(stk, stk->a, stk->atop_id);
@@ -52,20 +52,21 @@ void	self_sort_3(t_stacks *stks, int *stk, int top)
 
 void	self_sort_5(t_stacks *stks, int *stk, int top)
 {
-	t_range *range;
-	
+	t_range	*range;
+
 	range = stack_range(stk, top);
 	if (!range)
 		return ;
-	while (!sort_check(stk, top))
+	while (!semi_sort_check(stk, top))
 	{
-		if (stk[top] < range->high && stk[top] > stk[top - 1])
+		if ((stk[top] < range->high && stk[top] > stk[top - 1])
+			|| (stk[top] == range->high && stk[top - 1] > stk[0]))
 			sa_do(stks, 1);
-		else if (stk[top] == range->high && stk[top - 1] > stk[0])
-			sa_do(stks, 1);
-		if(semi_sort_check(stk, top))
-			break;
-		ra_do(stks, 1);
+		else if ((stk[0] < range->high && stk[0] > stk[top])
+			|| (stk[0] == range->high && stk[top] > stk[1]))
+			rra_do(stks, 1);
+		else
+			ra_do(stks, 1);
 	}
 	stack_shift(stks);
 	free(range);
@@ -75,21 +76,22 @@ int	semi_sort_check(int *stk, int top)
 {
 	int	i;
 	int	j;
-	int y;
+	int	y;
 
 	i = -1;
-	y = 1;
+	y = top;
 	while (++i < top)
 	{
 		j = 0;
 		while (++j + i <= top)
 		{
-			if (stk[i] < stk[i + j] && stk[i + j] > stk[i])
+			if (i == 0 && stk[i] < stk[i + j] && stk[top] > stk[0])
 			{
-				while (++j + i <= top && stk[i + j] > stk[i])
-					if (stk[i] < stk[i + j])
-						return (0);
-			}	
+				if (!sort_check(stk, j - 1))
+					return (0);
+				i = j;
+				j = 0;
+			}
 			else if (stk[i] < stk[i + j])
 				return (0);
 		}
@@ -109,7 +111,7 @@ int	semi_sort_check(int *stk, int top)
 // 2 3 1 4 5
 // 3 1 4 5 2
 // 1 3 4 5 2
-// 
+//
 
 // 4 3 5 2 1    0
 // 3 4 5 2 1    1 sa
@@ -125,7 +127,6 @@ int	semi_sort_check(int *stk, int top)
 // 4 5 1 2 3    4 ra
 // 5 1 2 3 4    5 ra
 // 1 2 3 4 5    6 ra
-
 
 void	initial_sort(t_stacks *stk)
 {
