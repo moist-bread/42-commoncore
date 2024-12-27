@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:02:51 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 11:51:20 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:11:31 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int	ft_isascii(int c);
-
-/*
-int	main(void)
-{
-	printf("return: %d \n", ft_isascii('A'));
-	printf("return: %d \n", ft_isascii('?'));
-	printf("return: %d \n", ft_isascii(163));
-	printf("return: %d \n", ft_isascii('1'));
-	return (0);
-}
-*/
 
 int	ft_isascii(int c)
 {

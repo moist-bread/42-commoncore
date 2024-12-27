@@ -6,32 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:48:25 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/04 10:51:22 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:13:06 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-
-typedef struct s_list
-{
-void			*content;
-struct s_list	*next;
-}				t_list;
-
-t_list			*ft_lstnew(void *content);
-
-int main (void)
-{
-	char	*con;
-
-	con = "conteudo interessante";
-	ft_lstnew((void *)con);
-	return(0);
-}
-
-*/
 
 t_list	*ft_lstnew(void *content)
 {

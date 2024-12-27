@@ -3,29 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:39 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 11:53:43 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:12:01 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(int n);
-int		ft_intlen(long n);
-
-/*
-int	main(void)
-{
-	int	number;
-
-	number = 0;
-	printf("%d (original)\n", number);
-	printf("%s (my itoa)\n", ft_itoa(number));
-	return (0);
-}
- */
+static int	ft_intlen(long n);
 
 char	*ft_itoa(int n)
 {
@@ -53,7 +40,7 @@ char	*ft_itoa(int n)
 	return (number);
 }
 
-int	ft_intlen(long n)
+static int	ft_intlen(long n)
 {
 	int	i;
 

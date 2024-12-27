@@ -6,13 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:52:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/04 11:29:59 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:12:12 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_lstadd_back(t_list **lst, t_list *new);
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {

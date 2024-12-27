@@ -6,13 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:47:50 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/04 11:24:48 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:12:50 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-t_list	*ft_lstlast(t_list *lst);
 
 t_list	*ft_lstlast(t_list *lst)
 {

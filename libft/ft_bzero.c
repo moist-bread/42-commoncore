@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:28:21 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 11:51:13 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:11:01 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_bzero(void *s, size_t n);
-
-/*
-int	main(void)
-{
-	char	string1[] = "bom dia olá";
-	char	string2[] = "bom dia olá";
-
-	printf("%s (original)\n", string1);
-	bzero(string1, 5);
-	printf("%s (cleared)\n", string1);
-	printf("%c (char 4)\n", string1[4]);
-	printf("%c (char 5)\n", string1[5]);
-	printf("%s (original)\n", string2);
-	ft_bzero(string2, 5);
-	printf("%s (cleared)\n", string2);
-	printf("%c (char 4)\n", string2[4]);
-	printf("%c (char 5)\n", string2[5]);
-	return (0);
-}
- */
 
 void	ft_bzero(void *s, size_t n)
 {

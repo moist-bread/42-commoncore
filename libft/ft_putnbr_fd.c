@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:11 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/10/31 11:53:32 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:14:03 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_putnbr_fd(int n, int fd);
-
-/*
-int	main(void)
-{
-	int	testint;
-
-	testint = 2147483647;
-	printf("%d (correct number)\n", testint);
-	printf(" (put number)");
-	ft_putnbr_fd(testint, 1);
-	return (0);
-}
-*/
 
 void	ft_putnbr_fd(int n, int fd)
 {

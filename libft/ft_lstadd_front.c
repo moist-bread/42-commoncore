@@ -6,23 +6,13 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 16:11:31 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/01 17:47:56 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:12:33 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_lstadd_front(t_list **lst, t_list *new);
-t_list			*ft_lstnew(void *content);
-
 /*
-
-typedef struct s_list
-{
-void			*content;
-struct s_list	*next;
-}				t_list;
-
 int main (void)
 {
 	char	*t3;
@@ -54,17 +44,6 @@ int main (void)
 	return(0);
 }
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*new;
-
-	new = malloc(sizeof(t_list));
-	if (new == 0)
-		return(NULL);
-	new->content = content;
-	new->next = NULL;
-	return(new);
-}
 */
 
 void	ft_lstadd_front(t_list **lst, t_list *new)

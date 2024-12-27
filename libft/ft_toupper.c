@@ -12,21 +12,6 @@
 
 #include "libft.h"
 
-int	ft_toupper(int c);
-
-/*
-int	main(void)
-{
-	char test1 = ';';
-	char test2 = 't';
-
-	printf("text:%c ", test1);
-	printf("return: %c \n", ft_toupper(test1));
-	printf("text:%c ", test2);
-	printf("return: %c \n", ft_toupper(test2));
-	return (0);
-}
- */
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')

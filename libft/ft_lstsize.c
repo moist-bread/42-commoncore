@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:36:35 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/04 10:49:57 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:13:23 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-
 int main (void)
 {
 	char	*t3;
@@ -47,24 +43,6 @@ int main (void)
 	printf("%s(content %d)\n", (char *)(*list)->content, i);
 	printf("%d(list size)\n", ft_lstsize(first));
 	return(0);
-}
-
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*new;
-
-	new = malloc(sizeof(t_list));
-	if (new == 0)
-		return(NULL);
-	new->content = content;
-	new->next = NULL;
-	return(new);
-}
-
-void	ft_lstadd_front(t_list **lst, t_list *new)
-{
-	new->next = *lst;
-	*lst = new;
 }
 */
 

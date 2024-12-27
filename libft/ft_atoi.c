@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:29:43 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/04 08:41:39 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:04:37 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int	ft_atoi(const char *str);
-
-/*
-int	main(void)
-{
-	char	teststr1[] = "\n   -95345\n67++8-";
-	char	teststr2[] = "   +-+++-+1234ab5-67+";
-
-	printf("original str: %s\natoi output: %d\n", teststr1, atoi(teststr1));
-	printf("my   output: %d\n", ft_atoi(teststr1));
-	printf("original str: %s\natoi output: %d\n", teststr2, atoi(teststr2));
-	printf("my   output: %d\n", ft_atoi(teststr2));
-	return (0);
-}
-*/
 
 int	ft_atoi(const char *str)
 {
