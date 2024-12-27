@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:40:16 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/17 14:30:04 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 12:28:27 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	exe_move(t_stacks *stk, t_moves *mover)
 
 void	exe_rot(int *dist, int bst_id, t_stacks *stk, int flag)
 {
-	int top_id;
+	int	top_id;
 
 	if (flag == 'a')
 		top_id = stk->atop_id;
@@ -48,17 +48,17 @@ void	exe_rot(int *dist, int bst_id, t_stacks *stk, int flag)
 	{
 		if (bst_id >= (top_id + 1) / 2)
 		{
-			if(flag == 'a')
+			if (flag == 'a')
 				ra_do(stk, 1);
 			else
 				rb_do(stk, 1);
 		}
 		else
 		{
-			if(flag == 'a')
+			if (flag == 'a')
 				rra_do(stk, 1);
 			else
-			rrb_do(stk, 1);
+				rrb_do(stk, 1);
 		}
 		(*dist)--;
 	}

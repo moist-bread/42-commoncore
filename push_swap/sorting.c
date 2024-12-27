@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 11:58:05 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/27 13:00:18 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	sort_stack(t_stacks *stk)
 		return (self_sort_5(stk, stk->a, stk->atop_id));
 	initial_sort(stk);
 	if (!sort_check(stk->a, stk->atop_id))
-		self_sort_3(stk, stk->a, stk->atop_id);
-	// MAKE SELF SORT FOR 5
-	// print_both_stacks(stk); // PRINTING FT !!
+		self_sort_5(stk, stk->a, stk->atop_id);
 	final_sort(stk);
 }
 
@@ -72,62 +70,6 @@ void	self_sort_5(t_stacks *stks, int *stk, int top)
 	free(range);
 }
 
-int	semi_sort_check(int *stk, int top)
-{
-	int	i;
-	int	j;
-	int	y;
-
-	i = -1;
-	y = top;
-	while (++i < top)
-	{
-		j = 0;
-		while (++j + i <= top)
-		{
-			if (i == 0 && stk[i] < stk[i + j] && stk[top] > stk[0])
-			{
-				if (!sort_check(stk, j - 1))
-					return (0);
-				i = j;
-				j = 0;
-			}
-			else if (stk[i] < stk[i + j])
-				return (0);
-		}
-	}
-	return (1);
-}
-
-// 1 5 2 4 3    0
-// 5 2 4 3 1
-// 2 4 3 1 5
-// 4 3 1 5 2
-// 3 4 1 5 2
-// 4 1 5 2 3
-// 1 4 5 2 3
-// 4 5 2 3 1
-// 5 2 3 1 4
-// 2 3 1 4 5
-// 3 1 4 5 2
-// 1 3 4 5 2
-//
-
-// 4 3 5 2 1    0
-// 3 4 5 2 1    1 sa
-// 4 5 2 1 3    2 ra
-// 5 2 1 3 4    3 ra
-// 2 1 3 4 5    4 ra
-// 1 2 3 4 5    5 sa
-
-// 1 2 4 3 5    0
-// 2 4 3 5 1    1 ra
-// 4 3 5 1 2    2 ra
-// 3 4 5 1 2    3 sa
-// 4 5 1 2 3    4 ra
-// 5 1 2 3 4    5 ra
-// 1 2 3 4 5    6 ra
-
 void	initial_sort(t_stacks *stk)
 {
 	t_highest	*highest;
@@ -144,14 +86,14 @@ void	initial_sort(t_stacks *stk)
 	while (stk->atop_id >= 5) // WHILE ATOPID BIGGER THAN 2
 	{
 		// ft_printf("num: %d\n", stk->a[stk->atop_id]); // PRINTING FT !!
-		/* while (stk->a[stk->atop_id] >= highest->low_high
+		while (stk->a[stk->atop_id] >= highest->low_high
 			&& stk->a[stk->atop_id] <= highest->top_high)
 		{
 			//ft_printf("HIGH NUM (%d)!!\n", stk->a[stk->atop_id]);
 				// PRINTING FT !!
 			ra_do(stk, 1);
-		} */
-		sort_calc(stk, mover);
+		}
+		sort_calc(stk, mover, highest);
 		exe_move(stk, mover);
 		// print_both_stacks(stk); // PRINTING FT !!
 	}
