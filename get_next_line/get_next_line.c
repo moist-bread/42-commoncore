@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:46:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/03 12:19:26 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/28 16:23:10 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,8 @@ char	*get_next_line(int fd)
 		ft_buffrealign(buff);
 	}
 	if (!line[0] || len_read < 0)
-		return (ft_freeline(line));
+		return (free(line), NULL);
 	return (line);
-}
-
-void	*ft_buffzero(char *buff, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-		buff[i++] = 0;
-	return (NULL);
 }
 
 /* int main(void)
@@ -58,7 +48,7 @@ void	*ft_buffzero(char *buff, size_t n)
 	write(1, "your input: ", 13);
 	line = get_next_line(1);
 	printf("line: %s", line);
-	ft_freeline(line);
+	free(line);
 	return(0);
 }
 */
@@ -74,7 +64,7 @@ void	*ft_buffzero(char *buff, size_t n)
 		line = get_next_line(fd);
 		printf("line %d: %s", i, line);
 		i++;
-		ft_freeline(line);
+		free(line);
 	}
 	return(0);
 }  */

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:45:59 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/11/15 11:55:36 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/28 16:23:52 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_add_line_chunck(char *start, char *chunck)
 	while (chunck[j] && chunck[j - 1] != '\n')
 		line[i++] = chunck[j++];
 	line[i] = '\0';
-	ft_freeline(start);
+	free(start);
 	return (line);
 }
 
@@ -80,8 +80,12 @@ int	ft_linelen(char *str)
 	return (i);
 }
 
-void	*ft_freeline(char *line)
+void	*ft_buffzero(char *buff, size_t n)
 {
-	free(line);
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+		buff[i++] = 0;
 	return (NULL);
 }
