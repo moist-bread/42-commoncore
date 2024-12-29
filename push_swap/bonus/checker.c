@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:41:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/28 19:13:20 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/29 00:05:30 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	exe_intructions(t_stacks *stk)
 			rb_do(stk, 0);
 		else if (ft_strncmp(command, "rr\n", 3))
 			rr_do(stk);
-		else if (ft_strncmp(command, "rra\n", 3))
+		else if (ft_strncmp(command, "rra\n", 4))
 			rra_do(stk, 0);
-		else if (ft_strncmp(command, "rrb\n", 3))
+		else if (ft_strncmp(command, "rrb\n", 4))
 			rrb_do(stk, 0);
-		else if (ft_strncmp(command, "rrr\n", 3))
+		else if (ft_strncmp(command, "rrr\n", 4))
 			rrr_do(stk);
 		else
 		{

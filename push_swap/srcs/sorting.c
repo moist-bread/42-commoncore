@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 16:46:08 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/28 22:13:53 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	final_sort(t_stacks *stk)
 {
 	t_range	*range;
 
+	/* int		i;
+	i = 0; */
 	range = stack_range(stk->a, stk->atop_id);
 	if (!range)
 		return ;
@@ -108,15 +110,26 @@ void	final_sort(t_stacks *stk)
 			rra_do(stk, 1);
 	while (stk->btop_id >= 0)
 	{
-		if (stk->b[stk->btop_id] > range->low)
+		if ((stk->b[stk->btop_id] > stk->a[0]
+				&& stk->b[stk->btop_id] < stk->a[stk->atop_id])
+			|| (stk->b[stk->btop_id] < range->low
+				&& stk->b[stk->btop_id] < stk->a[stk->atop_id]
+				&& !(stk->a[0] == range->low))
+			|| (stk->b[stk->btop_id] > range->high && stk->a[0] == range->high))
 		{
-			while (stk->btop_id >= 0 && stk->b[stk->btop_id] > stk->a[0])
-				pa_do(stk);
-			rra_do(stk, 1);
+			if (stk->b[stk->btop_id] < range->low)
+				range->low = stk->b[stk->btop_id];
+			else if (stk->b[stk->btop_id] > range->high)
+				range->high = stk->b[stk->btop_id];
+			pa_do(stk);
 		}
 		else
-			while (stk->btop_id >= 0 && stk->b[stk->btop_id] < range->low)
-				pa_do(stk);
+		{
+			rra_do(stk, 1);
+			/* i++;
+			if (i == 100)
+				return ; */
+		}
 	}
 	free(range);
 	stack_shift(stk);

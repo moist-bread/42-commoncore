@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 17:10:50 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/28 19:11:59 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			int_check(char *argv);
 int			overflow_check(char *str);
 int			repeat_check(t_stacks *stk);
 
-// MAKE HELPERS
+// MAKE STACK
 int			arg_counter(int argc, char **args);
 t_stacks	*make_stacks(int argc, char **argv);
 int			free_args(char **args, int argc, int splitted);
