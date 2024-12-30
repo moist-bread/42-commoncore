@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/28 19:11:59 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/29 00:13:05 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,15 @@ void		exe_rot(int *dist, int bst_id, t_stacks *stk, int flag);
 // OPERATIONS
 void		sa_do(t_stacks *stk, int flag);
 void		sb_do(t_stacks *stk, int flag);
-void		ss_do(t_stacks *stk);
-void		pa_do(t_stacks *stk);
-void		pb_do(t_stacks *stk);
+void		ss_do(t_stacks *stk, int flag);
+void		pa_do(t_stacks *stk, int flag);
+void		pb_do(t_stacks *stk, int flag);
 void		ra_do(t_stacks *stk, int flag);
 void		rb_do(t_stacks *stk, int flag);
-void		rr_do(t_stacks *stk);
+void		rr_do(t_stacks *stk, int flag);
 void		rra_do(t_stacks *stk, int flag);
 void		rrb_do(t_stacks *stk, int flag);
-void		rrr_do(t_stacks *stk);
+void		rrr_do(t_stacks *stk, int flag);
 
 // PRINTING
 void		print_stack(int *stack, int top_idx);

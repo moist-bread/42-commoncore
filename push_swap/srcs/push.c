@@ -6,15 +6,16 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:48:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 16:46:08 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/29 00:13:56 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	pa_do(t_stacks *stk)
+void	pa_do(t_stacks *stk, int flag)
 {
-	ft_printf("pa\n");
+	if (flag)
+		ft_printf("pa\n");
 	if (stk->btop_id >= 0)
 	{
 		stk->atop_id++;
@@ -24,9 +25,10 @@ void	pa_do(t_stacks *stk)
 	}
 }
 
-void	pb_do(t_stacks *stk)
+void	pb_do(t_stacks *stk, int flag)
 {
-	ft_printf("pb\n");
+	if (flag)
+		ft_printf("pb\n");
 	if (stk->atop_id >= 0)
 	{
 		stk->btop_id++;
@@ -76,9 +78,10 @@ void	rb_do(t_stacks *stk, int flag)
 	}
 }
 
-void	rr_do(t_stacks *stk)
+void	rr_do(t_stacks *stk, int flag)
 {
-	ft_printf("rr\n");
+	if (flag)
+		ft_printf("rr\n");
 	ra_do(stk, 0);
 	rb_do(stk, 0);
 }

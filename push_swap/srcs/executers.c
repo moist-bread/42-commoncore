@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:40:16 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 16:46:08 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/29 00:16:37 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ void	exe_move(t_stacks *stk, t_moves *mover)
 	dist_b = dist_calc(mover->bst_id_b, stk->btop_id, mover, 0);
 	while (mover->bst_rot == 2 && dist_a && dist_b)
 	{
-		rr_do(stk);
+		rr_do(stk, 1);
 		dist_a--;
 		dist_b--;
 	}
 	while (mover->bst_rot == -2 && dist_a && dist_b)
 	{
-		rrr_do(stk);
+		rrr_do(stk, 1);
 		dist_a--;
 		dist_b--;
 	}
 	exe_rot(&dist_a, mover->bst_id_a, stk, 'a');
 	exe_rot(&dist_b, mover->bst_id_b, stk, 'b');
-	pb_do(stk);
+	pb_do(stk, 1);
 }
 
 void	exe_rot(int *dist, int bst_id, t_stacks *stk, int flag)

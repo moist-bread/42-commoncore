@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/28 22:13:53 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/29 00:24:21 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	initial_sort(t_stacks *stk)
 	high = highest_elems(stk);
 	if (!high)
 		return (free(mover));
-	pb_do(stk);
-	pb_do(stk);
+	pb_do(stk, 1);
+	pb_do(stk, 1);
 	while (stk->atop_id >= 5)
 	{
 		while (stk->a[stk->atop_id] >= high->low_high
@@ -100,8 +100,6 @@ void	final_sort(t_stacks *stk)
 {
 	t_range	*range;
 
-	/* int		i;
-	i = 0; */
 	range = stack_range(stk->a, stk->atop_id);
 	if (!range)
 		return ;
@@ -121,16 +119,12 @@ void	final_sort(t_stacks *stk)
 				range->low = stk->b[stk->btop_id];
 			else if (stk->b[stk->btop_id] > range->high)
 				range->high = stk->b[stk->btop_id];
-			pa_do(stk);
+			pa_do(stk, 1);
 		}
 		else
-		{
 			rra_do(stk, 1);
-			/* i++;
-			if (i == 100)
-				return ; */
-		}
 	}
 	free(range);
 	stack_shift(stk);
 }
+// FINAL SORT TOO BIG

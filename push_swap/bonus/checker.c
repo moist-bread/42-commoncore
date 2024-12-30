@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:41:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/29 00:05:30 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/29 00:14:46 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	// print_both_stacks(stk);
 	exe_intructions(stk);
 	check_ok(stk);
-	// print_both_stacks(stk);
+	print_both_stacks(stk);
 	free_stacks(stk);
 	return (0);
 }
@@ -41,28 +41,28 @@ void	exe_intructions(t_stacks *stk)
 		command = get_next_line(0);
 		if (!command)
 			break ;
-		if (ft_strncmp(command, "sa\n", 3))
+		if (!ft_strncmp(command, "sa\n", 3))
 			sa_do(stk, 0);
-		else if (ft_strncmp(command, "sb\n", 3))
+		else if (!ft_strncmp(command, "sb\n", 3))
 			sb_do(stk, 0);
-		else if (ft_strncmp(command, "ss\n", 3))
-			ss_do(stk);
-		else if (ft_strncmp(command, "pa\n", 3))
-			pa_do(stk);
-		else if (ft_strncmp(command, "pb\n", 3))
-			pb_do(stk);
-		else if (ft_strncmp(command, "ra\n", 3))
+		else if (!ft_strncmp(command, "ss\n", 3))
+			ss_do(stk, 0);
+		else if (!ft_strncmp(command, "pa\n", 3))
+			pa_do(stk, 0);
+		else if (!ft_strncmp(command, "pb\n", 3))
+			pb_do(stk, 0);
+		else if (!ft_strncmp(command, "ra\n", 3))
 			ra_do(stk, 0);
-		else if (ft_strncmp(command, "rb\n", 3))
+		else if (!ft_strncmp(command, "rb\n", 3))
 			rb_do(stk, 0);
-		else if (ft_strncmp(command, "rr\n", 3))
-			rr_do(stk);
-		else if (ft_strncmp(command, "rra\n", 4))
+		else if (!ft_strncmp(command, "rr\n", 3))
+			rr_do(stk, 0);
+		else if (!ft_strncmp(command, "rra\n", 4))
 			rra_do(stk, 0);
-		else if (ft_strncmp(command, "rrb\n", 4))
+		else if (!ft_strncmp(command, "rrb\n", 4))
 			rrb_do(stk, 0);
-		else if (ft_strncmp(command, "rrr\n", 4))
-			rrr_do(stk);
+		else if (!ft_strncmp(command, "rrr\n", 4))
+			rrr_do(stk, 0);
 		else
 		{
 			write(2, "Error\n", 6);
@@ -70,7 +70,6 @@ void	exe_intructions(t_stacks *stk)
 		}
 		ft_printf("%s", command);
 	}
-	// ft_strncmp(command, "sa\n", 3);
 }
 
 void	check_ok(t_stacks *stk)

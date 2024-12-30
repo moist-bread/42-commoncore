@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:48:58 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 16:46:08 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/29 00:12:28 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ void	sb_do(t_stacks *stk, int flag)
 	}
 }
 
-void	ss_do(t_stacks *stk)
+void	ss_do(t_stacks *stk, int flag)
 {
-	ft_printf("ss\n");
+	if (flag)
+		ft_printf("ss\n");
 	sa_do(stk, 0);
 	sb_do(stk, 0);
 }
