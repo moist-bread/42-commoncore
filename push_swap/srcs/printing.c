@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:45:16 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 16:46:08 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/30 12:06:29 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,9 @@ void	print_moves(t_moves *mover, t_stacks *stk)
 	ft_printf("%d(bst id a nb) !!\n", stk->a[mover->bst_id_a]);
 	ft_printf("%d(bst id b)\n\n", mover->bst_id_b);
 }
+
+/* 	print_dists(id_a, id_b, dist_a, dist_b); // PRINTING FT !!
+	ft_printf("%d(cur nb) %d(not allowed over)\n", stk->a[id_a],
+		highest->low_high);
+	print_moves(mover, stk); // PRINTING FT !!
+	ft_printf("%d(chosen)\n", stk->a[mover->bst_id_a]); // PRINTING FT !! */

@@ -6,13 +6,13 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:49:09 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 16:46:08 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/30 12:06:20 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	sort_calc(int id_a, t_stacks *stk, t_moves *mover, t_highest *high)
+int	sort_calc(int id_a, t_stacks *stk, t_moves *mover)
 {
 	int		id_b;
 	int		dist_a;
@@ -21,6 +21,8 @@ void	sort_calc(int id_a, t_stacks *stk, t_moves *mover, t_highest *high)
 
 	mover->bst_move = 1;
 	range = stack_range(stk->b, stk->btop_id);
+	if (!range)
+		return (1);
 	while (id_a--)
 	{
 		mover->cur_rot = 0;
@@ -28,23 +30,12 @@ void	sort_calc(int id_a, t_stacks *stk, t_moves *mover, t_highest *high)
 		dist_a = dist_calc(id_a, stk->atop_id, mover, 1);
 		dist_b = dist_calc(id_b, stk->btop_id, mover, 1);
 		mover->cur_move = curmov_calc(dist_a, dist_b, stk->btop_id, mover);
-		if (id_a == stk->atop_id || mover->bst_move > mover->cur_move)
-		{
-			if (id_a == stk->atop_id || !(stk->atop_id > stk->btop_id
-					&& stk->a[id_a] >= high->low_high))
-				is_the_best(id_a, id_b, mover);
-			if (mover->bst_move <= 2)
+		if (id_a == stk->atop_id || mover->cur_move < mover->bst_move)
+			if (is_the_best(id_a, id_b, mover))
 				break ;
-		}
 	}
-	free(range);
+	return (free(range), 0);
 }
-
-/* 	print_dists(id_a, id_b, dist_a, dist_b); // PRINTING FT !!
-	ft_printf("%d(cur nb) %d(not allowed over)\n", stk->a[id_a],
-		highest->low_high);
-	print_moves(mover, stk); // PRINTING FT !!
-	ft_printf("%d(chosen)\n", stk->a[mover->bst_id_a]); // PRINTING FT !! */
 
 t_range	*stack_range(int *stk, int top_id)
 {
@@ -108,10 +99,13 @@ int	curmov_calc(int dist_a, int dist_b, int bt, t_moves *mover)
 		return (dist_a + dist_b + 1);
 }
 
-void	is_the_best(int id_a, int id_b, t_moves *mover)
+int	is_the_best(int id_a, int id_b, t_moves *mover)
 {
 	mover->bst_move = mover->cur_move;
 	mover->bst_rot = mover->cur_rot;
 	mover->bst_id_a = id_a;
 	mover->bst_id_b = id_b;
+	if (mover->bst_move <= 2)
+		return (1);
+	return (0);
 }

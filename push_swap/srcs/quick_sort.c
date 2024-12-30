@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:09:57 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 16:46:08 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/30 13:36:21 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_highest	*highest_elems(t_stacks *stk)
 		return (NULL);
 	highest = malloc(sizeof(t_highest));
 	if (!highest)
-		return (NULL);
+		return (free(quicksrt), NULL);
 	i = -1;
 	while (++i <= stk->atop_id)
 		quicksrt[i] = stk->a[i];
@@ -32,8 +32,7 @@ t_highest	*highest_elems(t_stacks *stk)
 	quick_sort(quicksrt, 0, pivot);
 	highest->top_high = quicksrt[stk->atop_id];
 	highest->low_high = quicksrt[(stk->atop_id / 4) * 3];
-	free(quicksrt);
-	return (highest);
+	return (free(quicksrt), highest);
 }
 
 int	pivot_picker(int *qs, int last)
@@ -66,9 +65,9 @@ void	quick_sort(int *qs, int start, int pivot)
 
 	if (start < pivot)
 	{
-		i = start;
+		i = start - 1;
 		j = start - 1;
-		while (i <= pivot)
+		while (++i <= pivot)
 		{
 			if (qs[i] <= qs[pivot])
 			{
@@ -76,7 +75,6 @@ void	quick_sort(int *qs, int start, int pivot)
 				if (qs[i] < qs[j])
 					ft_swap(&qs[i], &qs[j]);
 			}
-			i++;
 		}
 		quick_sort(qs, start, j - 1);
 		quick_sort(qs, j + 1, pivot);

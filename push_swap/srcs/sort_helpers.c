@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:14:45 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/28 21:03:38 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/30 11:33:07 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	dist_calc(int id, int top, t_moves *mover, int flag)
 	return (dist);
 }
 
-void	stack_shift(t_stacks *stk)
+int	stack_shift(t_stacks *stk)
 {
 	t_range	*range;
 	t_moves	*mover;
@@ -96,10 +96,10 @@ void	stack_shift(t_stacks *stk)
 
 	range = stack_range(stk->a, stk->atop_id);
 	if (!range)
-		return ;
+		return (1);
 	mover = set_mover();
 	if (!mover)
-		return (free(range));
+		return (free(range), 1);
 	dist = dist_calc(range->low_id, stk->atop_id, mover, 1);
 	while (dist--)
 	{
@@ -108,6 +108,5 @@ void	stack_shift(t_stacks *stk)
 		else
 			rra_do(stk, 1);
 	}
-	free(mover);
-	free(range);
+	return (free(mover), free(range), 0);
 }

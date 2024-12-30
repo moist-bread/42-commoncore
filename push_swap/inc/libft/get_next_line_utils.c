@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:45:59 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/28 16:38:40 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:11:33 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ char	*ft_add_line_chunck(char *start, char *chunck)
 	while (chunck[j] && chunck[j - 1] != '\n')
 		line[i++] = chunck[j++];
 	line[i] = '\0';
-	free(start);
-	return (line);
+	return (free(start), line);
 }
 
 void	ft_buffrealign(char *buff)

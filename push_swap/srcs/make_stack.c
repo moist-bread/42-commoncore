@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:14:37 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/28 17:15:03 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/30 12:20:34 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int	free_args(char **args, int argc, int spt)
 	i = 0;
 	while (i <= argc)
 		free(args[i++]);
-	free(args);
-	return (1);
+	return (free(args), 1);
 }
 
 void	free_stacks(t_stacks *stk)

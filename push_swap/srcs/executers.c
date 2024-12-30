@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:40:16 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/29 00:16:37 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/30 12:46:09 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,22 @@ void	exe_rot(int *dist, int bst_id, t_stacks *stk, int flag)
 		}
 		(*dist)--;
 	}
+}
+
+void	exe_final(t_stacks *stk, t_range *range)
+{
+	if ((stk->b[stk->btop_id] > stk->a[0]
+			&& stk->b[stk->btop_id] < stk->a[stk->atop_id])
+		|| (stk->b[stk->btop_id] < range->low
+			&& stk->a[stk->atop_id] == range->low)
+		|| (stk->b[stk->btop_id] > range->high && stk->a[0] == range->high))
+	{
+		if (stk->b[stk->btop_id] < range->low)
+			range->low = stk->b[stk->btop_id];
+		else if (stk->b[stk->btop_id] > range->high)
+			range->high = stk->b[stk->btop_id];
+		pa_do(stk, 1);
+	}
+	else
+		rra_do(stk, 1);
 }

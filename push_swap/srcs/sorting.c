@@ -6,32 +6,35 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/29 00:24:21 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2024/12/30 13:31:31 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	sort_stack(t_stacks *stk)
+int	sort_stack(t_stacks *stk)
 {
 	if (sort_check(stk->a, stk->atop_id))
-		return ;
+		return (0);
 	if (stk->atop_id <= 2)
-		return (self_sort_3(stk, stk->a, stk->atop_id));
+		return (self_sort_3(stk, stk->a, stk->atop_id), 0);
 	if (stk->atop_id == 4)
 		return (self_sort_5(stk, stk->a, stk->atop_id));
-	initial_sort(stk);
+	if (initial_sort(stk))
+		return (1);
 	if (!sort_check(stk->a, stk->atop_id))
-		self_sort_5(stk, stk->a, stk->atop_id);
-	final_sort(stk);
+		if (self_sort_5(stk, stk->a, stk->atop_id))
+			return (1);
+	if (final_sort(stk))
+		return (1);
+	return (0);
 }
 
 void	self_sort_3(t_stacks *stks, int *stk, int top)
 {
-	if (top == 1)
-		if (!sort_check(stk, top))
-			return (sa_do(stks, 1));
-	if (!sort_check(stk, top))
+	if (top == 1 && !sort_check(stk, top))
+		sa_do(stks, 1);
+	else if (!sort_check(stk, top))
 	{
 		if (stk[top] < stk[top - 1])
 			rra_do(stks, 1);
@@ -41,46 +44,42 @@ void	self_sort_3(t_stacks *stks, int *stk, int top)
 			sa_do(stks, 1);
 	}
 }
-// 1 2 3	0
-// 1 3 2	2 rra (2 1 3) + sa
-// 2 3 1	1 rra
-// 2 1 3	1 sa
-// 3 2 1	2 ra (2 1 3) + sa
-// 3 1 2	1 ra
 
-void	self_sort_5(t_stacks *stks, int *stk, int top)
+int	self_sort_5(t_stacks *stks, int *stk, int top)
 {
 	t_range	*range;
 
 	range = stack_range(stk, top);
 	if (!range)
-		return ;
+		return (1);
 	while (!semi_sort_check(stk, top))
 	{
 		if ((stk[top] < range->high && stk[top] > stk[top - 1])
 			|| (stk[top] == range->high && stk[top - 1] > stk[0]))
 			sa_do(stks, 1);
-		else if ((stk[0] < range->high && stk[0] > stk[top])
-			|| (stk[0] == range->high && stk[top] > stk[1]))
+		else if (((stk[0] < range->high && stk[0] > stk[top])
+				|| (stk[0] == range->high && stk[top] > stk[1]))
+			&& stk[top] != range->low)
 			rra_do(stks, 1);
 		else
 			ra_do(stks, 1);
 	}
-	stack_shift(stks);
-	free(range);
+	if (stack_shift(stks))
+		return (free(range), 1);
+	return (free(range), 0);
 }
 
-void	initial_sort(t_stacks *stk)
+int	initial_sort(t_stacks *stk)
 {
 	t_highest	*high;
 	t_moves		*mover;
 
 	mover = set_mover();
 	if (!mover)
-		return ;
+		return (1);
 	high = highest_elems(stk);
 	if (!high)
-		return (free(mover));
+		return (free(mover), 1);
 	pb_do(stk, 1);
 	pb_do(stk, 1);
 	while (stk->atop_id >= 5)
@@ -89,42 +88,26 @@ void	initial_sort(t_stacks *stk)
 			&& stk->a[stk->atop_id] <= high->top_high
 			&& stk->atop_id > stk->btop_id)
 			ra_do(stk, 1);
-		sort_calc(stk->atop_id + 1, stk, mover, high);
+		if (sort_calc(stk->atop_id + 1, stk, mover))
+			return (free(mover), free(high), 1);
 		exe_move(stk, mover);
 	}
-	free(mover);
-	free(high);
+	return (free(mover), free(high), 0);
 }
 
-void	final_sort(t_stacks *stk)
+int	final_sort(t_stacks *stk)
 {
 	t_range	*range;
 
 	range = stack_range(stk->a, stk->atop_id);
 	if (!range)
-		return ;
+		return (1);
 	if (stk->b[stk->btop_id] < range->high && stk->b[stk->btop_id] > range->low)
 		while (stk->b[stk->btop_id] < stk->a[0])
 			rra_do(stk, 1);
 	while (stk->btop_id >= 0)
-	{
-		if ((stk->b[stk->btop_id] > stk->a[0]
-				&& stk->b[stk->btop_id] < stk->a[stk->atop_id])
-			|| (stk->b[stk->btop_id] < range->low
-				&& stk->b[stk->btop_id] < stk->a[stk->atop_id]
-				&& !(stk->a[0] == range->low))
-			|| (stk->b[stk->btop_id] > range->high && stk->a[0] == range->high))
-		{
-			if (stk->b[stk->btop_id] < range->low)
-				range->low = stk->b[stk->btop_id];
-			else if (stk->b[stk->btop_id] > range->high)
-				range->high = stk->b[stk->btop_id];
-			pa_do(stk, 1);
-		}
-		else
-			rra_do(stk, 1);
-	}
-	free(range);
-	stack_shift(stk);
+		exe_final(stk, range);
+	if (stack_shift(stk))
+		return (free(range), 1);
+	return (free(range), 0);
 }
-// FINAL SORT TOO BIG
