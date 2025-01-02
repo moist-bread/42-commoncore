@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/30 13:56:54 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:01:01 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		free_stacks(t_stacks *stk);
 // SORTING
 int			sort_stack(t_stacks *stk);
 void		self_sort_3(t_stacks *stks, int *stk, int top);
-int			self_sort_5(t_stacks *stks, int *stk, int top);
+int			self_sort_5(t_stacks *stk);
 int			initial_sort(t_stacks *stk);
 int			final_sort(t_stacks *stk);
 

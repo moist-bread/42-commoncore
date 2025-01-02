@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:13:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/30 12:19:34 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/01/02 11:30:48 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	input_processer(int argc, char **argv, t_stacks **stk, int spt)
 	else
 		args = &argv[1];
 	argc = arg_counter(argc, args);
-	if (argc <= 1)
-		return (free_args(args, argc, spt));
 	if (input_check(args))
+		return (free_args(args, argc, spt));
+	if (argc <= 1)
 		return (free_args(args, argc, spt));
 	*stk = make_stacks(argc, args);
 	if (!*stk || repeat_check(*stk))
@@ -57,7 +57,11 @@ int	int_check(char *argv)
 
 	j = -1;
 	if (argv[0] == '-' || argv[0] == '+')
-		j++;
+	{
+		j = 1;
+		if (!ft_isdigit(argv[j]))
+			return (1);
+	}
 	while (argv[++j])
 		if (!ft_isdigit(argv[j]))
 			return (1);

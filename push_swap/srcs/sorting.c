@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/30 13:31:31 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:04:29 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	sort_stack(t_stacks *stk)
 	if (stk->atop_id <= 2)
 		return (self_sort_3(stk, stk->a, stk->atop_id), 0);
 	if (stk->atop_id == 4)
-		return (self_sort_5(stk, stk->a, stk->atop_id));
+		return (self_sort_5(stk));
 	if (initial_sort(stk))
 		return (1);
 	if (!sort_check(stk->a, stk->atop_id))
-		if (self_sort_5(stk, stk->a, stk->atop_id))
+		if (self_sort_5(stk))
 			return (1);
 	if (final_sort(stk))
 		return (1);
@@ -45,28 +45,16 @@ void	self_sort_3(t_stacks *stks, int *stk, int top)
 	}
 }
 
-int	self_sort_5(t_stacks *stks, int *stk, int top)
+int	self_sort_5(t_stacks *stk)
 {
-	t_range	*range;
-
-	range = stack_range(stk, top);
-	if (!range)
+	pb_do(stk, 1);
+	pb_do(stk, 1);
+	self_sort_3(stk, stk->a, stk->atop_id);
+	if(stk->b[0] > stk->b[1])
+		sb_do(stk, 1);
+	if (final_sort(stk))
 		return (1);
-	while (!semi_sort_check(stk, top))
-	{
-		if ((stk[top] < range->high && stk[top] > stk[top - 1])
-			|| (stk[top] == range->high && stk[top - 1] > stk[0]))
-			sa_do(stks, 1);
-		else if (((stk[0] < range->high && stk[0] > stk[top])
-				|| (stk[0] == range->high && stk[top] > stk[1]))
-			&& stk[top] != range->low)
-			rra_do(stks, 1);
-		else
-			ra_do(stks, 1);
-	}
-	if (stack_shift(stks))
-		return (free(range), 1);
-	return (free(range), 0);
+	return (0);
 }
 
 int	initial_sort(t_stacks *stk)
