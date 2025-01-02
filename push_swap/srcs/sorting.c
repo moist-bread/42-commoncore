@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 23:36:27 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/01/02 12:04:29 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:20:51 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	sort_stack(t_stacks *stk)
 	if (!sort_check(stk->a, stk->atop_id))
 		if (self_sort_5(stk))
 			return (1);
-	if (final_sort(stk))
-		return (1);
+	if (stk->btop_id >= 0)
+		if (final_sort(stk))
+			return (1);
 	return (0);
 }
 
@@ -47,10 +48,10 @@ void	self_sort_3(t_stacks *stks, int *stk, int top)
 
 int	self_sort_5(t_stacks *stk)
 {
-	pb_do(stk, 1);
-	pb_do(stk, 1);
+	while (stk->atop_id > 2)
+		pb_do(stk, 1);
 	self_sort_3(stk, stk->a, stk->atop_id);
-	if(stk->b[0] > stk->b[1])
+	if (stk->b[0] > stk->b[1])
 		sb_do(stk, 1);
 	if (final_sort(stk))
 		return (1);

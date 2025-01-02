@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/01/02 13:37:07 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/01/02 15:03:20 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,6 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 $(LIBFT):
-	$(M_COMLIB)
 	@make -C ./inc/libft -s
 
 
@@ -77,16 +76,16 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR_BONUS)/%.c | $(OBJS_DIR)
 
 # ★☆★-‵,┊( STANDARD RULES )┊.´-★☆★
 clean:
+	@make clean -C ./inc/libft -s
 	$(M_REMOBJS)
 	@rm -rf $(OBJS_DIR)
-	@make clean -C ./inc/libft -s
 
 fclean: clean
+	$(M_REMLIB)
+	@rm -rf $(LIBFT)
 	$(M_REM)
 	@rm -rf $(NAME)
 	@rm -rf $(BONUS)
-	$(M_REMLIB)
-	@rm -rf $(LIBFT)
 
 re:	fclean all
 	@echo "Re-Done!!"
