@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/12/30 17:13:14 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/01/02 13:37:07 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,6 @@ LIBFT = ./inc/libft/libft.a
 
 # ★☆★-‵,┊( TO DO )┊.´-★☆★
 #	REMOVE PRINTING FTS!!!!!!!
-#	MAKE AN EXE RULE
-#	MAKE MESSAGES PRETTY 
 
 
 # ★☆★-‵,┊( SOURCES AND OBJS )┊.´-★☆★
@@ -54,7 +52,7 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJS_MAIN) $(OBJS) $(LIBFT)
-	@echo "Compiling $(NAME)..."
+	$(M_COM)
 	@$(CC) $(CFLAGS) $(OBJS_MAIN) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
@@ -64,13 +62,13 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 $(LIBFT):
-	@echo "Compiling libft..."
+	$(M_COMLIB)
 	@make -C ./inc/libft -s
 
 
 # ★☆★-‵,┊( BONUS RULES )┊.´-★☆★
 bonus: $(OBJS) $(LIBFT) $(OBJS_BONUS)
-	@echo "Compiling $(NAME) bonus $(BONUS)..."
+	$(M_COMBONUS)
 	@$(CC) $(CFLAGS) -o $(BONUS) $(OBJS) $(OBJS_BONUS) $(LIBFT)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR_BONUS)/%.c | $(OBJS_DIR)
@@ -79,15 +77,15 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR_BONUS)/%.c | $(OBJS_DIR)
 
 # ★☆★-‵,┊( STANDARD RULES )┊.´-★☆★
 clean:
-	@echo "Removing push_swap OBJS"
+	$(M_REMOBJS)
 	@rm -rf $(OBJS_DIR)
 	@make clean -C ./inc/libft -s
 
 fclean: clean
-	@echo "Removing $(NAME)"
+	$(M_REM)
 	@rm -rf $(NAME)
 	@rm -rf $(BONUS)
-	@echo "Removing libft.a"
+	$(M_REMLIB)
 	@rm -rf $(LIBFT)
 
 re:	fclean all
@@ -99,51 +97,37 @@ re:	fclean all
 # ★☆★-‵,┊( COSMETICS )┊.´-★☆★
 
 #-‵,┊ normal colors
-GRAY		=		\033[0;30m
-GREEN		=		\033[0;32m
-YELLOW		=		\033[0;33m
-BLUE		=		\033[0;34m
-MAGENTA		=		\033[0;35m
-CYAN		=		\033[0;36m
-WHITE		=		\033[0;37m
-DEF			=		\033[0;39m
+DEF	=	\e[0;39m
+GRY	=	\e[0;30m
+BLU	=	\e[0;34m
+GRN	=	\e[0;32m
 
 #-‵,┊ bold colors
-BGREEN		=		\033[1;32m
-BYELLOW		=		\033[1;33m
-BBLUE		=		\033[1;34m
-BMAGENTA	=		\033[1;35m
-BCYAN		=		\033[1;36m
+BCYN	=	\e[1;36m
 
 #-‵,┊ background colors
-CYNB = \e[46m
+CYNB	=	\e[46m
+YELB	=	\e[43m
 
 #-‵,┊ names
-HEAD = head
-HEAD_B = headb
+PH = placeholder
 
 #-‵,┊ messages
-M_REM = @echo "$(GRAY)★☆★-‵,┊($(BLUE) Removing: $(DEF)$(CYNB) $(NAME) $(GRAY) )┊.´-★☆★$(DEF)\n"
-T_CREATING	=		@echo "$(GRAY)-->|	$(BBLUE)Creating $(HEAD) at $(NAME) $(GRAY)...\n"
-T_CREATING_B=		@echo "$(GRAY)-->|	$(BBLUE)Creating $(HEAD_B) at $(NAME) $(GRAY)...\n"
-T_BUILDING	=		@echo "	$(GRAY)... $(BYELLOW)Building $(NAME) $(GRAY)... \n"
-T_COMPILING	=		@echo "	$(GRAY)... $(YELLOW)Compiling $(WHITE)$(FLAGS) $(YELLOW)$< $(GRAY)..."
-T_REMOVE_O	=		@echo "$(MAGENTA)$(HEAD): Objects Removed!$(DEF)\n"
-T_REMOVE_A	=		@echo "$(BMAGENTA)$(HEAD): All Files Removed!$(DEF)\n"
-T_COMPILED	=		@echo "\n$(BGREEN)	     $(HEAD) Compiled!   $(GRAY)|<--$(DEF)\n"
-T_EXECUTING	=		@echo "\n$(GRAY)-->|	$(BLUE)Executing: $(BCYAN)$(NAME) - main.c $(BLUE)at $(WHITE)exe $(GRAY)...$(DEF)"
-T_EXECUTED	=		@echo "$(GRAY)	...$(BGREEN)Execution Ended!   $(GRAY)|<--$(DEF)\n"
+M_COMOBJS = @echo "$(GRY)-->┊$(GRN)  Compiling: $(BCYN) $(NAME)/objs $(GRY)$(DEF)"
+M_COMLIB = @echo "$(GRY)-->┊$(GRN)  Compiling: $(DEF)$(YELB) libft.a $(GRY)$(DEF)"
+M_COM = @echo "$(GRY)-->┊$(GRN)  Compiling: $(DEF)$(CYNB) $(NAME) $(GRY)$(DEF)"
+M_COMBONUS = @echo "$(GRY)-->┊$(GRN)  Compiling: $(DEF)$(CYNB) $(NAME)/bonus $(BONUS) $(GRY)$(DEF)"
+M_REMOBJS = @echo "$(GRY)-->┊$(BLU)  Removing: $(BCYN) $(NAME)/objs $(GRY)$(DEF)"
+M_REMLIB = @echo "$(GRY)-->┊$(BLU)  Removing: $(DEF)$(YELB) libft.a $(GRY)$(DEF)"
+M_REM = @echo "$(GRY)-->┊$(BLU)  Removing: $(DEF)$(CYNB) $(NAME) $(GRY)$(DEF)"
 
 #-‵,┊ tester
 test:
+	$(M_COMOBJS)
+	$(M_COMLIB)
+	$(M_COM)
+	$(M_COMBONUS)
+	$(M_REMOBJS)
+	$(M_REMLIB)
 	$(M_REM)
-	$(T_CREATING)
-	$(T_CREATING_B)
-	$(T_BUILDING)
-	$(T_COMPILING)
-	$(T_REMOVE_O)
-	$(T_REMOVE_A)
-	$(T_COMPILED)
-	$(T_EXECUTING)
-	$(T_EXECUTED)
 	

@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2024/12/28 16:38:50 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/01/02 13:36:04 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,22 +46,61 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@echo "Archiving OBJS into $(NAME)"
+	$(M_COMOBJS)
+	$(M_ARC)
 	@ar rcs $(NAME) $(OBJS)
 
 clean:
-	@echo "Removing libft OBJS"
+	$(M_REMOBJS)
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@echo "Removing $(NAME)"
+	$(M_REM)
 	@rm -rf $(NAME)
 
 re:	fclean all
 	@echo "Re-Done!!"
 
 bonus: $(OBJS) $(BONUS_OBJS)
-	@echo "Archiving OBJS and BONUS into $(NAME)"
+	$(M_COMOBJS)
+	$(M_COMBONUS)
+	$(M_ARCBONUS)
 	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS) 
 
 .PHONY: all clean fclean re bonus
+
+# ★☆★-‵,┊( COSMETICS )┊.´-★☆★
+
+#-‵,┊ normal colors
+DEF	=	\e[0;39m
+GRY	=	\e[0;30m
+BLU	=	\e[0;34m
+GRN	=	\e[0;32m
+YEL =	\e[0;33m
+
+#-‵,┊ bold colors
+BYEL	=	\e[1;33m
+
+#-‵,┊ background colors
+YELB	=	\e[43m
+
+#-‵,┊ names
+PH = placeholder
+
+#-‵,┊ messages
+M_COMOBJS = @echo "$(GRY)-->┊$(GRN)  Compiling: $(BYEL) $(NAME)/objs $(GRY)$(DEF)"
+M_COMBONUS = @echo "$(GRY)-->┊$(GRN)  Compiling: $(BYEL) $(NAME) bonus objs $(GRY)$(DEF)"
+M_ARC = @echo "$(GRY)-->┊$(YEL)  Archiving: $(DEF)$(YELB) $(NAME) $(GRY)$(DEF)"
+M_ARCBONUS = @echo "$(GRY)-->┊$(YEL)  Archiving: $(DEF)$(YELB) $(NAME) bonus $(GRY)$(DEF)"
+M_REMOBJS = @echo "$(GRY)-->┊$(BLU)  Removing: $(BYEL) $(NAME)/objs $(GRY)$(DEF)"
+M_REM = @echo "$(GRY)-->┊$(BLU)  Removing: $(DEF)$(YELB) $(NAME) $(GRY)$(DEF)"
+
+#-‵,┊ tester
+test:
+	$(M_COMOBJS)
+	$(M_COM)
+	$(M_COMBONUS)
+	$(M_ARC)
+	$(M_ARCBONUS)
+	$(M_REMOBJS)
+	$(M_REM)
