@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:41:42 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/30 14:21:10 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:23:28 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ int	exe_intructions(t_stacks *stk)
 		command = get_next_line(0);
 		if (!command)
 			break ;
-		if (command_assign(command, stk))
-			;
-		else
-			return (write(2, "Error\n", 6), free(command), 1);
+		if (!command_assign(command, stk))
+			return (free(command), 1);
 		free(command);
 	}
 	return (0);
@@ -67,7 +65,7 @@ int	command_assign(char *command, t_stacks *stk)
 	else if (!ft_strncmp(command, "rrr\n", 4))
 		rrr_do(stk, 0);
 	else
-		return (0);
+		return (write(2, "Error\n", 6), 0);
 	return (1);
 }
 
