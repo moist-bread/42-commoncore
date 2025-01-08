@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 22:28:47 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/01/02 15:01:16 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:11:32 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_stacks	*stk;
+	t_stacks *stk;
 
 	if (input_processer(argc, argv, &stk, 0))
 		return (1);
