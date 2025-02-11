@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/10 22:10:35 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:08:20 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ typedef struct s_pipe
 	int		temp;
 	int		fds[2];
 	char	*paths[2];
-	char	**command[2];
+	char	**comd[2];
 	char	**env;
 	int		ret;
 }			t_pipe;
 
 // TBD
+void pipex_init(t_pipe *pipex, char **av);
+
 
 // MAIN
 

@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/02/10 18:27:12 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/02/11 15:59:17 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ exe2: all
 	./pipex nohere.txt cd cd test1.txt
 
 exe3: all
-	./pipex srcs "ls -la" cd text2.txt
+	./pipex srcs "ls -la" cat text2.txt
 
 exe4: all
 	./pipex cat 
