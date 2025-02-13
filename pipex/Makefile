@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/02/11 15:59:17 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/02/13 12:48:43 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,14 +53,22 @@ $(OBJS_DIR):
 $(LIBFT):
 	@make -C ./inc/libft -s
 
-exe1: all
-	./pipex text1.txt cd cd text2.txt
+exe1: all cl1
+	./pipex text1.txt "cat" "cat" text2.txt
+	
+ex1: cl1
+	< text1.txt "cat" | "cat" > text2.txt
+
+cl1:
+	echo "" > text2.txt
 
 exe2: all
-	./pipex nohere.txt cd cd test1.txt
+	rm -rf text3.txt
+	./pipex text1.txt "cat" "cat" text3.txt
+	cat text3.txt
 
 exe3: all
-	./pipex srcs "ls -la" cat text2.txt
+	./pipex srcs "ls -la" "cat" text2.txt
 
 exe4: all
 	./pipex cat 

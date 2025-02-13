@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/11 16:08:20 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:18:37 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 // DEFINES
@@ -38,8 +39,8 @@ typedef struct s_pipe
 }			t_pipe;
 
 // TBD
-void pipex_init(t_pipe *pipex, char **av);
-
+void		pipex_init(t_pipe **pipex, char **av);
+void		print_pipe(t_pipe *pipex);
 
 // MAIN
 
