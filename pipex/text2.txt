@@ -1,8 +1,1 @@
-inc
-Makefile
-objs
-pipex
-srcs
-text1.txt
-text2.txt
-text3.txt
+
