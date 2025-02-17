@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/02/17 13:51:17 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/02/17 18:19:44 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ ex4: cl3
 	< text1.txt grep COPY | wc -l  > text3.txt
 
 exe5: all
-	./pipex
+	./pipex text1.txt "cat" "wc -l" outfile
 
 exe6: all
 	./pipex

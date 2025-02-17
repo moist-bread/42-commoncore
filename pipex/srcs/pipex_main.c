@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:20:50 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/17 15:38:27 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:53:26 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,11 @@ int	main(int argc, char **argv, char **envp)
 	int		id;
 	int		i;
 
-	// int		result;
 	i = -1;
 	if (argc != 5)
 		return (1);
 	pipex_init(&pipex, argv, envp);
-	print_pipe(pipex);
-	id = fork();
-	if (id == 0)
-	{
-		close(pipex->fd[1][1]);
-		close(pipex->fd[1][0]);
-		ft_printf("\n_____________\n\nchild_1\n");
-		ft_printf("executing command\n\n");
-		if (execve(pipex->paths[0], pipex->comd[0], pipex->env) == -1)
-			return (perror(YEL "command didn't execute" DEF), 4);
-		ft_printf("child is dead");
-	}
-	wait(NULL);
+	// print_pipe(pipex);
 	if (pipe(pipe_fds) == -1)
 		return (perror(YEL "pipe unsuccessfull" DEF), 5);
 	else
@@ -44,40 +31,41 @@ int	main(int argc, char **argv, char **envp)
 	pipex->fd[1][0] = pipe_fds[0]; // read from 2
 	pipex->fd[0][1] = pipe_fds[1]; // write to 1
 	print_pipe(pipex);
+	id = fork(); //  check for fork failure
+	if (id == 0)
+	{
+		ft_printf("\n_____________\n\nchild_1\n");
+		close(pipex->fd[1][0]);
+		ft_printf("dupping STDOUT\n");
+		dup2(pipex->fd[0][0], STDIN_FILENO);
+		close(pipex->fd[0][0]);
+		dup2(pipex->fd[0][1], STDOUT_FILENO);
+		close(pipex->fd[0][1]);
+		if (execve(pipex->paths[0], pipex->comd[0], pipex->env) == -1)
+			return (perror(YEL "command didn't execute" DEF), 4);
+	}
+	// wait(NULL);
 	id = fork();
 	if (id == 0)
 	{
 		ft_printf("\n_____________\n\nchild_2\n");
-		close(pipex->fd[1][0]);
-		ft_printf("dupping STDOUT\n");
-		dup2(pipex->fd[1][1], STDOUT_FILENO);
-		close(pipex->fd[1][1]);
-		ft_printf("fd has been dupped\n\n");
-		if (execve(pipex->paths[0], pipex->comd[0], pipex->env) == -1)
-			return (perror(YEL "command didn't execute" DEF), 4);
-		ft_printf("child is dead");
-	}
-	wait(NULL);
-	id = fork();
-	if (id == 0)
-	{
-		ft_printf("\n_____________\n\nchild_3\n");
-		close(pipex->fd[1][1]);
+		close(pipex->fd[0][1]);
 		ft_printf("dupping STDIN\n");
-		dup2(pipex->fd[1][0], STDIN_FILENO); // the fd of the pipe
+		dup2(pipex->fd[1][0], STDIN_FILENO);
+		dup2(pipex->fd[1][1], STDOUT_FILENO);
 		close(pipex->fd[1][0]);
-		ft_printf("fd has been dupped\n\n");
-		if (execve(pipex->paths[0], pipex->comd[0], pipex->env) == -1)
+		close(pipex->fd[1][1]);
+		if (execve(pipex->paths[1], pipex->comd[1], pipex->env) == -1)
 			return (perror(YEL "command didn't execute" DEF), 4);
-		ft_printf("child is dead");
 	}
 	wait(NULL);
 	ft_printf("\n_____________\n\n");
 	ft_printf("parent\n");
-	ft_printf("not doing anything yet");
+	ft_printf("closing message");
 	close(pipex->fd[1][0]);
 	close(pipex->fd[1][1]);
 	ft_printf("\n_____________\n\n");
+	clean_pipes_exit(pipex, 10);
 }
 
 // exit meanings
@@ -107,7 +95,6 @@ void	pipex_init(t_pipe **pipex, char **av, char **env)
 		clean_pipes_exit(*pipex, 3);
 	find_paths(*pipex, env, 2);
 	(*pipex)->env = env;
-	(*pipex)->ret = 0;
 }
 
 void	find_paths(t_pipe *pipex, char **env, int n)
@@ -115,8 +102,11 @@ void	find_paths(t_pipe *pipex, char **env, int n)
 	int	i;
 	int	j;
 	int	result;
+	char *temp_1;
+	char *temp_2;
 
 	i = -1;
+	pipex->envp = NULL;
 	while (env[++i] && !pipex->envp)
 		if (!ft_strncmp(env[i], "PATH=", 5))
 			pipex->envp = ft_split(env[i] + 5, ':');
@@ -129,19 +119,61 @@ void	find_paths(t_pipe *pipex, char **env, int n)
 		result = 1;
 		while (pipex->envp[++i] && result)
 		{
-			result = access(ft_strjoin(ft_strjoin(pipex->envp[i], "/"),
-						pipex->comd[j][0]), F_OK);
+			temp_1 = ft_strjoin(pipex->envp[i], "/");
+			temp_2 = ft_strjoin(temp_1, pipex->comd[j][0]);
+			result = access(temp_2, F_OK);
+			free (temp_1);
 			if (!result)
-				pipex->paths[j] = ft_strjoin(ft_strjoin(pipex->envp[i], "/"),
-						pipex->comd[j][0]);
+				pipex->paths[j] = ft_strdup(temp_2);
+			free (temp_2);
 		}
 	}
 }
 
 void	clean_pipes_exit(t_pipe *pipex, int status)
 {
+	int i;
+
+	i = -1;
+	// if (status == 10)
+	// {
+		
+	// }
+	free_pipe(pipex, status);
 	(void)pipex;
 	exit(status); // make it good
+}
+
+void	free_pipe(t_pipe *pipex, int status)
+{
+	int	i;
+	int j;
+	
+	i = -1;
+	while (pipex->envp[++i])
+		;
+	free_matrix(pipex->envp, i);
+	free_matrix(pipex->paths, 1);
+	j = -1;
+	while(++j <= 1)
+	{	
+		i = -1;
+		while (pipex->comd[j][++i])
+			;
+		free_matrix(pipex->comd[j], i);
+	}
+	free(pipex);
+	(void)status;
+}
+
+void	free_matrix(char **matrix, int max)
+{
+	int	i;
+
+	i = 0;
+	while (i <= max)
+		free(matrix[i++]);
+	free(matrix);
 }
 
 void	print_pipe(t_pipe *pipex)
@@ -162,9 +194,8 @@ void	print_pipe(t_pipe *pipex)
 	ft_printf("\n");
 	i = -1;
 	while (pipex->envp[++i])
-		ft_printf("pipex->envp[i]: %s\n", pipex->envp[i]);
+		ft_printf("pipex->envp[%d]: %s\n", i, pipex->envp[i]);
 	ft_printf("\n");
 	ft_printf("pipex->paths[0]: %s\n", pipex->paths[0]);
 	ft_printf("pipex->paths[1]: %s\n\n", pipex->paths[1]);
-	ft_printf("pipex->ret: %d\n", pipex->ret);
 }

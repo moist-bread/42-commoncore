@@ -1,3 +1,6 @@
 TEXTO DENTRO DO 1
+mais texto para mostrar
+que o texto 3 vai ter COPY
+de varias linhas
 things that it can COPY
 COPY STUFF
