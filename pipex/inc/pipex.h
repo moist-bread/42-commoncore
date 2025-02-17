@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/13 19:07:28 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:37:28 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,10 @@
 // STRUCTS
 typedef struct s_pipe
 {
-	int		temp;
-	int		io[2];
-	int		fds[2];
-	char	*paths[2];
-	char	*path[2];
-	char	**envp;
+	int		fd[2][2];
 	char	**comd[2];
+	char	**envp;
+	char	*paths[2];
 	char	**env;
 	int		ret;
 }			t_pipe;
@@ -44,6 +41,8 @@ typedef struct s_pipe
 // TBD
 void		pipex_init(t_pipe **pipex, char **av, char **env);
 void		print_pipe(t_pipe *pipex);
+void		find_paths(t_pipe *pipex, char **env, int n);
+void		clean_pipes_exit(t_pipe *pipex, int status);
 
 // MAIN
 

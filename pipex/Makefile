@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/02/13 16:49:46 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/02/17 13:51:17 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ exe3: all
 	./pipex srcs "ls -la" "cat" text2.txt
 
 exe4: all
-	./pipex text1.txt "grep COPY" "wc -l" text3.txt
+	./pipex text1.txt "grep COPY text1.txt" "wc -l" text3.txt
 
 ex4: cl3
 	< text1.txt grep COPY | wc -l  > text3.txt
