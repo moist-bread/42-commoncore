@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:20:50 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/17 18:53:26 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/18 20:01:20 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 
 	i = -1;
 	if (argc != 5)
-		return (1);
+		clean_pipes_exit(NULL, 1);
 	pipex_init(&pipex, argv, envp);
 	// print_pipe(pipex);
 	if (pipe(pipe_fds) == -1)
@@ -128,74 +128,4 @@ void	find_paths(t_pipe *pipex, char **env, int n)
 			free (temp_2);
 		}
 	}
-}
-
-void	clean_pipes_exit(t_pipe *pipex, int status)
-{
-	int i;
-
-	i = -1;
-	// if (status == 10)
-	// {
-		
-	// }
-	free_pipe(pipex, status);
-	(void)pipex;
-	exit(status); // make it good
-}
-
-void	free_pipe(t_pipe *pipex, int status)
-{
-	int	i;
-	int j;
-	
-	i = -1;
-	while (pipex->envp[++i])
-		;
-	free_matrix(pipex->envp, i);
-	free_matrix(pipex->paths, 1);
-	j = -1;
-	while(++j <= 1)
-	{	
-		i = -1;
-		while (pipex->comd[j][++i])
-			;
-		free_matrix(pipex->comd[j], i);
-	}
-	free(pipex);
-	(void)status;
-}
-
-void	free_matrix(char **matrix, int max)
-{
-	int	i;
-
-	i = 0;
-	while (i <= max)
-		free(matrix[i++]);
-	free(matrix);
-}
-
-void	print_pipe(t_pipe *pipex)
-{
-	int	i;
-
-	ft_printf("\npipex->fd[0][0]: %d\n", pipex->fd[0][0]);
-	ft_printf("pipex->fd[0][1]: %d\n\n", pipex->fd[0][1]);
-	ft_printf("pipex->fd[1][0]: %d\n", pipex->fd[1][0]);
-	ft_printf("pipex->fd[1][1]: %d\n\n", pipex->fd[1][1]);
-	i = -1;
-	while (pipex->comd[0][++i])
-		ft_printf("pipex->comd[0][i]: %s\n", pipex->comd[0][i]);
-	ft_printf("\n");
-	i = -1;
-	while (pipex->comd[1][++i])
-		ft_printf("pipex->comd[1][i]: %s\n", pipex->comd[1][i]);
-	ft_printf("\n");
-	i = -1;
-	while (pipex->envp[++i])
-		ft_printf("pipex->envp[%d]: %s\n", i, pipex->envp[i]);
-	ft_printf("\n");
-	ft_printf("pipex->paths[0]: %s\n", pipex->paths[0]);
-	ft_printf("pipex->paths[1]: %s\n\n", pipex->paths[1]);
 }

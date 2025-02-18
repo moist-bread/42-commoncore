@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/02/17 18:19:44 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/02/18 19:59:51 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ LIBFT = ./inc/libft/libft.a
 
 
 # ★☆★-‵,┊( SOURCES AND OBJS )┊.´-★☆★
-MAIN    =  pipex_main.c 
-SOURCES =	
+MAIN    =  pipex_main.c
+SOURCES =  pipex_utils.c
 
 SRCS_DIR = srcs
 SRCS = $(addprefix $(SRCS_DIR)/, $(SOURCES))
@@ -74,7 +74,7 @@ exe3: all
 	./pipex srcs "ls -la" "cat" text2.txt
 
 exe4: all
-	./pipex text1.txt "grep COPY text1.txt" "wc -l" text3.txt
+	./pipex text1.txt "grep COPY" "wc -l" text3.txt
 
 ex4: cl3
 	< text1.txt grep COPY | wc -l  > text3.txt

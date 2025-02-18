@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/17 18:40:46 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:47:14 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ void		pipex_init(t_pipe **pipex, char **av, char **env);
 void		print_pipe(t_pipe *pipex);
 void		find_paths(t_pipe *pipex, char **env, int n);
 void		clean_pipes_exit(t_pipe *pipex, int status);
-void	free_pipe(t_pipe *pipex, int status);
-void	free_matrix(char **matrix, int max);
-
+void		free_pipe(t_pipe *pipex, int status);
+void		free_matrix(char **matrix, int max);
 
 // MAIN
 
