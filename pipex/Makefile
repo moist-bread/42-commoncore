@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/02/18 19:59:51 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/02/19 15:38:00 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,11 @@ exe5: all
 	./pipex text1.txt "cat" "wc -l" outfile
 
 exe6: all
-	./pipex
+	./pipex text1.txt "cato" "ls" text3.txt
+
+exe7: all
+	valgrind --track-origins=yes -s ./pipex text1.txt "cato" "ls" text3.txt
+	
 # ★☆★-‵,┊( STANDARD RULES )┊.´-★☆★
 clean:
 	@make clean -C ./inc/libft -s
