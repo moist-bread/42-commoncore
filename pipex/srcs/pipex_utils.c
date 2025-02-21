@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:53:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/21 13:44:06 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:02:52 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ void	clean_pipes_exit(t_pipe *pipex, int status)
 
 	i = -1;
 	if (status == 1)
-		ft_printf(YEL "not enough arguments" DEF ": accepted format is \" infile \"cmd1\" \"cmd2\" outfile \"\n");
+		ft_printf(YEL "not enough arguments" DEF
+			": accepted format is \" infile \"cmd1\" \"cmd2\" outfile \"\n");
 	else if (status == 2)
 		ft_printf(YEL "malloc failure" DEF ": pipex struct\n");
 	else if (status == 3)
-		ft_printf(YEL "open failure" DEF ": infile or outfile didn't open\n");
+		ft_printf(YEL "open failure" DEF ": outfile didn't open\n");
 	else if (status == 4)
 		ft_printf(YEL "malloc failure" DEF ": cmd1 or cmd2\n");
 	else if (status == 5 || status == 6)

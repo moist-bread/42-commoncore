@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:20:50 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/21 14:03:13 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:09:25 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ int	main(int argc, char **argv, char **envp)
 	pipex_init(&pipex, argv, envp);
 	if (pipe(pipe_fds) == -1)
 		clean_pipes_exit(pipex, 7);
-	pipex->fd[0][1] = pipe_fds[1]; // write from 1
-	pipex->fd[1][0] = pipe_fds[0]; // read to 2
+	pipex->fd[0][1] = pipe_fds[1];
+	pipex->fd[1][0] = pipe_fds[0];
 	child_process((t_crossfd){pipex->fd[0][0], pipex->fd[0][1], pipex->fd[1][0],
 		pipex->fd[1][1]}, pipex->paths[0], pipex->comd[0], pipex);
 	child_process((t_crossfd){pipex->fd[1][0], pipex->fd[1][1], pipex->fd[0][0],
 		pipex->fd[0][1]}, pipex->paths[1], pipex->comd[1], pipex);
 	wait(NULL);
-	// ft_printf("\n_____________\n\nmy final message. goodbye.\n");
 	close(pipex->fd[1][0]);
 	close(pipex->fd[1][1]);
-	close(pipex->fd[0][0]);
+	if (pipex->fd[0][0] != -1)
+		close(pipex->fd[0][0]);
 	close(pipex->fd[0][1]);
 	clean_pipes_exit(pipex, 10);
 }
@@ -43,13 +43,14 @@ void	pipex_init(t_pipe **pipex, char **av, char **env)
 {
 	int	i;
 
-	// ft_printf("find the seg\n");
 	*pipex = malloc(sizeof(t_pipe));
 	if (!pipex)
 		clean_pipes_exit(*pipex, 2);
 	(*pipex)->fd[0][0] = open(av[1], O_RDONLY);
 	(*pipex)->fd[1][1] = open(av[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
-	if ((*pipex)->fd[0][0] == -1 || (*pipex)->fd[1][1] == -1)
+	if ((*pipex)->fd[0][0] == -1)
+		perror(YEL "infile open failure" DEF);
+	if ((*pipex)->fd[1][1] == -1)
 		clean_pipes_exit(*pipex, 3);
 	(*pipex)->comd[0] = ft_split(av[2], ' ');
 	(*pipex)->comd[1] = ft_split(av[3], ' ');
@@ -104,13 +105,16 @@ void	child_process(t_crossfd fd, char *path, char **cmd, t_pipe *pipex)
 		clean_pipes_exit(pipex, 8);
 	if (id == 0)
 	{
-		// ft_printf("\n_____________\n\nchild\n");
-		close(fd.out_read);
-		close(fd.out_write);
+		if (fd.out_read != -1)
+			close(fd.out_read);
+		if (fd.out_write != -1)
+			close(fd.out_write);
 		dup2(fd.in_read, STDIN_FILENO);
-		close(fd.in_read);
+		if (fd.in_read != -1)
+			close(fd.in_read);
 		dup2(fd.in_write, STDOUT_FILENO);
-		close(fd.in_write);
+		if (fd.in_write != -1)
+			close(fd.in_write);
 		if (execve(path, cmd, pipex->env) == -1)
 			clean_pipes_exit(pipex, 9);
 	}
