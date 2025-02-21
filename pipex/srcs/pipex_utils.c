@@ -6,11 +6,23 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:53:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/19 16:10:41 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:44:06 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
+
+// exit meanings
+// 1: not enough input
+// 2: pipex didnt malloc
+// 3: files doent exist or didnt create
+// 4: failed to malloc commands
+// 5: failed to find or malloc env paths
+// 6: failed a path malloc
+// 7: pipe fail
+// 8: fork fail
+// 9: command fail
+// 10: success
 
 void	clean_pipes_exit(t_pipe *pipex, int status)
 {
@@ -18,8 +30,7 @@ void	clean_pipes_exit(t_pipe *pipex, int status)
 
 	i = -1;
 	if (status == 1)
-		ft_printf(YEL "not enough arguments" DEF 
-		": accepted format is \" infile \"cmd1\" \"cmd2\" outfile \"\n");
+		ft_printf(YEL "not enough arguments" DEF ": accepted format is \" infile \"cmd1\" \"cmd2\" outfile \"\n");
 	else if (status == 2)
 		ft_printf(YEL "malloc failure" DEF ": pipex struct\n");
 	else if (status == 3)
