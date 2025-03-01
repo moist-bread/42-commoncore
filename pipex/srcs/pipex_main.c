@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:20:50 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/21 16:09:25 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:43:14 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,106 +16,24 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipe	*pipex;
 	int		pipe_fds[2];
-	int		i;
+	int		status;
 
-	i = -1;
 	if (argc != 5 || !*argv[2] || !*argv[3])
-		clean_pipes_exit(NULL, 1);
+		clean_pipes_exit(NULL, 1, 1);
 	pipex_init(&pipex, argv, envp);
 	if (pipe(pipe_fds) == -1)
-		clean_pipes_exit(pipex, 7);
+		clean_pipes_exit(pipex, 7, 7);
 	pipex->fd[0][1] = pipe_fds[1];
 	pipex->fd[1][0] = pipe_fds[0];
 	child_process((t_crossfd){pipex->fd[0][0], pipex->fd[0][1], pipex->fd[1][0],
-		pipex->fd[1][1]}, pipex->paths[0], pipex->comd[0], pipex);
+		pipex->fd[1][1]}, pipex, 0);
+	close(pipex->fd[0][1]);
 	child_process((t_crossfd){pipex->fd[1][0], pipex->fd[1][1], pipex->fd[0][0],
-		pipex->fd[0][1]}, pipex->paths[1], pipex->comd[1], pipex);
-	wait(NULL);
+		pipex->fd[0][1]}, pipex, 1);
 	close(pipex->fd[1][0]);
+	process_waiting(pipex, &status);
 	close(pipex->fd[1][1]);
 	if (pipex->fd[0][0] != -1)
 		close(pipex->fd[0][0]);
-	close(pipex->fd[0][1]);
-	clean_pipes_exit(pipex, 10);
-}
-
-void	pipex_init(t_pipe **pipex, char **av, char **env)
-{
-	int	i;
-
-	*pipex = malloc(sizeof(t_pipe));
-	if (!pipex)
-		clean_pipes_exit(*pipex, 2);
-	(*pipex)->fd[0][0] = open(av[1], O_RDONLY);
-	(*pipex)->fd[1][1] = open(av[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
-	if ((*pipex)->fd[0][0] == -1)
-		perror(YEL "infile open failure" DEF);
-	if ((*pipex)->fd[1][1] == -1)
-		clean_pipes_exit(*pipex, 3);
-	(*pipex)->comd[0] = ft_split(av[2], ' ');
-	(*pipex)->comd[1] = ft_split(av[3], ' ');
-	if (!(*pipex)->comd[0] || !(*pipex)->comd[1])
-		clean_pipes_exit(*pipex, 4);
-	i = -1;
-	(*pipex)->envp = NULL;
-	while (env[++i] && !(*pipex)->envp)
-		if (!ft_strncmp(env[i], "PATH=", 5))
-			(*pipex)->envp = ft_split(env[i] + 5, ':');
-	if (!(*pipex)->envp)
-		clean_pipes_exit(*pipex, 5);
-	find_paths(*pipex, 2);
-	(*pipex)->env = env;
-}
-
-void	find_paths(t_pipe *pipex, int n)
-{
-	int		i;
-	int		j;
-	int		result;
-	char	*temp_1;
-	char	*temp_2;
-
-	j = -1;
-	while (++j < n)
-	{
-		i = -1;
-		result = 1;
-		while (pipex->envp[++i] && result)
-		{
-			temp_1 = ft_strjoin(pipex->envp[i], "/");
-			temp_2 = ft_strjoin(temp_1, pipex->comd[j][0]);
-			if (temp_1)
-				free(temp_1);
-			if (!temp_2)
-				clean_pipes_exit(pipex, 6);
-			result = access(temp_2, F_OK);
-			if (!result || !pipex->envp[i + 1])
-				pipex->paths[j] = ft_strdup(temp_2);
-			free(temp_2);
-		}
-	}
-}
-
-void	child_process(t_crossfd fd, char *path, char **cmd, t_pipe *pipex)
-{
-	int	id;
-
-	id = fork();
-	if (id == -1)
-		clean_pipes_exit(pipex, 8);
-	if (id == 0)
-	{
-		if (fd.out_read != -1)
-			close(fd.out_read);
-		if (fd.out_write != -1)
-			close(fd.out_write);
-		dup2(fd.in_read, STDIN_FILENO);
-		if (fd.in_read != -1)
-			close(fd.in_read);
-		dup2(fd.in_write, STDOUT_FILENO);
-		if (fd.in_write != -1)
-			close(fd.in_write);
-		if (execve(path, cmd, pipex->env) == -1)
-			clean_pipes_exit(pipex, 9);
-	}
+	clean_pipes_exit(pipex, 10, status);
 }

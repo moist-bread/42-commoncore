@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/02/19 15:38:00 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/02/28 17:13:46 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ LIBFT = ./inc/libft/libft.a
 
 
 # ★☆★-‵,┊( TO DO )┊.´-★☆★
-#	start
+#	bonus
 
 
 # ★☆★-‵,┊( SOURCES AND OBJS )┊.´-★☆★
 MAIN    =  pipex_main.c
-SOURCES =  pipex_utils.c
+SOURCES =  pipex_utils.c destroyers.c
 
 SRCS_DIR = srcs
 SRCS = $(addprefix $(SRCS_DIR)/, $(SOURCES))
@@ -32,6 +32,13 @@ OBJS = $(addprefix $(OBJS_DIR)/, $(SOURCES:.c=.o))
 OBJS_MAIN = $(addprefix $(OBJS_DIR)/, $(MAIN:.c=.o))
 
 
+# ★☆★-‵,┊( BONUS SOURCES AND OBJS )┊.´-★☆★
+SOURCES_BONUS =	bonus_pipex_main.c
+SRCS_DIR_BONUS = bonus
+SRCS_BONUS = $(addprefix $(SRCS_DIR_BONUS)/, $(SOURCES_BONUS))
+OBJS_BONUS = $(addprefix $(OBJS_DIR)/, $(SOURCES_BONUS:.c=.o))
+
+
 # ★☆★-‵,┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -40,7 +47,7 @@ CFLAGS = -Wall -Wextra -Werror
 # ★☆★-‵,┊( MAIN RULES )┊.´-★☆★
 all: $(NAME)
 
-$(NAME): $(OBJS_MAIN) $(OBJS) $(LIBFT) $(MLX)
+$(NAME): $(OBJS_MAIN) $(OBJS) $(LIBFT)
 	$(M_COM)
 	@$(CC) $(CFLAGS) $(OBJS_MAIN) $(OBJS) $(LIBFT) -o $(NAME)
 
@@ -53,17 +60,19 @@ $(OBJS_DIR):
 $(LIBFT):
 	@make -C ./inc/libft -s
 
-exe1: all cl1
+
+# ★☆★-‵,┊( BONUS RULES )┊.´-★☆★
+bonus: $(OBJS) $(LIBFT) $(OBJS_BONUS)
+	$(M_COMBONUS)
+	@$(CC) $(CFLAGS) $(OBJS) $(OBJS_BONUS) $(LIBFT) -o $(NAME)
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR_BONUS)/%.c | $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+
+# ★☆★-‵,┊( EXECUTION RULES )┊.´-★☆★
+exe1: all
 	./pipex text1.txt "cat" "cat" text2.txt
-	
-ex1: cl1
-	< text1.txt "cat" | "cat" > text2.txt
-
-cl1:
-	echo "" > text2.txt
-
-cl3:
-	echo "" > text3.txt
 
 exe2: all
 	rm -rf text3.txt
@@ -133,7 +142,7 @@ PH = placeholder
 M_COMOBJS = @echo "$(GRY)-->┊$(GRN)  Compiling: $(BCYN) $(NAME)/objs $(GRY)$(DEF)"
 M_COMLIB = @echo "$(GRY)-->┊$(GRN)  Compiling: $(DEF)$(YELB) libft.a $(GRY)$(DEF)"
 M_COM = @echo "$(GRY)-->┊$(GRN)  Compiling: $(DEF)$(BLUB) $(NAME) $(GRY)$(DEF)"
-M_COMBONUS = @echo "$(GRY)-->┊$(GRN)  Compiling: $(DEF)$(CYNB) $(NAME)/bonus $(BONUS) $(GRY)$(DEF)"
+M_COMBONUS = @echo "$(GRY)-->┊$(GRN)  Compiling: $(DEF)$(CYNB) $(NAME)/bonus $(NAME) $(GRY)$(DEF)"
 M_REMOBJS = @echo "$(GRY)-->┊$(BLU)  Removing: $(BBLU) $(NAME)/objs $(GRY)$(DEF)"
 M_REMLIB = @echo "$(GRY)-->┊$(BLU)  Removing: $(DEF)$(YELB) libft.a $(GRY)$(DEF)"
 M_REM = @echo "$(GRY)-->┊$(BLU)  Removing: $(DEF)$(BLUB) $(NAME) $(GRY)$(DEF)"

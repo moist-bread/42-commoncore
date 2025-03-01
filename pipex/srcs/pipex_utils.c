@@ -6,107 +6,103 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:53:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/21 16:02:52 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:35:35 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
-// exit meanings
-// 1: not enough input
-// 2: pipex didnt malloc
-// 3: files doent exist or didnt create
-// 4: failed to malloc commands
-// 5: failed to find or malloc env paths
-// 6: failed a path malloc
-// 7: pipe fail
-// 8: fork fail
-// 9: command fail
-// 10: success
-
-void	clean_pipes_exit(t_pipe *pipex, int status)
+void	pipex_init(t_pipe **pipex, char **av, char **env)
 {
 	int	i;
 
+	*pipex = malloc(sizeof(t_pipe));
+	if (!pipex)
+		clean_pipes_exit(*pipex, 2, 2);
+	(*pipex)->fd[0][0] = open(av[1], O_RDONLY);
+	(*pipex)->fd[1][1] = open(av[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
+	if ((*pipex)->fd[0][0] == -1)
+		perror(YEL "infile open failure" DEF);
+	if ((*pipex)->fd[1][1] == -1)
+		clean_pipes_exit(*pipex, 3, 3);
+	(*pipex)->comd[0] = ft_split(av[2], ' ');
+	(*pipex)->comd[1] = ft_split(av[3], ' ');
+	if (!(*pipex)->comd[0] || !(*pipex)->comd[1])
+		clean_pipes_exit(*pipex, 4, 4);
 	i = -1;
-	if (status == 1)
-		ft_printf(YEL "not enough arguments" DEF
-			": accepted format is \" infile \"cmd1\" \"cmd2\" outfile \"\n");
-	else if (status == 2)
-		ft_printf(YEL "malloc failure" DEF ": pipex struct\n");
-	else if (status == 3)
-		ft_printf(YEL "open failure" DEF ": outfile didn't open\n");
-	else if (status == 4)
-		ft_printf(YEL "malloc failure" DEF ": cmd1 or cmd2\n");
-	else if (status == 5 || status == 6)
-		ft_printf(YEL "path failure" DEF ": couldn't find or malloc paths\n");
-	else if (status == 7)
-		perror(YEL "pipe unsuccessfull" DEF);
-	else if (status == 8)
-		perror(YEL "fork unsuccessfull" DEF);
-	else if (status == 9)
-		perror(YEL "command didn't execute" DEF);
-	free_pipe(pipex, status);
-	exit(status);
+	(*pipex)->envp = NULL;
+	while (env[++i] && !(*pipex)->envp)
+		if (!ft_strncmp(env[i], "PATH=", 5))
+			(*pipex)->envp = ft_split(env[i] + 5, ':');
+	if (!(*pipex)->envp)
+		clean_pipes_exit(*pipex, 5, 5);
+	find_paths(*pipex, 2);
+	(*pipex)->env = env;
 }
 
-void	free_pipe(t_pipe *pipex, int status)
+void	find_paths(t_pipe *pipex, int n)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	int		result;
+	char	*temp_1;
+	char	*temp_2;
 
-	i = -1;
-	while (status >= 6 && pipex->envp[++i])
-		;
-	if (status >= 6)
-		free_matrix(pipex->envp, i);
-	if (status >= 6 && pipex->paths[0])
-		free(pipex->paths[0]);
-	if (status >= 6 && pipex->paths[1])
-		free(pipex->paths[1]);
 	j = -1;
-	while (status >= 4 && ++j <= 1)
+	while (++j < n)
 	{
 		i = -1;
-		while (pipex->comd[j][++i])
-			;
-		if (pipex->comd[j])
-			free_matrix(pipex->comd[j], i);
+		result = 1;
+		while (pipex->envp[++i] && result)
+		{
+			temp_1 = ft_strjoin(pipex->envp[i], "/");
+			temp_2 = ft_strjoin(temp_1, pipex->comd[j][0]);
+			if (temp_1)
+				free(temp_1);
+			if (!temp_2)
+				clean_pipes_exit(pipex, 6, 6);
+			result = access(temp_2, F_OK);
+			if (!result)
+				pipex->paths[j] = ft_strdup(temp_2);
+			else if (!pipex->envp[i + 1])
+				pipex->paths[j] = ft_strdup(pipex->comd[j][0]);
+			free(temp_2);
+		}
 	}
-	if (status >= 3)
-		free(pipex);
 }
 
-void	free_matrix(char **matrix, int max)
+void	child_process(t_crossfd fd, t_pipe *pipex, int i)
 {
-	int	i;
-
-	i = 0;
-	while (i <= max)
-		free(matrix[i++]);
-	free(matrix);
+	pipex->pid[i] = fork();
+	if (pipex->pid[i] == -1)
+		clean_pipes_exit(pipex, 8, 8);
+	if (pipex->pid[i] == 0)
+	{
+		if (fd.out_read != -1)
+			close(fd.out_read);
+		if (fd.out_write != -1)
+			close(fd.out_write);
+		dup2(fd.in_read, STDIN_FILENO);
+		if (fd.in_read != -1)
+			close(fd.in_read);
+		dup2(fd.in_write, STDOUT_FILENO);
+		if (fd.in_write != -1)
+			close(fd.in_write);
+		if (execve(pipex->paths[i], pipex->comd[i], pipex->env) == -1)
+			clean_pipes_exit(pipex, 9, 127); // command didnt execute
+	}
 }
 
-void	print_pipe(t_pipe *pipex)
+void	process_waiting(t_pipe *pipex, int *status)
 {
-	int	i;
+	int	w_pid;
+	int	exit_status;
 
-	ft_printf("\npipex->fd[0][0]: %d\n", pipex->fd[0][0]);
-	ft_printf("pipex->fd[0][1]: %d\n\n", pipex->fd[0][1]);
-	ft_printf("pipex->fd[1][0]: %d\n", pipex->fd[1][0]);
-	ft_printf("pipex->fd[1][1]: %d\n\n", pipex->fd[1][1]);
-	i = -1;
-	while (pipex->comd[0][++i])
-		ft_printf("pipex->comd[0][i]: %s\n", pipex->comd[0][i]);
-	ft_printf("\n");
-	i = -1;
-	while (pipex->comd[1][++i])
-		ft_printf("pipex->comd[1][i]: %s\n", pipex->comd[1][i]);
-	ft_printf("\n");
-	i = -1;
-	while (pipex->envp[++i])
-		ft_printf("pipex->envp[%d]: %s\n", i, pipex->envp[i]);
-	ft_printf("\n");
-	ft_printf("pipex->paths[0]: %s\n", pipex->paths[0]);
-	ft_printf("pipex->paths[1]: %s\n\n", pipex->paths[1]);
+	w_pid = wait(&exit_status);
+	if (w_pid == pipex->pid[0])
+		wait(&exit_status);
+	else
+		wait(NULL);
+	if (WIFEXITED(exit_status))
+		*status = WEXITSTATUS(exit_status);
 }
