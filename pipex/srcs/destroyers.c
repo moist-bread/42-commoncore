@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:35:41 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/28 15:05:20 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:56:41 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 void	clean_pipes_exit(t_pipe *pipex, int type, int status)
 {
 	if (type == 1)
-		ft_printf(YEL "incorrect format" DEF ": accepted format is \" infile \"cmd1\" \"cmd2\" outfile \"\n");
+		ft_printf(YEL "incorrect format" DEF
+			": accepted format is \" infile \"cmd1\" \"cmd2\" outfile \"\n");
 	else if (type == 2)
 		ft_printf(YEL "malloc failure" DEF ": pipex struct\n");
 	else if (type == 3)

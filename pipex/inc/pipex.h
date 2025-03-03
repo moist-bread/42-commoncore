@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/28 16:59:26 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:42:10 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_crossfd
 // UTILS
 void		pipex_init(t_pipe **pipex, char **av, char **env);
 void		find_paths(t_pipe *pipex, int n);
+char		*make_path(t_pipe *pipex, int j, int i);
 void		child_process(t_crossfd fd, t_pipe *pipex, int i);
 void		process_waiting(t_pipe *pipex, int *status);
 
@@ -59,5 +60,8 @@ void		clean_pipes_exit(t_pipe *pipex, int type, int status);
 void		free_pipe(t_pipe *pipex, int status);
 void		free_matrix(char **matrix, int max);
 void		print_pipe(t_pipe *pipex);
+
+// COMMAND PARSING
+char		**command_separator(char const *s);
 
 #endif

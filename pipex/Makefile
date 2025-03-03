@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/02/28 17:13:46 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/03/03 14:24:18 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT = ./inc/libft/libft.a
 
 # ★☆★-‵,┊( SOURCES AND OBJS )┊.´-★☆★
 MAIN    =  pipex_main.c
-SOURCES =  pipex_utils.c destroyers.c
+SOURCES =  pipex_utils.c destroyers.c command_parsing.c
 
 SRCS_DIR = srcs
 SRCS = $(addprefix $(SRCS_DIR)/, $(SOURCES))
