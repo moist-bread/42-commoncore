@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:53:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/03 19:42:22 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:54:53 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	pipex_init(t_pipe **pipex, char **av, char **env)
 		clean_pipes_exit(*pipex, 2, 2);
 	(*pipex)->fd[0][0] = open(av[1], O_RDONLY);
 	(*pipex)->fd[1][1] = open(av[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
-	if ((*pipex)->fd[0][0] == -1)
-		perror(YEL "infile open failure" DEF);
 	if ((*pipex)->fd[1][1] == -1)
 		clean_pipes_exit(*pipex, 3, 3);
 	(*pipex)->comd[0] = command_separator(av[2]);
@@ -93,6 +91,11 @@ void	child_process(t_crossfd fd, t_pipe *pipex, int i)
 		dup2(fd.in_read, STDIN_FILENO);
 		if (fd.in_read != -1)
 			close(fd.in_read);
+		else
+		{
+			close(0);
+			clean_pipes_exit(pipex, 9, 127);
+		}
 		dup2(fd.in_write, STDOUT_FILENO);
 		if (fd.in_write != -1)
 			close(fd.in_write);

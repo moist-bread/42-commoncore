@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:35:41 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/03 12:56:41 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:54:46 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	clean_pipes_exit(t_pipe *pipex, int type, int status)
 	else if (type == 2)
 		ft_printf(YEL "malloc failure" DEF ": pipex struct\n");
 	else if (type == 3)
-		ft_printf(YEL "open failure" DEF ": outfile didn't open\n");
+		perror(YEL "infile or outfile open failure" DEF);
 	else if (type == 4)
 		ft_printf(YEL "malloc failure" DEF ": cmd1 or cmd2\n");
 	else if (type == 5 || type == 6)
