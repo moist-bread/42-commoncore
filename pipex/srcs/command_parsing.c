@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:23:55 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/03 19:52:38 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/04 09:09:45 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ static void	sub_creator(int *len, char **split, const char *s, int i)
 static int	param_count(char const *str, char c)
 {
 	int	count;
-	int	string_flag;
 
 	count = 0;
-	string_flag = 0;
 	while (*str)
 	{
 		while (*str == c && *str)
