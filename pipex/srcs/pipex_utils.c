@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:53:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/05 19:27:34 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/05 20:35:34 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	pipex_init(t_pipe **pipex, char **av, char **env)
 		clean_pipes_exit(*pipex, 3, 3);
 	(*pipex)->comd[0] = command_separator(av[2]);
 	(*pipex)->comd[1] = command_separator(av[3]);
-	if (!(*pipex)->comd[0] || !(*pipex)->comd[1])
+	if (!*((*pipex)->comd[0]) || !*((*pipex)->comd[1]))
 		clean_pipes_exit(*pipex, 4, 4);
 	i = -1;
 	(*pipex)->envp = NULL;

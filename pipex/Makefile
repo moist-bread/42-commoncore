@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/03/05 19:38:10 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/03/05 20:38:45 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,6 +115,10 @@ exe7: all
 # second cmd doesnt exist
 exe8: all
 	$(VAL) $(FDFLAGS) ./pipex infile_1 "sleep 3" "i_dont_exist" outfile_3
+
+# command with just spaces
+exe9: all
+	$(VAL) $(FDFLAGS) ./pipex infile_1 "  " "sleep 3" outfile_3
 
 
 # ★☆★-‵,┊( STANDARD RULES )┊.´-★☆★
