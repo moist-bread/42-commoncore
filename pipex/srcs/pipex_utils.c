@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 18:53:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/04 14:54:53 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/05 19:27:34 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	child_process(t_crossfd fd, t_pipe *pipex, int i)
 		else
 		{
 			close(0);
+			close(fd.in_write);
 			clean_pipes_exit(pipex, 9, 127);
 		}
 		dup2(fd.in_write, STDOUT_FILENO);

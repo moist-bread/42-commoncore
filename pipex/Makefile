@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/03/03 14:24:18 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/03/05 19:38:10 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ OBJS_BONUS = $(addprefix $(OBJS_DIR)/, $(SOURCES_BONUS:.c=.o))
 # ★☆★-‵,┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s
+FDFLAGS = --trace-children=yes --track-fds=yes
 
 
 # ★☆★-‵,┊( MAIN RULES )┊.´-★☆★
@@ -71,34 +73,52 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR_BONUS)/%.c | $(OBJS_DIR)
 
 
 # ★☆★-‵,┊( EXECUTION RULES )┊.´-★☆★
-exe1: all
-	./pipex text1.txt "cat" "cat" text2.txt
+exe_setup: exe_clean all
+	cat Makefile > infile_1
+	cat srcs/destroyers.c | grep // > infile_2
 
-exe2: all
-	rm -rf text3.txt
-	./pipex text1.txt "cat" "cat" text3.txt
-	cat text3.txt
-
-exe3: all
-	./pipex srcs "ls -la" "cat" text2.txt
-
-exe4: all
-	./pipex text1.txt "grep COPY" "wc -l" text3.txt
-
-ex4: cl3
-	< text1.txt grep COPY | wc -l  > text3.txt
-
-exe5: all
-	./pipex text1.txt "cat" "wc -l" outfile
-
-exe6: all
-	./pipex text1.txt "cato" "ls" text3.txt
-
-exe7: all
-	valgrind --track-origins=yes -s ./pipex text1.txt "cato" "ls" text3.txt
+exe_clean:
+	rm -rf infile_1 
+	rm -rf infile_2 
+	rm -rf outfile_1 
+	rm -rf outfile_2 
+	rm -rf outfile_3 
 	
+# cat with existing infile
+exe1: all
+	./pipex infile_1 "cat" "cat" outfile_1
+
+# basic grep
+exe2: all
+	./pipex infile_1 "cat" "grep BONUS" outfile_2
+
+# cats with no infile
+exe3: all
+	./pipex i_dont_exist "cat" "cat" outfile_2
+
+# sleeping
+exe4: all
+	./pipex infile_1 "sleep 4" "sleep 2" outfile_1
+
+# sleeping with no infile
+exe5: all
+	$(VAL) $(FDFLAGS) ./pipex i_dont_exist "sleep 500" "sleep 2" outfile_1
+
+# spaces in between ''
+exe6: all
+	./pipex infile_1 "ls -la" "cut -d ' ' -f 1" outfile_3
+
+# first cmd doesnt exist
+exe7: all
+	$(VAL) $(FDFLAGS) ./pipex infile_1 "cato" "sleep 3" outfile_3
+
+# second cmd doesnt exist
+exe8: all
+	$(VAL) $(FDFLAGS) ./pipex infile_1 "sleep 3" "i_dont_exist" outfile_3
+
+
 # ★☆★-‵,┊( STANDARD RULES )┊.´-★☆★
-clean:
+clean: exe_clean
 	@make clean -C ./inc/libft -s
 	$(M_REMOBJS)
 	@rm -rf $(OBJS_DIR)
@@ -112,7 +132,7 @@ fclean: clean
 re:	fclean all
 	@echo "Re-Done!!"
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus exe_setup exe_clean exe1 exe2 exe3 exe4 exe5 exe6 exe7 exe8
 
 
 # ★☆★-‵,┊( COSMETICS )┊.´-★☆★

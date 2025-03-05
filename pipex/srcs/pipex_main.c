@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:20:50 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/05 15:02:10 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/05 17:34:46 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5 || !*argv[2] || !*argv[3])
 		clean_pipes_exit(NULL, 1, 1);
 	pipex_init(&pipex, argv, envp);
-	print_pipe(pipex);
 	if (pipe(pipe_fds) == -1)
 		clean_pipes_exit(pipex, 7, 7);
 	pipex->fd[0][1] = pipe_fds[1];
