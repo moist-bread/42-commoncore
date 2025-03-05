@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:23:55 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/04 09:09:45 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:05:55 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static void	sub_creator(int *len, char **split, const char *s, int i)
 		s++;
 	*len = param_len(s, ' ');
 	if (*s && *s == '\'')
-		split[i] = ft_substr(s + 1, 0, *len - 2);
+		split[i] = ft_substr(s + 1, 0, *len - 3);
 	else
-		split[i] = ft_substr(s, 0, *len);
+		split[i] = ft_substr(s, 0, *len - 1);
 }
 
 static int	param_count(char const *str, char c)
@@ -97,7 +97,7 @@ static int	param_len(char const *str, char c)
 		while (str[i] && str[i] != c)
 			i++;
 	}
-	return (i);
+	return (++i);
 }
 
 static void	*ft_freestr(char **split, int max)

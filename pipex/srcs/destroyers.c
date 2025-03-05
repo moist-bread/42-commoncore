@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:35:41 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/04 14:54:46 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:03:15 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ void	print_pipe(t_pipe *pipex)
 	ft_printf("pipex->fd[1][1]: %d\n\n", pipex->fd[1][1]);
 	i = -1;
 	while (pipex->comd[0][++i])
-		ft_printf("pipex->comd[0][i]: %s\n", pipex->comd[0][i]);
+		ft_printf("pipex->comd[0][%d]: %s\n", i, pipex->comd[0][i]);
 	ft_printf("\n");
 	i = -1;
 	while (pipex->comd[1][++i])
-		ft_printf("pipex->comd[1][i]: %s\n", pipex->comd[1][i]);
+		ft_printf("pipex->comd[1][%d]: %s\n", i, pipex->comd[1][i]);
 	ft_printf("\n");
 	i = -1;
 	while (pipex->envp[++i])
