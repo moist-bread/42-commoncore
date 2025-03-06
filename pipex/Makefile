@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/03/06 12:53:44 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/03/06 15:03:56 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ exe1: all
 
 # basic grep
 exe2: all
-	$(VAL) $(FDFLAGS) ./pipex infile_1 "cat" "grep BONUS" outfile_2
+	./pipex infile_1 "cat" "grep BONUS" outfile_2
 
 # cats with no infile
 exe3: all
@@ -106,7 +106,7 @@ exe5: all
 
 # spaces in between ''
 exe6: all
-	$(VAL) $(FDFLAGS) ./pipex infile_1 "ls -la" "cut -d ' ' -f 1" outfile_3
+	./pipex infile_1 "ls -la" "cut -d ' ' -f 1" outfile_3
 
 # first cmd doesnt exist
 exe7: all
