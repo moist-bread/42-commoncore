@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:35:41 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/05 20:49:16 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:52:23 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,14 @@ void	clean_pipes_exit(t_pipe *pipex, int type, int status)
 	else if (type == 9)
 		perror(YEL "command not found" DEF);
 	if (type > 2)
-		free_pipe(pipex, type);
+		free_pipe(pipex, type, -1);
 	exit(status);
 }
 
-void	free_pipe(t_pipe *pipex, int status)
+void	free_pipe(t_pipe *pipex, int status, int i)
 {
-	int	i;
 	int	j;
 
-	i = -1;
 	while (status >= 6 && pipex->envp[++i])
 		;
 	if (status >= 6)
@@ -71,9 +69,9 @@ void	free_pipe(t_pipe *pipex, int status)
 		if (pipex->comd[j])
 			free_matrix(pipex->comd[j], i);
 	}
-	if (pipex->fd[0][0] != 1)
+	if (pipex->fd[0][0] != -1)
 		close (pipex->fd[0][0]);
-	if (pipex->fd[1][1] != 1)
+	if (pipex->fd[1][1] != -1)
 		close (pipex->fd[1][1]);
 	free(pipex);
 }

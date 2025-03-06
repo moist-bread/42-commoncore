@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/03/05 20:38:45 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/03/06 12:53:44 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,19 +86,19 @@ exe_clean:
 	
 # cat with existing infile
 exe1: all
-	./pipex infile_1 "cat" "cat" outfile_1
+	$(VAL) $(FDFLAGS) ./pipex infile_1 "cat" "cat" outfile_1
 
 # basic grep
 exe2: all
-	./pipex infile_1 "cat" "grep BONUS" outfile_2
+	$(VAL) $(FDFLAGS) ./pipex infile_1 "cat" "grep BONUS" outfile_2
 
 # cats with no infile
 exe3: all
-	./pipex i_dont_exist "cat" "cat" outfile_2
+	$(VAL) $(FDFLAGS) ./pipex i_dont_exist "cat" "cat" outfile_2
 
 # sleeping
 exe4: all
-	./pipex infile_1 "sleep 4" "sleep 2" outfile_1
+	$(VAL) $(FDFLAGS) ./pipex infile_1 "sleep 4" "sleep 2" outfile_1
 
 # sleeping with no infile
 exe5: all
@@ -106,7 +106,7 @@ exe5: all
 
 # spaces in between ''
 exe6: all
-	./pipex infile_1 "ls -la" "cut -d ' ' -f 1" outfile_3
+	$(VAL) $(FDFLAGS) ./pipex infile_1 "ls -la" "cut -d ' ' -f 1" outfile_3
 
 # first cmd doesnt exist
 exe7: all

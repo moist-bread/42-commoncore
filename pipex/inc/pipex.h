@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/03 19:42:10 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:52:18 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		process_waiting(t_pipe *pipex, int *status);
 
 // DESTROYERS
 void		clean_pipes_exit(t_pipe *pipex, int type, int status);
-void		free_pipe(t_pipe *pipex, int status);
+void		free_pipe(t_pipe *pipex, int status, int i);
 void		free_matrix(char **matrix, int max);
 void		print_pipe(t_pipe *pipex);
 
