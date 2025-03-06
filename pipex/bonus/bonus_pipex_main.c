@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 16:55:28 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/02/28 18:52:59 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:20:19 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!ft_strncmp(argv[1], "here_doc", 9))
 		here_doc_ft();
 	i = 1;
-	while (++i < argc - 1)
-	{
-	}
+	multi_pipex_init();
 	/*
 	fd cross
 	fd[0][0] - infile
@@ -64,7 +62,12 @@ int	main(int argc, char **argv, char **envp)
 	clean_pipes_exit(pipex, 10, status); */
 }
 
+void	multi_pipex_init(void)
+{
+	ft_printf("multi pipe init\n");
+}
+
 void	here_doc_ft(void)
 {
-	;
+	ft_printf("here we doc\n");
 }
