@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/06 12:52:18 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:47:00 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 // DEFINES
 // colors
 # define YEL "\e[0;33m"
+# define BLU "\e[0;34m"
+# define CYN "\e[0;36m"
 # define DEF "\e[0m"
 
 // STRUCTS
@@ -58,7 +60,7 @@ void		process_waiting(t_pipe *pipex, int *status);
 // DESTROYERS
 void		clean_pipes_exit(t_pipe *pipex, int type, int status);
 void		free_pipe(t_pipe *pipex, int status, int i);
-void		free_matrix(char **matrix, int max);
+void		free_matrix(void **matrix, int max);
 void		print_pipe(t_pipe *pipex);
 
 // COMMAND PARSING

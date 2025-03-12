@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:35:41 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/06 12:52:23 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:22:00 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	free_pipe(t_pipe *pipex, int status, int i)
 	while (status >= 6 && pipex->envp[++i])
 		;
 	if (status >= 6)
-		free_matrix(pipex->envp, i);
+		free_matrix((void **)pipex->envp, i);
 	if (status >= 6 && pipex->paths[0])
 		free(pipex->paths[0]);
 	if (status >= 6 && pipex->paths[1])
@@ -67,7 +67,7 @@ void	free_pipe(t_pipe *pipex, int status, int i)
 		while (pipex->comd[j][++i])
 			;
 		if (pipex->comd[j])
-			free_matrix(pipex->comd[j], i);
+			free_matrix((void **)pipex->comd[j], i);
 	}
 	if (pipex->fd[0][0] != -1)
 		close (pipex->fd[0][0]);
@@ -76,7 +76,7 @@ void	free_pipe(t_pipe *pipex, int status, int i)
 	free(pipex);
 }
 
-void	free_matrix(char **matrix, int max)
+void	free_matrix(void **matrix, int max)
 {
 	int	i;
 
