@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:33:30 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/12 17:34:06 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:41:37 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ void	print_pipe_struct(t_pipe_data *pipex)
 	int	i;
 	int	j;
 
-	ft_printf(CYN "__ [printing] __\n\n" DEF);
-	ft_printf(" ->count: %d\n", pipex->count);
-	ft_printf(" ->fd[0][0]: %d\n", pipex->fd[0][0]);
-	ft_printf(" ->fd[0][1] = %d\n\n", pipex->fd[0][1]);
+	ft_printf(CYN "__ [printing] __\n\n" DEF " ->count: %d\n\n", pipex->count);
+	i = -1;
+	while (++i < pipex->count)
+		ft_printf(" ->fd[%d][0]: %d   ->fd[%d][1]: %d\n", i, pipex->fd[i][0], i, pipex->fd[i][1]);
+	ft_printf("\n");
 	j = -1;
 	while (++j < pipex->count)
 	{
@@ -54,7 +55,9 @@ void	print_pipe_struct(t_pipe_data *pipex)
 	while (++i < pipex->count)
 		ft_printf("pipex->paths[%d]: %s\n", i, pipex->paths[i]);
 	ft_printf("\n");
-	if (pipex->envp[0])
+	if (*pipex->envp)
 		ft_printf("pipex->envp? : yes\n");
+	if (*pipex->env)
+		ft_printf("pipex->env? : yes\n");
 	ft_printf(CYN "\n__   [over]  __\n\n" DEF);
 }

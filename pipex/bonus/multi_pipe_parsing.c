@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:14:51 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/12 17:15:44 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:35:29 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,19 @@ void	pipex_struct_init(t_pipe_data **pipex, int ac, char **av, char **env)
 		(*pipex)->fd[0][0] = open(av[1], O_RDONLY);
 	else
 		(*pipex)->fd[0][0] = open(av[1], O_WRONLY | O_TRUNC | O_CREAT, 0777);
-	(*pipex)->fd[0][1] = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT,
+	(*pipex)->fd[(*pipex)->count - 1][1] = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT,
 			0777);
-	if ((*pipex)->fd[0][1] == -1)
-		exit(1); // new clean pipe here
+	if ((*pipex)->fd[(*pipex)->count - 1][1] == -1)
+		pipex_free_exit(*pipex, 8, 8);
 	i = -1;
 	while (++i < (*pipex)->count)
 		(*pipex)->cmd[i] = command_separator(av[i + 2]);
 	i = -1;
 	while (++i < (*pipex)->count)
 		if (!*((*pipex)->cmd[i]))
-			exit(1); // new clean pipe here
+			pipex_free_exit(*pipex, 9, 9);
 	pipex_assign_paths(*pipex);
+	(*pipex)->env = env;
 	ft_printf(BLU "-- pipex struct init [ending]\n\n" DEF);
 }
 
@@ -46,21 +47,21 @@ void	pipex_struct_set(t_pipe_data **pipex, int ac, char **env)
 
 	*pipex = malloc(sizeof(t_pipe_data));
 	if (!pipex)
-		exit(1); // new clean pipe here
+		pipex_free_exit((*pipex), 2, 2);
 	
 	(*pipex)->count = ac - 3;
 
 	(*pipex)->fd = (int **)matrix_allocer(sizeof(int *), sizeof(int), (*pipex)->count, 2);
 	if (!(*pipex)->fd)
-		exit(1); // new clean pipe here
+		pipex_free_exit((*pipex), 3, 3);
 
 	(*pipex)->cmd = malloc(sizeof(char **) * (*pipex)->count);
 	if (!(*pipex)->cmd)
-		exit(1); // new clean pipe here
+		pipex_free_exit((*pipex), 4, 4);
 	
 	(*pipex)->paths = (char **)ft_calloc((*pipex)->count, sizeof(char *));
 	if (!(*pipex)->paths)
-		exit(1); // new clean pipe here
+		pipex_free_exit((*pipex), 5, 5);
 	
 	i = -1;
 	(*pipex)->envp = NULL;
@@ -68,11 +69,11 @@ void	pipex_struct_set(t_pipe_data **pipex, int ac, char **env)
 		if (!ft_strncmp(env[i], "PATH=", 5))
 			(*pipex)->envp = ft_split(env[i] + 5, ':');
 	if (!(*pipex)->envp)
-		exit(1); // new clean pipe here
+		pipex_free_exit((*pipex), 6, 6);
 	
 	(*pipex)->pid = (int *)ft_calloc((*pipex)->count, sizeof(int));
 	if (!(*pipex)->pid)
-		exit(1); // new clean pipe here
+		pipex_free_exit((*pipex), 7, 7);
 }
 
 void	pipex_assign_paths(t_pipe_data *pipex)
@@ -98,6 +99,8 @@ void	pipex_assign_paths(t_pipe_data *pipex)
 				pipex->paths[j] = ft_strdup(pipex->cmd[j][0]);
 			free(path);
 		}
+		if (!pipex->paths[j])
+			pipex_free_exit(pipex, 11, 11);
 	}
 }
 
@@ -112,6 +115,6 @@ char	*join_test_paths(t_pipe_data *pipex, int j, int i)
 	if (temp)
 		free(temp);
 	if (!path)
-		exit(1); // new clean pipe here
+		pipex_free_exit(pipex, 10, 10);
 	return (path);
 }
