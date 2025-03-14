@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:25:25 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/14 15:45:57 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:36:05 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@
 // 13: pipe failure
 // 14: fork failure
 // 15: command failure
-// 16: no infile fd 
-// 17: no problems exit 
+// 16: no infile fd
+// 17: no problems exit
 
 void	pipex_free_exit(t_pipe_data *pipex, int type, int status)
 {
-	if (type == 1)
-		ft_printf(YEL "incorrect format" DEF ": accepted format is \" infile \"cmd1\" \"cmd2\" ... outfile \"\n");
-	else if (type >= 2 && type <= 11 && type != 6 && type != 8)
+	if (type == 1 || type == 9)
+		ft_printf(YEL "incorrect format" DEF ": accepted format is "
+			YELB" infile \"cmd1\" \"cmd2\" ... outfile " DEF "\n");
+	if (type == 9)
+		ft_printf("OR\n");
+	if (type >= 2 && type <= 11 && type != 6 && type != 8)
 		ft_printf(YEL "malloc failure during parsing\n" DEF);
 	else if (type == 6)
 		perror(YEL "no env paths present or malloc failure of said paths" DEF);
@@ -52,35 +55,26 @@ void	pipex_free_exit(t_pipe_data *pipex, int type, int status)
 		perror(YEL "command not found" DEF);
 	else if (type == 16)
 		perror(YEL "no in read fd" DEF);
-	// ADD A MESSAGE FOR 9
 	if (type > 2)
 		pipex_data_free(pipex, type);
 	exit(status);
 }
 
-void pipex_data_free(t_pipe_data *pipex, int type)
+void	pipex_data_free(t_pipe_data *pipex, int type)
 {
-	int i;
-	int j;
-	
-	j = -1;
-	while (type >= 10 && ++j < pipex->count)
-		if (pipex->paths[j])
-			free(pipex->paths[j]);
+	int	i;
+
+	i = -1;
+	while (type >= 10 && ++i < pipex->count)
+		if (pipex->paths[i])
+			free(pipex->paths[i]);
 	if (type >= 9)
 	{
-		j = -1;
+		pipex_cmd_free(pipex);
 		close_all_fds(pipex);
 		free(pipex->pid);
-		while (++j < pipex->count)
-		{
-			i = -1;
-			while (pipex->cmd[j][++i])
-				;
-			if (pipex->cmd[j])
-				free_matrix((void **)pipex->cmd[j], i);
-		}	
 	}
+	i = -1;
 	while (type >= 7 && pipex->envp[++i])
 		;
 	if (type >= 7)
@@ -94,17 +88,32 @@ void pipex_data_free(t_pipe_data *pipex, int type)
 	free(pipex);
 }
 
-void close_all_fds(t_pipe_data *pipex)
+void	pipex_cmd_free(t_pipe_data *pipex)
 {
-	int i;
+	int	i;
+	int	j;
+
+	j = -1;
+	while (++j < pipex->count)
+	{
+		i = -1;
+		while (pipex->cmd[j][++i])
+			;
+		if (pipex->cmd[j])
+			free_matrix((void **)pipex->cmd[j], i);
+	}
+}
+
+void	close_all_fds(t_pipe_data *pipex)
+{
+	int	i;
 
 	i = -1;
-	while(++i < pipex->count)
+	while (++i < pipex->count)
 	{
 		if (pipex->fd[i][0] > 2)
 			close(pipex->fd[i][0]);
 		if (pipex->fd[i][1] > 2)
 			close(pipex->fd[i][1]);
 	}
-	close (7); // IDK WHATS GOING ON HERE
 }

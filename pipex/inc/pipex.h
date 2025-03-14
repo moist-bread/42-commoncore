@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/12 16:47:00 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:37:07 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define BLU "\e[0;34m"
 # define CYN "\e[0;36m"
 # define DEF "\e[0m"
+
+// bg colors
+# define YELB "\e[43m"
 
 // STRUCTS
 typedef struct s_pipe
