@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/03/14 17:24:35 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/03/15 13:01:12 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJS_MAIN	=	$(addprefix $(OBJS_DIR)/, $(MAIN:.c=.o))
 
 
 # ★☆★-‵,┊( BONUS SOURCES AND OBJS )┊.´-★☆★
-SOURCES_BONUS	=	bonus_pipex_main.c multi_pipe_parsing.c here_doc_handler.c \
+SOURCES_BONUS	=	bonus_pipex_main.c multi_pipe_parsing.c \
 					exit_handler.c processes.c pipex_aux.c
 
 SRCS_DIR_BONUS	=	bonus
