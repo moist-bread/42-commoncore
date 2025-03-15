@@ -6,23 +6,11 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:30:38 by rduro-pe          #+#    #+#             */
-/*   Updated: 2024/12/27 16:13:39 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:37:49 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-int	main(void)
-{
-	char	array1[] = "mau dia";
-	char	array2[] = "bom dia";
-
-	printf("%s(before)", array1);
-	ft_memcpy(array1, array2, 3);
-	printf("%s(after)", array1);
-}
-*/
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
