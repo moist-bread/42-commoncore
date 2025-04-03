@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 16:55:28 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/03/15 16:50:09 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:07:32 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	int			i;
 
 	if (argc < 5 || !*argv[2] || !*argv[3])
-		pipex_free_exit(pipex, 1, 1);
+		pipex_free_exit(NULL, 1, 1);
 	pipex_struct_init(&pipex, argc, argv, envp);
 	if (!ft_strncmp(argv[1], "here_doc", 8))
 		here_doc_handler(pipex, argv[2]);
