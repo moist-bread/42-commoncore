@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/06/09 17:54:01 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/06/09 18:15:46 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,20 +107,20 @@ re:	fclean all
 
 # -->┊( COSMETICS )┊.´-★☆★
 
-#-‵,┊ normal colors
+# -‵,┊ normal colors
 DEF	=	\e[0;39m
 GRY	=	\e[0;30m
 BLU	=	\e[0;34m
 GRN	=	\e[0;32m
 YEL =	\e[0;33m
 
-#-‵,┊ bold colors
+# -‵,┊ bold colors
 BYEL	=	\e[1;33m
 
-#-‵,┊ background colors
+# -‵,┊ background colors
 YELB	=	\e[43m
 
-#-‵,┊ messages
+# -‵,┊ messages
 M_COMOBJS	= @echo "$(GRY)-->┊$(GRN)  Compiling: $(BYEL)$(NAME)/objs $(GRY)$(DEF)"
 M_COMBONUS	= @echo "$(GRY)-->┊$(GRN)  Compiling: $(BYEL)$(NAME) bonus objs $(GRY)$(DEF)"
 M_ARC		= @echo "$(GRY)-->┊$(YEL)  Archiving: $(DEF)$(YELB) $(NAME) $(GRY)$(DEF)"
