@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/06/09 17:56:44 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/06/11 19:02:50 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJ_DIR	=	obj
 
 
 # -->┊( SOURCE AND OBJS )┊.´-★☆★
-SOURCE	=	main.c
+SOURCE	=	main.c parse.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SOURCE))
 OBJS	=	$(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))

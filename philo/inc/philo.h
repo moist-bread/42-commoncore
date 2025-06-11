@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/09 18:07:46 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:02:34 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 // -->┊( LIBS )┊.´-★☆★
 # include "libft/libft.h"
 # include "philo_structs.h"
+# include <pthread.h>
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/wait.h>
+# include <sys/time.h>
 # include <unistd.h>
 
 // -->┊( DEFINES )┊.´-★☆★
@@ -34,7 +35,15 @@
 //-‵,┊ bg colors
 # define YELB "\e[43m"
 
+//-‵,┊ error messages
+# define M_ARGAMT "incorrect amount of arguments provided\n"
+# define M_USAGE \
+	"\nusage: ./philo [number_of_philosophers] [time_to_die]\n\
+[time_to_eat] [time_to_sleep] (number_of_times_each_philosopher_must_eat)\n"
+
 // -->┊( TBD )┊.´-★☆★
 
+bool	validate_args(int ac, char **av, t_philo_data *ph_dt);
+void	specify_arg_error(int idx);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/06/09 18:15:46 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/06/11 17:36:19 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	=	libft.a
 
 # -->┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g
+CFLAGS	=	-Wall -Wextra -Werror -g -pthread
 
 # -->┊( DIRECTORIES )┊.´-★☆★
 OBJ_DIR	=	obj
@@ -35,7 +35,8 @@ SRC_MATRIX	=	$(addprefix ft_matrix/, free_matrix_until.c free_matrix.c \
 				ft_matrixlen.c ft_split.c matrix_add_front.c \
 				matrix_add_to_index.c matrix_dup_char.c)
 
-SRC_NUM		=	$(addprefix ft_num/, ft_atoi.c ft_itoa.c long_check.c)
+SRC_NUM		=	$(addprefix ft_num/, ft_atoi.c ft_itoa.c int_check.c \
+				long_check.c)
 
 SRC_PRINT	=	$(addprefix ft_print/, conversions.c conversions_fd.c \
 				ft_printf.c ft_printf_fd.c ft_putchar_fd.c ft_putendl_fd.c \

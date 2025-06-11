@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/09 17:29:42 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:36:19 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char				**matrix_dup_char(char **original_matrix);
 // FT NUM
 int					ft_atoi(const char *str);
 char				*ft_itoa(int n);
+int					int_check(char *arg, int *arg_n);
+int					long_check(char *arg, long *arg_n);
 
 // FT PRINT
 
