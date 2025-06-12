@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/11 19:02:34 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/12 12:30:45 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 
 // -->┊( TBD )┊.´-★☆★
 
-bool	validate_args(int ac, char **av, t_philo_data *ph_dt);
+bool	validate_args(int ac, char **av, t_ph_val *ph_dt);
 void	specify_arg_error(int idx);
 
 #endif

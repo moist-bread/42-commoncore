@@ -6,13 +6,13 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 19:02:13 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/11 19:08:35 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/12 12:30:45 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-bool	validate_args(int ac, char **av, t_philo_data *ph_dt)
+bool	validate_args(int ac, char **av, t_ph_val *ph_dt)
 {
 	int	i;
 	int	value[5];
