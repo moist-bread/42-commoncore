@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/06/11 19:02:50 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/06/13 18:17:54 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJ_DIR	=	obj
 
 
 # -->┊( SOURCE AND OBJS )┊.´-★☆★
-SOURCE	=	main.c parse.c
+SOURCE	=	main.c parse.c init.c clean.c utils.c
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SOURCE))
 OBJS	=	$(addprefix $(OBJ_DIR)/, $(SOURCE:.c=.o))
@@ -55,7 +55,7 @@ exe: all
 	./philo 2 500 100 1000
 
 val: all
-	$(VAL) ./philo 2 500 100 1000
+	$(VAL) ./philo 7 5000 2000 1000 3
 
 
 # -->┊( STANDARD RULES )┊.´-★☆★

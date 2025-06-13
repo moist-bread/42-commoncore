@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/12 12:30:45 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:03:12 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,15 @@
 
 bool	validate_args(int ac, char **av, t_ph_val *ph_dt);
 void	specify_arg_error(int idx);
+
+bool	create_needed_philos(t_ph_data *data);
+bool	init_philo_list(t_ph_data *data, int id);
+void	init_philo_forks(t_ph_data *data);
+void	init_philo_threads(t_ph_data *data);
+
+void	*routine_cycle(void *id);
+void	print_philos(t_ph_data *data);
+
+void	join_all_philos(t_ph_data *data);
 
 #endif

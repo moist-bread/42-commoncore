@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/12 18:40:54 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:53:28 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_ph_indiv
 	int					id;
 	pthread_t			thr;
 	t_ph_val			val;
-	// pthread_mutex_t 	*left;
-	// pthread_mutex_t 	*right;
+	pthread_mutex_t 	f_left;
+	// pthread_mutex_t 	*f_right;
 	struct s_ph_indiv	*left;
 	struct s_ph_indiv	*right;
 }						t_ph_indiv;
