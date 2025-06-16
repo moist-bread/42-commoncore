@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/13 14:03:12 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:02:01 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@
 [time_to_eat] [time_to_sleep] (number_of_times_each_philosopher_must_eat)\n"
 
 // -->┊( TBD )┊.´-★☆★
-
+void	*check_for_death(void *data);
+long	get_curr_time(void);
+void	print_act(t_ph_data *data, int id, char type);
 bool	validate_args(int ac, char **av, t_ph_val *ph_dt);
 void	specify_arg_error(int idx);
 

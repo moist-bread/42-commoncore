@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 19:02:13 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/13 12:27:12 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:20:34 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	validate_args(int ac, char **av, t_ph_val *ph_dt)
 			return (specify_arg_error(i), false);
 	}
 	i = -1;
-	printf("pre verification values:\n");
+	printf("args:\t");
 	while (++i < ac)
 		printf("%d\t", value[i]);
 	printf("\n\n");

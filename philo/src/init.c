@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 13:57:03 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/13 14:53:53 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:03:48 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,34 @@ bool	create_needed_philos(t_ph_data *data)
 		if (!init_philo_list(data, id))
 			return (false);
 	}
-	print_philos(data);
 	init_philo_forks(data);
+	pthread_mutex_init(&data->print_t, NULL);
+	pthread_mutex_init(&data->check_died, NULL);
+	data->t_start = get_curr_time();
 	init_philo_threads(data);
+	// pthread_create(&data->death_checker, NULL, &routine_cycle, data);
 	return (true);
 }
+
+// void *check_for_death(void *data)
+// {
+// 	t_ph_data *dt;
+	
+// 	dt = (t_ph_data *)data;
+// 	while (1)
+// 	{
+// 		pthread_mutex_lock(&dt->check_died);
+// 		if (dt->died == true)
+// 		{
+// 			ft_printf_fd(1, YEL "\nwomp womppp   --\n" DEF);
+
+// 			break;
+// 		}
+// 		pthread_mutex_unlock(&dt->check_died);
+// 	}
+// 	join_all_philos(data);
+// 	return (NULL);
+// }
 
 bool	init_philo_list(t_ph_data *data, int id)
 {
@@ -40,6 +63,7 @@ bool	init_philo_list(t_ph_data *data, int id)
 	philo->id = id;
 	philo->val = (t_ph_val){data->val.n_phi, data->val.t_die, data->val.t_eat,
 		data->val.t_slp, data->val.n_eat};
+	philo->data = data;
 	if (!data->head)
 		data->head = philo;
 	else
@@ -62,30 +86,26 @@ void	init_philo_forks(t_ph_data *data)
 {
 	t_ph_indiv	*curr;
 
-	ft_printf_fd(1, YEL "\ninit philo forks\n\n" DEF);
+	ft_printf_fd(1, YEL "\niniting philo forks   --\n" DEF);
 	curr = data->head;
 	while (curr && curr->id != data->val.n_phi)
 	{
-		pthread_mutex_init(&curr->f_left, NULL);
-		printf("[%d] left fork given\n", curr->id);
+		pthread_mutex_init(&curr->fork_l, NULL);
 		curr = curr->right;
 	}
-	pthread_mutex_init(&curr->f_left, NULL);
-	printf("[%d] left fork given\n", curr->id);
+	pthread_mutex_init(&curr->fork_l, NULL);
 }
 
 void	init_philo_threads(t_ph_data *data)
 {
 	t_ph_indiv	*curr;
 
-	ft_printf_fd(1, YEL "\ninit philo threads\n\n" DEF);
+	ft_printf_fd(1, YEL "initing philo threads --\n\n" DEF);
 	curr = data->head;
-	while (curr && curr->id != data->val.n_phi)
+	while (curr->id != data->val.n_phi)
 	{
-		printf("[%d] is being created\n", curr->id);
 		pthread_create(&curr->thr, NULL, &routine_cycle, curr);
 		curr = curr->right;
 	}
-	printf("[%d] is being created\n", curr->id);
 	pthread_create(&curr->thr, NULL, &routine_cycle, curr);
 }
