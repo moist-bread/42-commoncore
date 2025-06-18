@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 13:57:03 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/16 19:03:48 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:14:08 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,13 @@ bool	create_needed_philos(t_ph_data *data)
 			return (false);
 	}
 	init_philo_forks(data);
+	pthread_mutex_init(&data->sleep_death, NULL);
+	pthread_mutex_init(&data->end_lock, NULL);
 	pthread_mutex_init(&data->print_t, NULL);
-	pthread_mutex_init(&data->check_died, NULL);
 	data->t_start = get_curr_time();
 	init_philo_threads(data);
-	// pthread_create(&data->death_checker, NULL, &routine_cycle, data);
 	return (true);
 }
-
-// void *check_for_death(void *data)
-// {
-// 	t_ph_data *dt;
-	
-// 	dt = (t_ph_data *)data;
-// 	while (1)
-// 	{
-// 		pthread_mutex_lock(&dt->check_died);
-// 		if (dt->died == true)
-// 		{
-// 			ft_printf_fd(1, YEL "\nwomp womppp   --\n" DEF);
-
-// 			break;
-// 		}
-// 		pthread_mutex_unlock(&dt->check_died);
-// 	}
-// 	join_all_philos(data);
-// 	return (NULL);
-// }
 
 bool	init_philo_list(t_ph_data *data, int id)
 {
@@ -86,7 +66,6 @@ void	init_philo_forks(t_ph_data *data)
 {
 	t_ph_indiv	*curr;
 
-	ft_printf_fd(1, YEL "\niniting philo forks   --\n" DEF);
 	curr = data->head;
 	while (curr && curr->id != data->val.n_phi)
 	{
@@ -100,7 +79,6 @@ void	init_philo_threads(t_ph_data *data)
 {
 	t_ph_indiv	*curr;
 
-	ft_printf_fd(1, YEL "initing philo threads --\n\n" DEF);
 	curr = data->head;
 	while (curr->id != data->val.n_phi)
 	{
@@ -108,4 +86,31 @@ void	init_philo_threads(t_ph_data *data)
 		curr = curr->right;
 	}
 	pthread_create(&curr->thr, NULL, &routine_cycle, curr);
+}
+
+void	join_all_philos(t_ph_data *data)
+{
+	t_ph_indiv	*curr;
+	t_ph_indiv	*next;
+
+	ft_printf("\njoin threads and destroy mutexes\n\n");
+	curr = data->head;
+	while (curr && curr->id != data->val.n_phi)
+	{
+		// printf("next --\n");
+		next = curr->right;
+		pthread_join(curr->thr, NULL);
+		// printf("cleaning philo no. %d\n", curr->id);
+		pthread_mutex_destroy(&curr->fork_l);
+		free(curr);
+		curr = next;
+	}
+	// printf("next --\n");
+	pthread_join(curr->thr, NULL);
+	// printf("cleaning philo no. %d\n", curr->id);
+	pthread_mutex_destroy(&curr->fork_l);
+	free(curr);
+	pthread_mutex_destroy(&data->sleep_death);
+	pthread_mutex_destroy(&data->end_lock);
+	pthread_mutex_destroy(&data->print_t);
 }

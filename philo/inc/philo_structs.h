@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/16 18:57:42 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:37:23 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ typedef struct s_ph_data
 {
 	t_ph_val			val;
 	t_ph_indiv			*head;
-	pthread_t			death_checker;
-	pthread_mutex_t		check_died;
-	bool				died;
-	bool				full;
+	pthread_t			end_checker;
+	pthread_mutex_t		sleep_death;
+	pthread_mutex_t		end_lock;
+	bool				end;
 	pthread_mutex_t		print_t;
 	long				t_start;
 }						t_ph_data;
