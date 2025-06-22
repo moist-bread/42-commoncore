@@ -6,12 +6,13 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:40:57 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/20 15:57:44 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:12:21 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+/// @return current time in milliseconds
 long	get_curr_time(void)
 {
 	struct timeval	tv;
@@ -20,6 +21,10 @@ long	get_curr_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
+/// @brief sleeps in small amounts and checks for any philo death
+/// @param t_sleep amount to sleep in milliseconds
+/// @param ph current philo sleeping
+/// @return true for success, false for death in simulation
 bool	safe_sleep(int t_sleep, t_ph_indiv *ph)
 {
 	long	t_start;
@@ -36,19 +41,24 @@ bool	safe_sleep(int t_sleep, t_ph_indiv *ph)
 		curr_time = get_curr_time();
 		elapsed_time = curr_time - t_start;
 		if (access_end_var(&ph->data->end_lock, &ph->data->end, 'V'))
-			return (printf("\nsaida no sleep 1\n"), false);
+			return (false);
 		if (curr_time - ph->t_last_eat > ph->val.t_die)
 		{
 			pthread_mutex_lock(&ph->data->death_lock);
 			if (print_act(ph->data, ph->id, 'D'))
 				access_end_var(&ph->data->end_lock, &ph->data->end, 'C');
-			return (pthread_mutex_unlock(&ph->data->death_lock),
-				printf("\nsaida no sleep 2\n"), false);
+			return (pthread_mutex_unlock(&ph->data->death_lock), false);
 		}
 	}
 	return (true);
 }
 
+/// @brief verifies (type 'V') if the simulation has ended
+/// or changes END (type 'C') to end it
+/// @param end_lock lock for the END variable
+/// @param end var containing the amount of philos who've exited the simulation
+/// @param type 'V' verifies, 'C' changes END by incrementing it
+/// @return true when end (doesn't unlock END_LOCK), false when running
 bool	access_end_var(pthread_mutex_t *end_lock, int *end, char type)
 {
 	pthread_mutex_lock(end_lock);
@@ -66,9 +76,9 @@ bool	access_end_var(pthread_mutex_t *end_lock, int *end, char type)
 	return (false);
 }
 
-/// @brief
-/// @param data
-/// @param id
+/// @brief prints time, philo id and act
+/// @param data where time and its corresponding lock is stored
+/// @param id philo id
 /// @param type 'F'- fork 'E'- eating 'S'- sleeping 'T'- thinking
 /// 'D'- died 'M'- must eat full
 bool	print_act(t_ph_data *data, int id, char type)
