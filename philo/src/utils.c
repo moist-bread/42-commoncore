@@ -6,11 +6,13 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:40:57 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/22 18:12:21 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:49:13 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+static bool	still_alive(long curr_time, t_ph_indiv *ph);
 
 /// @return current time in milliseconds
 long	get_curr_time(void)
@@ -40,15 +42,29 @@ bool	safe_sleep(int t_sleep, t_ph_indiv *ph)
 		usleep(100);
 		curr_time = get_curr_time();
 		elapsed_time = curr_time - t_start;
-		if (access_end_var(&ph->data->end_lock, &ph->data->end, 'V'))
+		if (!still_alive(curr_time, ph))
 			return (false);
-		if (curr_time - ph->t_last_eat > ph->val.t_die)
+	}
+	return (true);
+}
+
+/// @brief checks if any philo is dead or if curr philo has starved 
+/// @param curr_time 
+/// @param ph current philosopher
+static bool	still_alive(long curr_time, t_ph_indiv *ph)
+{
+	if (access_end_var(&ph->data->end_lock, &ph->data->end, 'V'))
+		return (false);
+	if (curr_time - ph->t_last_eat > ph->val.t_die)
+	{
+		pthread_mutex_lock(&ph->data->death_lock);
+		if (print_act(ph->data, ph->id, 'D'))
 		{
-			pthread_mutex_lock(&ph->data->death_lock);
-			if (print_act(ph->data, ph->id, 'D'))
-				access_end_var(&ph->data->end_lock, &ph->data->end, 'C');
-			return (pthread_mutex_unlock(&ph->data->death_lock), false);
+			access_end_var(&ph->data->end_lock, &ph->data->end, 'C');
+			pthread_mutex_unlock(&ph->data->print_t);
 		}
+		pthread_mutex_unlock(&ph->data->death_lock);
+		return (false);
 	}
 	return (true);
 }
@@ -85,9 +101,9 @@ bool	print_act(t_ph_data *data, int id, char type)
 {
 	long	time;
 
-	if (access_end_var(&data->end_lock, &data->end, 'V'))
-		return (false);
 	pthread_mutex_lock(&data->print_t);
+	if (access_end_var(&data->end_lock, &data->end, 'V'))
+		return (pthread_mutex_unlock(&data->print_t), false);
 	time = get_curr_time() - data->t_start;
 	if (time < 100)
 		printf(" ⏰  %ld\t\t" BBLU "【" DEF " ", time);
@@ -102,9 +118,10 @@ bool	print_act(t_ph_data *data, int id, char type)
 	else if (type == 'T')
 		printf("%d\t" BBLU "】" DEF CYNB "Ξ  is thinking       Ξ" DEF "\n", id);
 	else if (type == 'D')
-		printf("%d\t" BBLU "】" BBLK WHTB "Ξ  died              Ξ" DEF "\n", id);
+		return (printf("%d\t" BBLU "】" BBLK WHTB "Ξ  died              Ξ" DEF \
+			"\n", id), true);
 	else if (type == 'M')
-		printf(":)\t" BBLU "】" DEF GRNB "Ξ  philos are full   Ξ" DEF "\n");
-	pthread_mutex_unlock(&data->print_t);
-	return (true);
+		return (printf(":)\t" BBLU "】" DEF GRNB "Ξ  philos are full   Ξ" DEF \
+			"\n"), true);
+	return (pthread_mutex_unlock(&data->print_t), true);
 }

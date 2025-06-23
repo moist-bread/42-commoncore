@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:43:52 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/22 18:47:04 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:52:46 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ bool	eating_act(t_ph_indiv *ph)
 		if (!locking_and_eating(ph, &ph->right->fork, &ph->fork))
 			return (false);
 	}
-	ph->t_last_eat = get_curr_time();
 	return (true);
 }
 
@@ -46,6 +45,7 @@ static bool	locking_and_eating(t_ph_indiv *ph, pthread_mutex_t *first_fork,
 	if (!print_act(ph->data, ph->id, 'E'))
 		return (pthread_mutex_unlock(first_fork),
 			pthread_mutex_unlock(second_fork), false);
+	ph->t_last_eat = get_curr_time();
 	if (!safe_sleep(ph->val.t_eat, ph))
 		return (pthread_mutex_unlock(first_fork),
 			pthread_mutex_unlock(second_fork), false);
@@ -57,16 +57,21 @@ static bool	locking_and_eating(t_ph_indiv *ph, pthread_mutex_t *first_fork,
 /// @brief only needed when must_eat arg is recieved
 /// @param ph current philo
 /// @param idx number of the current "meal"
-/// @return true when PH is the last philo and has eanten must_eat amount
+/// @return true when all PH have eanten must_eat amount
 bool	philos_are_full(t_ph_indiv *ph, int idx)
 {
-	if (ph->val.n_eat && idx == ph->val.n_eat - 1 && \
-		((ph->val.n_phi % 2 != 0 && ph->id == ph->val.n_phi) || \
-		(ph->val.n_phi % 2 == 0 && ph->id == ph->val.n_phi - 1)))
+	if (ph->val.n_eat && idx == ph->val.n_eat)
 	{
-		print_act(ph->data, ph->id, 'M');
-		access_end_var(&ph->data->end_lock, &ph->data->end, 'C');
-		return (true);
+		pthread_mutex_lock(&ph->data->full_lock);
+		ph->data->full++;
+		if (ph->data->full == ph->val.n_phi)
+		{
+			print_act(ph->data, ph->id, 'M');
+			access_end_var(&ph->data->end_lock, &ph->data->end, 'C');
+			pthread_mutex_unlock(&ph->data->print_t);
+			return (pthread_mutex_unlock(&ph->data->full_lock), true);
+		}
+		pthread_mutex_unlock(&ph->data->full_lock);
 	}
 	return (false);
 }

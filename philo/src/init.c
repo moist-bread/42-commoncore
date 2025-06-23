@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 13:57:03 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/06/22 18:00:30 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:21:53 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ bool	create_needed_philos(t_ph_data *data)
 	init_philo_forks(data);
 	pthread_mutex_init(&data->death_lock, NULL);
 	pthread_mutex_init(&data->end_lock, NULL);
+	pthread_mutex_init(&data->full_lock, NULL);
 	pthread_mutex_init(&data->print_t, NULL);
 	data->t_start = get_curr_time();
 	init_philo_threads(data);

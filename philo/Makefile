@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/06/22 18:23:10 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/06/23 10:53:15 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ NAME	=	philo
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g
 VAL		=	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s
-HELFLAG	=	--tool=helgrind
 
 # -->┊( DIRECTORIES )┊.´-★☆★
 SRC_DIR	=	src
